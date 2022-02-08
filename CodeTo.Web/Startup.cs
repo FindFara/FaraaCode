@@ -1,4 +1,5 @@
 using CodeTo.IOC;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -24,9 +25,24 @@ namespace CodeTo.Web
         {
             services.AddIOCServices(_configuration);
             services.AddControllersWithViews();
+
+            #region Authentication
+            services.AddAuthentication(op =>
+            {
+                op.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                op.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                op.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                op.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(op =>
+            {
+                op.LoginPath = "/auth/login";
+                op.LogoutPath = "/auth/logout";
+                op.ExpireTimeSpan = TimeSpan.FromMinutes(143200);
+            });
+            #endregion
         }
 
-         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

@@ -1,5 +1,8 @@
 ﻿using CodeTo.Core.Services.AccountVm;
+using CodeTo.Core.Utilities.Extension;
+using CodeTo.Core.Utilities.Senders;
 using CodeTo.Core.ViewModel.User;
+using CodeTo.Domain.Entities.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -11,89 +14,114 @@ using System.Threading.Tasks;
 
 namespace CodeTo.Web.Controllers
 {
-   
-        [Route("auth")]
-        public class AccountController : Controller
+
+    [Route("auth")]
+    public class AccountController : Controller
+    {
+
+        private readonly IAccountService _accountService;
+        private IViewRenderService viewRenderService;
+
+        public AccountController(IAccountService accountService, IViewRenderService viewRenderService)
         {
-
-            private readonly IAccountService _accountService;
-
-            public AccountController(IAccountService accountService)
-            {
-                _accountService = accountService;
-            }
-
-            [Route("login")]
-            public IActionResult Login()
-            {
-                return View();
-            }
-            [Route("login")]
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public async Task<IActionResult> Login(AccountLoginVm vm)
-            {
-                if (!await _accountService.CheckEmailAndPasswordAsync(vm))
-                    ModelState.AddModelError(nameof(vm.Password), "Email or Password not corect");
-
-                if (ModelState.IsValid)
-                {
-                    var user = await _accountService.GetUserByEmailAsync(vm.Email);
-                    var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.NameIdentifier,"1"),
-                    new Claim(ClaimTypes.Email,vm.Email)
-                };
-                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    var principal = new ClaimsPrincipal(identity);
-                    var properties = new AuthenticationProperties
-                    {
-                        IsPersistent = vm.RememberMe
-                    };
-                    await HttpContext.SignInAsync(principal, properties);
-
-                    if (user.Id == 1)
-                    {
-                        return RedirectToAction("Index", "Home", new { area = "Admin" });
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-
-                }
-                return View(vm);
-            }
-
-
-            [Route("register")]
-            public IActionResult Register()
-            {
-                return View();
-            }
-
-            [Route("register")]
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public async Task<IActionResult> Register(AccountRegisterVm vm)
-            {
-                if (await _accountService.IsDuplicatedEmail(vm.Email))
-                    ModelState.AddModelError(nameof(vm.Email), "There is an email entered.");
-
-                if (ModelState.IsValid)
-                {
-                    await _accountService.RegisterAsync(vm);
-                    return RedirectToAction("Index", "Home");
-                }
-                return View(vm);
-            }
-
-            [Route("logout")]
-            public async Task<IActionResult> Logout()
-            {
-                await HttpContext.SignOutAsync();
-                return RedirectToAction("Index", "Home");
-            }
+            _accountService = accountService;
+            this.viewRenderService = viewRenderService;
         }
+
+
+
+        #region Login
+        [Route("login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [Route("login")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(AccountLoginVm vm)
+        {
+            if (!await _accountService.CheckEmailAndPasswordAsync(vm))
+                ModelState.AddModelError(nameof(vm.Password), "ایمیل یا پسورد وارد شده معتبر نمیباشد ");
+
+            if (ModelState.IsValid)
+            {
+                var user = await _accountService.GetUserByEmailAsync(vm.Email);
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier,user.UserName.ToString()),
+                    new Claim(ClaimTypes.Name,user.UserName),
+                    new Claim(ClaimTypes.Email,user.Email)
+                };
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+                var properties = new AuthenticationProperties
+                {
+                    IsPersistent = vm.RememberMe
+                };
+                await HttpContext.SignInAsync(principal,properties);
+
+                    return RedirectToAction("Index", "Home");
+
+            }
+            return View(vm);
+        }
+        #endregion
+
+        #region Register
+        [Route("register")]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [Route("register")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(AccountRegisterVm vm)
+        {
+            if (await _accountService.IsDuplicatedEmail(vm.Email))
+                ModelState.AddModelError(nameof(vm.Email), "ایمیل ورودی معتبر نمیباشد ");
+
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            await _accountService.RegisterAsync(vm);
+
+            #region Send Activation Email
+
+            string body = viewRenderService.RenderToStringAsync("_ActiveEmail",User);
+            SendEmail.Send(vm.Email, "فعالسازی", body);
+
+            #endregion
+
+
+
+
+            return RedirectToAction("Index", "Home");
+        }
+        #endregion
+
+        #region Active Account
+        public async Task<IActionResult> ActiveAccount(string id)
+        {
+            ViewBag.IsActiv = await _accountService.ActiveAccountAsync(id);
+            return View();
+        }
+
+        #endregion
+
+        #region Logout
+        [Route("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+        #endregion
     }
+
+}
 

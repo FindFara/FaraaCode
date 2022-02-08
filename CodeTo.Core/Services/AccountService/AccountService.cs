@@ -1,4 +1,5 @@
-﻿using CodeTo.Core.Services.AccountVm;
+﻿
+using CodeTo.Core.Services.AccountVm;
 using CodeTo.Core.Utilities.Extension;
 using CodeTo.Core.Utilities.Security;
 using CodeTo.Core.ViewModel.User;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace CodeTo.Core.Services.AccountService
 {
+
     public class AccountService : IAccountService
     {
         private readonly CodeToContext _context;
@@ -22,6 +24,8 @@ namespace CodeTo.Core.Services.AccountService
             _context = context;
             _securityService = securityService;
         }
+
+        
 
         public async Task<bool> CheckEmailAndPasswordAsync(AccountLoginVm vm)
         {
@@ -59,7 +63,6 @@ namespace CodeTo.Core.Services.AccountService
             try
             {
                 var hassPassword = _securityService.HashPassword(vm.Password);
-                var emailCode = Guid.NewGuid();
                 await _context.Users.AddAsync(new Domain.Entities.User.User
                 {
                     ActiveCode=Generator.GeneratorUniqCode(),
@@ -78,6 +81,17 @@ namespace CodeTo.Core.Services.AccountService
                 var m = ex.Message;
                 return false;
             }
+        }
+        
+        public async Task<bool> ActiveAccountAsync(string activecode)
+        {
+            var user =await _context.Users.SingleOrDefaultAsync(u => u.ActiveCode == activecode);
+            if (user == null || user.IsActive==false)
+                return false;
+            user.IsActive = true;
+            user.ActiveCode = Generator.GeneratorUniqCode();
+            _context.SaveChanges();
+            return true;
         }
     }
 }

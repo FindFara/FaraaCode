@@ -14,5 +14,6 @@ namespace CodeTo.Core.Services.AccountVm
         Task<bool> IsDuplicatedEmail(string email);
         Task<UserDetailVm> GetUserByEmailAsync(string email);
         Task<UserDetailVm> GetUserByIdAsync(int userId);
+        Task<bool> ActiveAccountAsync(string activecode);
     }
 }
