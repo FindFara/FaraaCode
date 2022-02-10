@@ -83,12 +83,15 @@ namespace CodeTo.Web.Controllers
             if (await _accountService.IsDuplicatedEmail(vm.Email))
                 ModelState.AddModelError(nameof(vm.Email), "ایمیل ورودی معتبر نمیباشد ");
 
+            
+
             if (!ModelState.IsValid)
             {
                 return View(vm);
             }
 
-            await _accountService.RegisterAsync(vm);
+             var user = await _accountService.RegisterAsync(vm);
+           
 
             #region Send Activation Email
 
@@ -100,7 +103,7 @@ namespace CodeTo.Web.Controllers
 
 
 
-            return RedirectToAction("Index", "Home");
+            return View("SuccessRegister",user);
         }
         #endregion
 

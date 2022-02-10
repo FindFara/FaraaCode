@@ -28,6 +28,7 @@ namespace CodeTo.Core.Services.AccountService
         
 
         public async Task<bool> CheckEmailAndPasswordAsync(AccountLoginVm vm)
+
         {
             var user = await _context.Users.SingleOrDefaultAsync(c => c.Email.Trim().ToLower() == vm.Email.Trim().ToLower());
             if (user != null)
@@ -63,7 +64,7 @@ namespace CodeTo.Core.Services.AccountService
             try
             {
                 var hassPassword = _securityService.HashPassword(vm.Password);
-                await _context.Users.AddAsync(new Domain.Entities.User.User
+                var user=await _context.Users.AddAsync(new Domain.Entities.User.User
                 {
                     ActiveCode=Generator.GeneratorUniqCode(),
                     UserName = vm.UserName,
@@ -92,6 +93,20 @@ namespace CodeTo.Core.Services.AccountService
             user.ActiveCode = Generator.GeneratorUniqCode();
             _context.SaveChanges();
             return true;
+        }
+
+        public async Task<UserDetailVm> GetUserInformation(string username)
+        {
+            var user =await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
+
+            UserDetailVm uv = new UserDetailVm();
+            {
+                uv.UserName = user.UserName;
+                uv.Email = user.Email;
+                uv.RegisterDate = user.RegisterDate;
+                uv.Wallet = 0;
+            }
+            return uv;
         }
     }
 }

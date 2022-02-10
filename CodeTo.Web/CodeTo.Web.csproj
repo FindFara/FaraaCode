@@ -20,6 +20,11 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\CodeTo.Core\CodeTo.Core.csproj" />
+	
 	  <ProjectReference Include="..\CodeTo.IOC\CodeTo.IOC.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Areas\Admin\Views\" />
 	</ItemGroup>
 </Project>

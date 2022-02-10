@@ -16,6 +16,7 @@ namespace CodeTo.Core.ViewModel.User
         public bool IsActive { get; set; }
         public string UserAvatar { get; set; }
         public DateTime RegisterDate { get; set; }
+        public int Wallet { get; set; }
 
     }
 }
