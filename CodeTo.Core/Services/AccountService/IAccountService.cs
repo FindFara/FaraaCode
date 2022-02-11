@@ -12,10 +12,12 @@ namespace CodeTo.Core.Services.AccountVm
         Task<bool> RegisterAsync(AccountRegisterVm vm);
         Task<bool> CheckEmailAndPasswordAsync(AccountLoginVm vm);
         Task<bool> IsDuplicatedEmail(string email);
+        Task<bool> IsDuplicatedUsername(string username);
         Task<UserDetailVm> GetUserByEmailAsync(string email);
         Task<UserDetailVm> GetUserByIdAsync(int userId);
-        Task<UserDetailVm> GetUserInformation(string username);
+        Task<UserInformation> GetUserInformation(string username);
         Task<bool> ActiveAccountAsync(string activecode);
+        Task<UserPanelData> GetUserPanelData(string username);
        
     }
 }

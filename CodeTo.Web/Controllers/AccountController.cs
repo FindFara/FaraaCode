@@ -83,7 +83,9 @@ namespace CodeTo.Web.Controllers
             if (await _accountService.IsDuplicatedEmail(vm.Email))
                 ModelState.AddModelError(nameof(vm.Email), "ایمیل ورودی معتبر نمیباشد ");
 
-            
+            if (await _accountService.IsDuplicatedUsername(vm.UserName))
+                ModelState.AddModelError(nameof(vm.UserName), "نام کاربری  ورودی معتبر نمیباشد ");
+
 
             if (!ModelState.IsValid)
             {

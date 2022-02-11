@@ -14,9 +14,16 @@ namespace CodeTo.Core.ViewModel.User
         public string Password { get; set; }
         public string ActiveCode { get; set; }
         public bool IsActive { get; set; }
-        public string UserAvatar { get; set; }
         public DateTime RegisterDate { get; set; }
+        public string UserAvatar { get; set; }
         public int Wallet { get; set; }
 
+    }
+
+    public class UserPanelData
+    {
+        public string UserName { get; set; }
+        public DateTime RegisterDate { get; set; }
+        public string ImageName { get; set; }
     }
 }

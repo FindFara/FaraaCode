@@ -59,6 +59,11 @@ namespace CodeTo.Core.Services.AccountService
             return await _context.Users.AnyAsync(c => c.Email.Trim().ToLower() == email.Trim().ToLower());
         }
 
+        public async Task<bool> IsDuplicatedUsername(string username)
+        {
+            return await _context.Users.AnyAsync(u => u.UserName==username); 
+        }
+
         public async Task<bool> RegisterAsync(AccountRegisterVm vm)
         {
             try
@@ -95,18 +100,38 @@ namespace CodeTo.Core.Services.AccountService
             return true;
         }
 
-        public async Task<UserDetailVm> GetUserInformation(string username)
+        public async Task<UserInformation> GetUserInformation(string username)
         {
             var user =await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
 
-            UserDetailVm uv = new UserDetailVm();
+            UserInformation uv = new UserInformation();
             {
-                uv.UserName = user.UserName;
+                uv.UserName1 = user.UserName;
                 uv.Email = user.Email;
                 uv.RegisterDate = user.RegisterDate;
                 uv.Wallet = 0;
             }
             return uv;
         }
+
+        public async Task<UserPanelData> GetUserPanelData(string username)
+        {
+            //UserPanelData ud = new UserPanelData();
+            //var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
+            //ud.UserName = user.UserName;
+            //ud.RegisterDate = user.RegisterDate;
+            //ud.ImageName = user.UserAvatar;
+
+            //return ud;
+
+            return await _context.Users.Where(u => u.UserName == username).Select(u => new UserPanelData()
+            {
+                UserName = u.UserName,
+                ImageName = u.UserAvatar,
+                RegisterDate = u.RegisterDate
+            }).SingleAsync();
+        }
+
+      
     }
 }
