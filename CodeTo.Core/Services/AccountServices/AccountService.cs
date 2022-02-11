@@ -1,8 +1,6 @@
-﻿
-using CodeTo.Core.Services.AccountVm;
-using CodeTo.Core.Utilities.Extension;
+﻿using CodeTo.Core.Utilities.Extension;
 using CodeTo.Core.Utilities.Security;
-using CodeTo.Core.ViewModel.User;
+using CodeTo.Core.ViewModel.Users;
 using CodeTo.DataEF.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeTo.Core.Services.AccountService
+namespace CodeTo.Core.Services.AccountServices
 {
 
     public class AccountService : IAccountService
@@ -100,13 +98,13 @@ namespace CodeTo.Core.Services.AccountService
             return true;
         }
 
-        public async Task<UserInformation> GetUserInformation(string username)
+        public async Task<UserDetailVm> GetUserInformation(string username)
         {
             var user =await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
 
-            UserInformation uv = new UserInformation();
+            UserDetailVm uv = new UserDetailVm();
             {
-                uv.UserName1 = user.UserName;
+                uv.UserName = user.UserName;
                 uv.Email = user.Email;
                 uv.RegisterDate = user.RegisterDate;
                 uv.Wallet = 0;

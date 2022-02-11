@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeTo.Core.ViewModel.User
+namespace CodeTo.Core.ViewModel.Users
 {
     public class AccountRegisterVm
     {

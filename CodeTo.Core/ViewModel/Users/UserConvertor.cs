@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeTo.Core.ViewModel.User;
+using CodeTo.Core.ViewModel.Users;
 
 
-namespace CodeTo.Core.ViewModel.User
+namespace CodeTo.Core.ViewModel.Users
 {
    public static class UserConvertor
     {

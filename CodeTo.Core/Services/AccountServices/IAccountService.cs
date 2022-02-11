@@ -1,11 +1,11 @@
-﻿using CodeTo.Core.ViewModel.User;
+﻿using CodeTo.Core.ViewModel.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeTo.Core.Services.AccountVm
+namespace CodeTo.Core.Services.AccountServices
 {
     public interface IAccountService
     {
@@ -15,7 +15,7 @@ namespace CodeTo.Core.Services.AccountVm
         Task<bool> IsDuplicatedUsername(string username);
         Task<UserDetailVm> GetUserByEmailAsync(string email);
         Task<UserDetailVm> GetUserByIdAsync(int userId);
-        Task<UserInformation> GetUserInformation(string username);
+        Task<UserDetailVm> GetUserInformation(string username);
         Task<bool> ActiveAccountAsync(string activecode);
         Task<UserPanelData> GetUserPanelData(string username);
        

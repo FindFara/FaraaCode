@@ -1,5 +1,5 @@
-﻿@using CodeTo.Core.Services.AccountVm
-@using CodeTo.Core.ViewModel.User
+﻿@using CodeTo.Core.Services.AccountServices
+@using CodeTo.Core.ViewModel.Users
 @using CodeTo.Core.Utilities.Extension
 @inject IAccountService _UserService
 
@@ -13,7 +13,7 @@
         <div class="avatar-layer">
             <div class="img-layer">
                 <a href="" class="change-image"><i class="zmdi zmdi-edit"></i></a>
-                <img src="/UserAvatar/@user.ImageName">
+                <img src="/UserAvatar/Default.jpg">
             </div>
             <div class="detail">
                 <span> @user.UserName </span>
