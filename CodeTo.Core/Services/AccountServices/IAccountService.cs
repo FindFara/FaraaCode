@@ -15,9 +15,15 @@ namespace CodeTo.Core.Services.AccountServices
         Task<bool> IsDuplicatedUsername(string username);
         Task<UserDetailVm> GetUserByEmailAsync(string email);
         Task<UserDetailVm> GetUserByIdAsync(int userId);
-        Task<UserDetailVm> GetUserInformation(string username);
         Task<bool> ActiveAccountAsync(string activecode);
-        Task<UserPanelData> GetUserPanelData(string username);
-       
+
+        #region UserProfile
+        Task<UserDetailVm> GetUserInformation(string username);
+        Task<UserPanelDataVm> GetUserPanelData(string username);
+        Task<EditProfileVm> GetEditPrifileData(string username);
+        Task<bool> GetEditProfile(string username, EditProfileVm profile);
+        #endregion
+
+
     }
 }

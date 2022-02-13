@@ -1,5 +1,6 @@
 ﻿using CodeTo.Core.Services.AccountServices;
 using CodeTo.Core.Utilities.Extension;
+using CodeTo.Core.Utilities.Other;
 using CodeTo.Core.Utilities.Security;
 using CodeTo.DataEF.Context;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,7 @@ namespace CodeTo.IOC
                 option.UseSqlServer(configuration.GetConnectionString("CodeToConnection"));
             });
 
-
+            services.AddSingleton(typeof(ILoggerService<>), typeof(LoggerService<>));
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ISecurityService, SecurityService>();
             services.AddTransient<IViewRenderService, RenderViewToString>();

@@ -1,4 +1,7 @@
-﻿using CodeTo.Core.Utilities.Extension;
+﻿using CodeTo.Core.Extensions;
+using CodeTo.Core.Statics;
+using CodeTo.Core.Utilities.Extension;
+using CodeTo.Core.Utilities.Other;
 using CodeTo.Core.Utilities.Security;
 using CodeTo.Core.ViewModel.Users;
 using CodeTo.DataEF.Context;
@@ -16,11 +19,13 @@ namespace CodeTo.Core.Services.AccountServices
     {
         private readonly CodeToContext _context;
         private readonly ISecurityService _securityService;
+        private readonly ILoggerService<AccountService> _logger;
 
-        public AccountService(CodeToContext context, ISecurityService securityService)
+        public AccountService(CodeToContext context, ISecurityService securityService, ILoggerService<AccountService> logger)
         {
             _context = context;
             _securityService = securityService;
+            _logger = logger;
         }
 
         
@@ -69,7 +74,7 @@ namespace CodeTo.Core.Services.AccountServices
                 var hassPassword = _securityService.HashPassword(vm.Password);
                 var user=await _context.Users.AddAsync(new Domain.Entities.User.User
                 {
-                    ActiveCode=Generator.GeneratorUniqCode(),
+                    ActiveCode=GeneratorGuid.GeneratorUniqCode(),
                     UserName = vm.UserName,
                     Email = vm.Email,
                     Password = hassPassword,
@@ -93,7 +98,7 @@ namespace CodeTo.Core.Services.AccountServices
             if (user == null || user.IsActive==false)
                 return false;
             user.IsActive = true;
-            user.ActiveCode = Generator.GeneratorUniqCode();
+            user.ActiveCode = GeneratorGuid.GeneratorUniqCode();
             _context.SaveChanges();
             return true;
         }
@@ -112,17 +117,19 @@ namespace CodeTo.Core.Services.AccountServices
             return uv;
         }
 
-        public async Task<UserPanelData> GetUserPanelData(string username)
+        public async Task<UserPanelDataVm> GetUserPanelData(string username)
         {
-            //UserPanelData ud = new UserPanelData();
-            //var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
+            //UserPanelDataVm ud = new UserPanelDataVm();
+            //var user = await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
             //ud.UserName = user.UserName;
             //ud.RegisterDate = user.RegisterDate;
-            //ud.ImageName = user.UserAvatar;
+            //ud.ImageName = user.UserAvatar; 
 
             //return ud;
 
-            return await _context.Users.Where(u => u.UserName == username).Select(u => new UserPanelData()
+            return await _context.Users
+            .Where(u => u.UserName == username)
+            .Select(u => new UserPanelDataVm()
             {
                 UserName = u.UserName,
                 ImageName = u.UserAvatar,
@@ -130,6 +137,46 @@ namespace CodeTo.Core.Services.AccountServices
             }).SingleAsync();
         }
 
-      
+        public async Task<EditProfileVm> GetEditPrifileData(string username)
+        {
+            return await _context.Users
+            .Where(u => u.UserName == username)
+            .Select(u => new EditProfileVm()
+            {
+                UserName = u.UserName,
+                AvatarName = u.UserAvatar,
+                Email = u.Email
+            }).SingleAsync();
+        }
+
+
+        public async Task<bool> GetEditProfile(string username ,EditProfileVm profile)
+        {
+
+            try
+            {
+                var user = await _context.Users.FindAsync(username,profile.UserName);
+
+                if (profile.AvatarFile != null)
+                {
+                    var UserImageName = DateTime.Now.ToString("MM-dd-yyyy_") + profile.AvatarFile.FileName;
+                    var thumbSize = new ThumbSize(100, 100);
+                    profile.AvatarFile.AddImageToServer(UserImageName, PathTools.UserImageServerPath, thumbSize, profile.AvatarName);
+                    user.UserAvatar = UserImageName;
+                }
+
+                user.UserName = profile.UserName;
+                user.Email = profile.Email;
+                user.UserAvatar = profile.AvatarName;
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return false;
+            }
+        }
     }
 }

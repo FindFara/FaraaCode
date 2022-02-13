@@ -1,6 +1,11 @@
 ﻿
+using Bz.ClassFinder.Attributes;
 using CodeTo.Core.Services.AccountServices;
+using CodeTo.Core.ViewModel.Users;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +15,40 @@ namespace CodeTo.Web.Areas.UserPanel.Controllers
 {
     public class HomeController : UserPanelController
     {
-        private IAccountService accountServise;
-        public HomeController(IAccountService _accountServise)
+        private IAccountService _accountServise;
+        public HomeController(IAccountService accountServise)
         {
-            accountServise = _accountServise;
+            _accountServise = accountServise;
         }
         public async Task<IActionResult> Index()
         {
-            return View(await accountServise.GetUserInformation(User.Identity.Name));
+            return View(await _accountServise.GetUserInformation(User.Identity.Name));
         }
+
+        #region EditProfile
+
+        [Route("EditProfile")]
+        public async Task<IActionResult> EditProfile()
+        {
+            return View(await _accountServise.GetEditPrifileData(User.Identity.Name));
+        }
+
+        [BzDescription("")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProfile(EditProfileVm profile)
+        {
+            if (!ModelState.IsValid)
+                return View(profile);
+
+           await _accountServise.GetEditProfile(User.Identity.Name, profile);
+
+            //Log Out User
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return Redirect("/Login?EditProfile=true");
+
+        }
+        #endregion
     }
 }

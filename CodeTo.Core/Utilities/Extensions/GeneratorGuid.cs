@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeTo.Core.Utilities.Extension
 {
-   public static class Generator
+   public static class GeneratorGuid
     {
         public static string GeneratorUniqCode()
         {
