@@ -80,7 +80,7 @@ namespace CodeTo.Core.Services.AccountServices
             try
             {
                 var hassPassword = _securityService.HashPassword(vm.Password);
-                var user = await _context.Users.AddAsync(new Domain.Entities.User.User
+                await _context.Users.AddAsync(new Domain.Entities.User.User
                 {
                     ActiveCode = GeneratorGuid.GeneratorUniqCode(),
                     UserName = vm.UserName,
@@ -158,37 +158,29 @@ namespace CodeTo.Core.Services.AccountServices
         }
 
        
-        public async Task<bool> Pic(string username,EditProfileVm profile)
+        public async Task<bool> EditProfile(string username, EditProfileVm profile)
         {
-            var user = await GetUserByUserNameAsync(username);
-            if (profile.AvatarFile != null)
+            try
             {
+                var user = await GetUserByUserNameAsync(username);
+                string UserImageName = null;
                 if (profile.AvatarFile != null)
                 {
-                    var UserImageName = GeneratorGuid.GeneratorUniqCode() + profile.AvatarFile.FileName;
+                    UserImageName = GeneratorGuid.GeneratorUniqCode() + profile.AvatarFile.FileName;
                     var thumbSize = new ThumbSize(100, 100);
                     profile.AvatarFile.AddImageToServer(UserImageName, PathTools.UserImageServerPath, thumbSize, profile.AvatarName);
                     user.AvatarName = UserImageName;
                 }
 
-            }
-            return true;
-        }
-        public async Task<bool> EditProfile(string username, EditProfileVm profile)
-        {
-            try
-            {
-                string productImageName = null;
-                Pic(username, profile);
-                await _context.Users.AddAsync(new User
-                {
-                    Id = profile.Id,
-                    UserName = profile.UserName,
-                    AvatarName=profile.AvatarName,
-                    Email=profile.Email
-                 
-                });
-                await _context.SaveChangesAsync();
+
+
+
+                user.UserName = profile.UserName;
+                user.Email = profile.Email;
+                user.AvatarName = UserImageName; 
+
+                _context.Users.Update(user);
+                _context.SaveChanges();
                 return true;
             }
             catch (Exception e)
