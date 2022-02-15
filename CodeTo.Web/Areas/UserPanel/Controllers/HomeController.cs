@@ -41,7 +41,7 @@ namespace CodeTo.Web.Areas.UserPanel.Controllers
             if (!ModelState.IsValid)
                 return View(profile);
 
-           await _accountServise.EditProfile(User.Identity.Name, profile);
+           await _accountServise.AddAsync(User.Identity.Name, profile);
 
             //Log Out User
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

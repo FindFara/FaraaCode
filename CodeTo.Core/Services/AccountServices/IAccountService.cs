@@ -25,6 +25,7 @@ namespace CodeTo.Core.Services.AccountServices
         Task<EditProfileVm> GetEditPrifileData(string username);
         Task<bool> EditProfile(string username, EditProfileVm profile);
         Task<bool> Exists(string username);
+        public Task<bool> AddAsync(string username, EditProfileVm profile);
         #endregion
 
 
