@@ -33,21 +33,20 @@ namespace CodeTo.Web.Areas.UserPanel.Controllers
             return View(await _accountServise.GetEditPrifileData(User.Identity.Name));
         }
 
-        [BzDescription("")]
+        [Route("EditProfile")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProfile(EditProfileVm profile)
+        public async Task<IActionResult> EditProfile(string username, EditProfileVm profile)
         {
             if (!ModelState.IsValid)
                 return View(profile);
 
-           await _accountServise.GetEditProfile(User.Identity.Name, profile);
+           await _accountServise.EditProfile(User.Identity.Name, profile);
 
             //Log Out User
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return Redirect("/Login?EditProfile=true");
-
+            return Redirect("auth/Login?EditProfile=true");
         }
         #endregion
     }

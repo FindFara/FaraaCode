@@ -26,5 +26,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Areas\Admin\Views\" />
+	  <Folder Include="wwwroot\upload\user\" />
 	</ItemGroup>
 </Project>

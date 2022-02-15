@@ -5,9 +5,11 @@ using CodeTo.Core.Utilities.Other;
 using CodeTo.Core.Utilities.Security;
 using CodeTo.Core.ViewModel.Users;
 using CodeTo.DataEF.Context;
+using CodeTo.Domain.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +30,7 @@ namespace CodeTo.Core.Services.AccountServices
             _logger = logger;
         }
 
-        
+
 
         public async Task<bool> CheckEmailAndPasswordAsync(AccountLoginVm vm)
 
@@ -47,14 +49,20 @@ namespace CodeTo.Core.Services.AccountServices
             var user = await _context.Users
                 .SingleOrDefaultAsync(c => c.Email == email);
 
-            return user.ToDetailViewModel();
+            return user.ToUserDetailViewModel();
         }
 
         public async Task<UserDetailVm> GetUserByIdAsync(int userId)
         {
             var user = await _context.Users
                .SingleOrDefaultAsync(c => c.Id == userId);
-            return user.ToDetailViewModel();
+            return user.ToUserDetailViewModel();
+        }
+
+        public async Task<User> GetUserByUserNameAsync(string username)
+        {
+            return await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
+
         }
 
         public async Task<bool> IsDuplicatedEmail(string email)
@@ -64,7 +72,7 @@ namespace CodeTo.Core.Services.AccountServices
 
         public async Task<bool> IsDuplicatedUsername(string username)
         {
-            return await _context.Users.AnyAsync(u => u.UserName==username); 
+            return await _context.Users.AnyAsync(u => u.UserName == username);
         }
 
         public async Task<bool> RegisterAsync(AccountRegisterVm vm)
@@ -72,14 +80,14 @@ namespace CodeTo.Core.Services.AccountServices
             try
             {
                 var hassPassword = _securityService.HashPassword(vm.Password);
-                var user=await _context.Users.AddAsync(new Domain.Entities.User.User
+                var user = await _context.Users.AddAsync(new Domain.Entities.User.User
                 {
-                    ActiveCode=GeneratorGuid.GeneratorUniqCode(),
+                    ActiveCode = GeneratorGuid.GeneratorUniqCode(),
                     UserName = vm.UserName,
                     Email = vm.Email,
                     Password = hassPassword,
                     RegisterDate = DateTime.Now,
-                    IsActive=false
+                    IsActive = false
 
                 });
                 await _context.SaveChangesAsync();
@@ -91,11 +99,11 @@ namespace CodeTo.Core.Services.AccountServices
                 return false;
             }
         }
-        
+
         public async Task<bool> ActiveAccountAsync(string activecode)
         {
-            var user =await _context.Users.SingleOrDefaultAsync(u => u.ActiveCode == activecode);
-            if (user == null || user.IsActive==false)
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.ActiveCode == activecode);
+            if (user == null || user.IsActive == false)
                 return false;
             user.IsActive = true;
             user.ActiveCode = GeneratorGuid.GeneratorUniqCode();
@@ -105,7 +113,7 @@ namespace CodeTo.Core.Services.AccountServices
 
         public async Task<UserDetailVm> GetUserInformation(string username)
         {
-            var user =await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
 
             UserDetailVm uv = new UserDetailVm();
             {
@@ -132,7 +140,7 @@ namespace CodeTo.Core.Services.AccountServices
             .Select(u => new UserPanelDataVm()
             {
                 UserName = u.UserName,
-                ImageName = u.UserAvatar,
+               AvatarName = u.AvatarName,
                 RegisterDate = u.RegisterDate
             }).SingleAsync();
         }
@@ -144,32 +152,36 @@ namespace CodeTo.Core.Services.AccountServices
             .Select(u => new EditProfileVm()
             {
                 UserName = u.UserName,
-                AvatarName = u.UserAvatar,
+                AvatarName = u.AvatarName,
                 Email = u.Email
             }).SingleAsync();
         }
 
 
-        public async Task<bool> GetEditProfile(string username ,EditProfileVm profile)
+        public async Task<bool> EditProfile(string username, EditProfileVm profile)
         {
-
             try
             {
-                var user = await _context.Users.FindAsync(username,profile.UserName);
-
+                var user = await GetUserByUserNameAsync(username);
                 if (profile.AvatarFile != null)
                 {
-                    var UserImageName = DateTime.Now.ToString("MM-dd-yyyy_") + profile.AvatarFile.FileName;
-                    var thumbSize = new ThumbSize(100, 100);
-                    profile.AvatarFile.AddImageToServer(UserImageName, PathTools.UserImageServerPath, thumbSize, profile.AvatarName);
-                    user.UserAvatar = UserImageName;
+                    if (profile.AvatarFile != null)
+                    {
+                        var UserImageName = GeneratorGuid.GeneratorUniqCode() + profile.AvatarFile.FileName;
+                        var thumbSize = new ThumbSize(100, 100);
+                        profile.AvatarFile.AddImageToServer(UserImageName, PathTools.UserImageServerPath, thumbSize, profile.AvatarName);
+                        user.AvatarName = UserImageName;
+                    }
+
                 }
+
 
                 user.UserName = profile.UserName;
                 user.Email = profile.Email;
-                user.UserAvatar = profile.AvatarName;
+                user.AvatarName = profile.AvatarName;
+
                 _context.Users.Update(user);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -177,6 +189,11 @@ namespace CodeTo.Core.Services.AccountServices
                 _logger.LogError(e.Message);
                 return false;
             }
+
+        }
+        public async Task<bool> Exists(string username)
+        {
+            return await _context.Users.AnyAsync(u => u.UserName == username);
         }
     }
 }

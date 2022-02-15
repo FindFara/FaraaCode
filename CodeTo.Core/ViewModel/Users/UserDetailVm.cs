@@ -27,8 +27,12 @@ namespace CodeTo.Core.ViewModel.Users
     {
         public string UserName { get; set; }
         public DateTime RegisterDate { get; set; }
-        public string ImageName { get; set; }
- 
+        public string AvatarName { get; set; }
+        public string AcatarFullName =>
+          !string.IsNullOrEmpty(AvatarName)
+          ? $"{PathTools.UserImagePath}{AvatarName}"
+          : PathTools.UserImageDefautl;
+
     }
     public class EditProfileVm
     {

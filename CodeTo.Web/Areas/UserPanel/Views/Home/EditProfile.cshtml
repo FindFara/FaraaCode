@@ -29,35 +29,35 @@
                                     </div>
                                 }
 
-                                @*<input type="hidden" asp-for="AvatarName" />*@
-                                <div class="row">
-                                    <div class="col-md-7 col-sm-8 col-xs-12">
-                                        <div class="input-group">
-                                            <span class="input-group-addon" id="username"><i class="zmdi zmdi-account"></i></span>
-                                            <input type="text" class="form-control" asp-for="UserName" placeholder="نام کاربری" aria-describedby="username">
-                                        </div>
+                                <input type="hidden" asp-for="AvatarFile" />
+
+                                <div class="col-md-7 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-email"></i></span>
+                                        <input type="text" class="form-control" asp-for="UserName" placeholder="نام کاربری" aria-describedby="email-address">
                                     </div>
-                                    <div class="col-md-7 col-sm-8 col-xs-12">
-                                        <div class="input-group">
-                                            <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-email"></i></span>
-                                            <input type="text" class="form-control" asp-for="Email" placeholder="ایمیل" aria-describedby="email-address">
-                                        </div>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-email"></i></span>
+                                        <input type="text" class="form-control" asp-for="Email" placeholder="ایمیل" aria-describedby="email-address">
                                     </div>
-                                    <div class="col-md-7 col-sm-8 col-xs-12">
-                                        <p class="help-block">
-                                            آواتار
-                                        </p>
-                                        <div class="form-group">
-                                            <label asp-for="AvatarFile" class="control-label"></label>
-                                            <input asp-for="AvatarFile" class="form-control" />
-                                            <img id="imgPreview" src="@Model.AcatarFullName" class="img-thumbnail mt-4" width="100" />
-                                        </div>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-12">
+                                    <p class="help-block">
+                                        آواتار
+                                    </p>
+                                    <div class="form-group">
+                                        <label asp-for="AvatarFile" class="control-label"></label>
+                                        <input asp-for="AvatarFile" class="form-control" />
+                                        <img id="imgPreview" src="@Model.AcatarFullName" class="img-thumbnail mt-4" width="100" />
+                                    </div>
 
 
-                                        <div class="col-md-7 col-sm-8 col-xs-12">
-                                            <button class="btn btn-success"> ویرایش اطلاعات </button>
-                                        </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button class="btn btn-success"> ویرایش اطلاعات </button>
                                     </div>
+                                </div>
 
                             </form>
                         </div>

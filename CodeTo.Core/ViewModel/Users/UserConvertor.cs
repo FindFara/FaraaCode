@@ -10,7 +10,7 @@ namespace CodeTo.Core.ViewModel.Users
 {
     public static class UserConvertor
     {
-        public static UserDetailVm ToDetailViewModel(this Domain.Entities.User.User user)
+        public static UserDetailVm ToUserDetailViewModel(this Domain.Entities.User.User user)
         {
             return new UserDetailVm
             {
@@ -19,14 +19,15 @@ namespace CodeTo.Core.ViewModel.Users
                 Email = user.Email,
                 Password = user.Password,
                 RegisterDate = user.RegisterDate,
-                AvatarName = user.UserAvatar,
+                //AvatarName = user.UserAvatar,
                 IsActive = user.IsActive,
                 ActiveCode = user.ActiveCode,
+                
             };
         }
-        public static IQueryable<UserDetailVm> ToDetailViewModel(this IQueryable<Domain.Entities.User.User> users)
+        public static IQueryable<UserDetailVm> ToUserDetailViewModel(this IQueryable<Domain.Entities.User.User> users)
         {
-            return users.Select(user => user.ToDetailViewModel());
+            return users.Select(user => user.ToUserDetailViewModel());
         }
         public static EditProfileVm ToEditProfileViewModel(this Domain.Entities.User.User user)
         {
@@ -35,7 +36,9 @@ namespace CodeTo.Core.ViewModel.Users
                 Id = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
-                AvatarName = user.UserAvatar
+                AvatarName = user.AvatarName
+                
+
 
             };
         }

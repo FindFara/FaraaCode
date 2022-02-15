@@ -40,7 +40,7 @@ namespace CodeTo.Domain.Entities.User
 
         [Display(Name = "آواتار")]
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-        public string UserAvatar { get; set; }
+        public string AvatarName { get; set; }
 
 
 
