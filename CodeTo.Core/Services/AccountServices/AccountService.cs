@@ -197,24 +197,18 @@ namespace CodeTo.Core.Services.AccountServices
                 return false;
             }
         }
-
-
-
-
-
-
-
         public async Task<bool> AddAsync(string username, EditProfileVm profile)
         {
             try
             {
                 var user = await GetUserByUserNameAsync(username);
                 Pic(username, profile);
-
-                user.UserName = profile.UserName;
-                user.Email = profile.Email;
-                user.AvatarName = profile.AvatarName;
-
+                await _context.Users.AddAsync(new User
+                {
+                    UserName = profile.UserName,
+                Email = profile.Email,
+                AvatarName = profile.AvatarName
+            });
                 _context.Users.Update(user);
                 _context.SaveChanges();
                 return true;
