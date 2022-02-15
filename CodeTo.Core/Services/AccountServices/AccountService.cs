@@ -140,7 +140,7 @@ namespace CodeTo.Core.Services.AccountServices
             .Select(u => new UserPanelDataVm()
             {
                 UserName = u.UserName,
-               AvatarName = u.AvatarName,
+                AvatarName = u.AvatarName,
                 RegisterDate = u.RegisterDate
             }).SingleAsync();
         }
@@ -157,24 +157,59 @@ namespace CodeTo.Core.Services.AccountServices
             }).SingleAsync();
         }
 
+       
+        public async Task<bool> Pic(string username,EditProfileVm profile)
+        {
+            var user = await GetUserByUserNameAsync(username);
+            if (profile.AvatarFile != null)
+            {
+                if (profile.AvatarFile != null)
+                {
+                    var UserImageName = GeneratorGuid.GeneratorUniqCode() + profile.AvatarFile.FileName;
+                    var thumbSize = new ThumbSize(100, 100);
+                    profile.AvatarFile.AddImageToServer(UserImageName, PathTools.UserImageServerPath, thumbSize, profile.AvatarName);
+                    user.AvatarName = UserImageName;
+                }
 
+            }
+            return true;
+        }
         public async Task<bool> EditProfile(string username, EditProfileVm profile)
         {
             try
             {
-                var user = await GetUserByUserNameAsync(username);
-                if (profile.AvatarFile != null)
+                string productImageName = null;
+                Pic(username, profile);
+                await _context.Users.AddAsync(new User
                 {
-                    if (profile.AvatarFile != null)
-                    {
-                        var UserImageName = GeneratorGuid.GeneratorUniqCode() + profile.AvatarFile.FileName;
-                        var thumbSize = new ThumbSize(100, 100);
-                        profile.AvatarFile.AddImageToServer(UserImageName, PathTools.UserImageServerPath, thumbSize, profile.AvatarName);
-                        user.AvatarName = UserImageName;
-                    }
+                    Id = profile.Id,
+                    UserName = profile.UserName,
+                    AvatarName=profile.AvatarName,
+                    Email=profile.Email
+                 
+                });
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return false;
+            }
+        }
 
-                }
 
+
+
+
+
+
+        public async Task<bool> AddAsync(string username, EditProfileVm profile)
+        {
+            try
+            {
+                var user = await GetUserByUserNameAsync(username);
+                Pic(username, profile);
 
                 user.UserName = profile.UserName;
                 user.Email = profile.Email;
