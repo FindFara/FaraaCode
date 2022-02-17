@@ -32,7 +32,7 @@ namespace CodeTo.Core.Services.AccountServices
 
 
 
-        public async Task<bool> CheckEmailAndPasswordAsync(AccountLoginVm vm)
+        public async Task<bool> CheckEmailAndPasswordAsync(AccountLoginViewModel vm)
 
         {
             var user = await _context.Users.SingleOrDefaultAsync(c => c.Email.Trim().ToLower() == vm.Email.Trim().ToLower());
@@ -43,7 +43,7 @@ namespace CodeTo.Core.Services.AccountServices
             return false;
         }
 
-        public async Task<UserDetailVm> GetUserByEmailAsync(string email)
+        public async Task<UserDetailViewModel> GetUserByEmailAsync(string email)
         {
             email = email.Trim().ToLower();
             var user = await _context.Users
@@ -52,7 +52,7 @@ namespace CodeTo.Core.Services.AccountServices
             return user.ToUserDetailViewModel();
         }
 
-        public async Task<UserDetailVm> GetUserByIdAsync(int userId)
+        public async Task<UserDetailViewModel> GetUserByIdAsync(int userId)
         {
             var user = await _context.Users
                .SingleOrDefaultAsync(c => c.Id == userId);
@@ -75,7 +75,7 @@ namespace CodeTo.Core.Services.AccountServices
             return await _context.Users.AnyAsync(u => u.UserName == username);
         }
 
-        public async Task<bool> RegisterAsync(AccountRegisterVm vm)
+        public async Task<bool> RegisterAsync(AccountRegisterViewModel vm)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace CodeTo.Core.Services.AccountServices
                     UserName = vm.UserName,
                     Email = vm.Email,
                     Password = hassPassword,
-                    RegisterDate = DateTime.Now,
+                    CreateDate = DateTime.Now,
                     IsActive = false
 
                 });
@@ -111,21 +111,21 @@ namespace CodeTo.Core.Services.AccountServices
             return true;
         }
 
-        public async Task<UserDetailVm> GetUserInformation(string username)
+        public async Task<UserDetailViewModel> GetUserInformation(string username)
         {
             var user = await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
 
-            UserDetailVm uv = new UserDetailVm();
+            UserDetailViewModel uv = new UserDetailViewModel();
             {
                 uv.UserName = user.UserName;
                 uv.Email = user.Email;
-                uv.RegisterDate = user.RegisterDate;
+                uv.CreateDate = user.CreateDate;
                 uv.Wallet = 0;
             }
             return uv;
         }
 
-        public async Task<UserPanelDataVm> GetUserPanelData(string username)
+        public async Task<UserPanelDataViewModel> GetUserPanelData(string username)
         {
             //UserPanelDataVm ud = new UserPanelDataVm();
             //var user = await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
@@ -137,19 +137,19 @@ namespace CodeTo.Core.Services.AccountServices
 
             return await _context.Users
             .Where(u => u.UserName == username)
-            .Select(u => new UserPanelDataVm()
+            .Select(u => new UserPanelDataViewModel()
             {
                 UserName = u.UserName,
                 AvatarName = u.AvatarName,
-                RegisterDate = u.RegisterDate
+                CreateDate = u.CreateDate
             }).SingleAsync();
         }
 
-        public async Task<EditProfileVm> GetEditPrifileData(string username)
+        public async Task<EditProfileViewModel> GetEditPrifileData(string username)
         {
             return await _context.Users
             .Where(u => u.UserName == username)
-            .Select(u => new EditProfileVm()
+            .Select(u => new EditProfileViewModel()
             {
                 UserName = u.UserName,
                 AvatarName = u.AvatarName,
@@ -157,58 +157,27 @@ namespace CodeTo.Core.Services.AccountServices
             }).SingleAsync();
         }
 
-       
-        public async Task<bool> Pic(string username,EditProfileVm profile)
+        public async Task<bool> EditProfile(string username, EditProfileViewModel profile)
         {
-            var user = await GetUserByUserNameAsync(username);
-            if (profile.AvatarFile != null)
+            try
             {
+                var user = await GetUserByUserNameAsync(username);
+                string UserImageName = null;
                 if (profile.AvatarFile != null)
                 {
-                    var UserImageName = GeneratorGuid.GeneratorUniqCode() + profile.AvatarFile.FileName;
+                    UserImageName = GeneratorGuid.GeneratorUniqCode() + profile.AvatarFile.FileName;
                     var thumbSize = new ThumbSize(100, 100);
                     profile.AvatarFile.AddImageToServer(UserImageName, PathTools.UserImageServerPath, thumbSize, profile.AvatarName);
                     user.AvatarName = UserImageName;
                 }
 
-            }
-            return true;
-        }
-        public async Task<bool> EditProfile(string username, EditProfileVm profile)
-        {
-            try
-            {
-                string productImageName = null;
-                Pic(username, profile);
-                await _context.Users.AddAsync(new User
-                {
-                    Id = profile.Id,
-                    UserName = profile.UserName,
-                    AvatarName=profile.AvatarName,
-                    Email=profile.Email
-                 
-                });
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e.Message);
-                return false;
-            }
-        }
-        public async Task<bool> AddAsync(string username, EditProfileVm profile)
-        {
-            try
-            {
-                var user = await GetUserByUserNameAsync(username);
-                Pic(username, profile);
-                await _context.Users.AddAsync(new User
-                {
-                    UserName = profile.UserName,
-                Email = profile.Email,
-                AvatarName = profile.AvatarName
-            });
+
+
+
+                user.UserName = profile.UserName;
+                user.Email = profile.Email;
+                user.AvatarName = UserImageName;
+
                 _context.Users.Update(user);
                 _context.SaveChanges();
                 return true;
@@ -218,11 +187,8 @@ namespace CodeTo.Core.Services.AccountServices
                 _logger.LogError(e.Message);
                 return false;
             }
+        }
 
-        }
-        public async Task<bool> Exists(string username)
-        {
-            return await _context.Users.AnyAsync(u => u.UserName == username);
-        }
+       
     }
 }

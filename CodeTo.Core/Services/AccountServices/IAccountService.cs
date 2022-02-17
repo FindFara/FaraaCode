@@ -10,22 +10,22 @@ namespace CodeTo.Core.Services.AccountServices
 {
     public interface IAccountService 
     {
-        Task<bool> RegisterAsync(AccountRegisterVm vm);
-        Task<bool> CheckEmailAndPasswordAsync(AccountLoginVm vm);
+        Task<bool> RegisterAsync(AccountRegisterViewModel vm);
+        Task<bool> CheckEmailAndPasswordAsync(AccountLoginViewModel vm);
         Task<bool> IsDuplicatedEmail(string email);
         Task<bool> IsDuplicatedUsername(string username);
-        Task<UserDetailVm> GetUserByEmailAsync(string email);
-        Task<UserDetailVm> GetUserByIdAsync(int userId);
+        Task<UserDetailViewModel> GetUserByEmailAsync(string email);
+        Task<UserDetailViewModel> GetUserByIdAsync(int userId);
         Task<User> GetUserByUserNameAsync(string username);
         Task<bool> ActiveAccountAsync(string activecode);
 
         #region UserProfile
-        Task<UserDetailVm> GetUserInformation(string username);
-        Task<UserPanelDataVm> GetUserPanelData(string username);
-        Task<EditProfileVm> GetEditPrifileData(string username);
-        Task<bool> EditProfile(string username, EditProfileVm profile);
-        Task<bool> Exists(string username);
-        public Task<bool> AddAsync(string username, EditProfileVm profile);
+        Task<UserDetailViewModel> GetUserInformation(string username);
+        Task<UserPanelDataViewModel> GetUserPanelData(string username);
+        Task<EditProfileViewModel> GetEditPrifileData(string username);
+        Task<bool> EditProfile(string username, EditProfileViewModel profile);
+        
+       
         #endregion
 
 

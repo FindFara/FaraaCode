@@ -39,7 +39,7 @@ namespace CodeTo.Web.Controllers
         [Route("login")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(AccountLoginVm vm)
+        public async Task<IActionResult> Login(AccountLoginViewModel vm)
         {
             if (!await _accountService.CheckEmailAndPasswordAsync(vm))
                 ModelState.AddModelError(nameof(vm.Password), "ایمیل یا پسورد وارد شده معتبر نمیباشد ");
@@ -67,7 +67,6 @@ namespace CodeTo.Web.Controllers
             return View(vm);
         }
         #endregion
-
         #region Register
         [Route("register")]
         public IActionResult Register()
@@ -78,7 +77,7 @@ namespace CodeTo.Web.Controllers
         [Route("register")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(AccountRegisterVm vm)
+        public async Task<IActionResult> Register(AccountRegisterViewModel vm)
         {
             if (await _accountService.IsDuplicatedEmail(vm.Email))
                 ModelState.AddModelError(nameof(vm.Email), "ایمیل ورودی معتبر نمیباشد ");
@@ -105,7 +104,7 @@ namespace CodeTo.Web.Controllers
 
 
 
-            return View("SuccessRegister",user);
+            return View("SuccessRegister",vm);
         }
         #endregion
 

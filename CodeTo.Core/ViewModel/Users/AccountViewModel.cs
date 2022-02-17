@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CodeTo.Core.ViewModel.Users
 {
-    public class AccountRegisterVm
+    public class AccountRegisterViewModel
     {
         [Display(Name = "نام کاربری")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
@@ -30,9 +30,14 @@ namespace CodeTo.Core.ViewModel.Users
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         [Compare("Password", ErrorMessage = "کلمه های عبور مغایرت دارند")]
         public string RePassword { get; set; }
+        public string ActiveCode { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreateDate { get; set; }
+        public string AvatarName { get; set; }
+        public int Id { get; set; }
     }
 
-    public class AccountLoginVm
+    public class AccountLoginViewModel
     {
         [Display(Name = "ایمیل")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]

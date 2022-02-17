@@ -8,7 +8,7 @@ namespace CodeTo.Domain.Base
 {
    public  interface IDateEntity
     {
-        DateTime RegisterDate { get; set; }
+        DateTime CreateDate { get; set; }
         DateTime? LastModifyDate { get; set; }
     }
 }

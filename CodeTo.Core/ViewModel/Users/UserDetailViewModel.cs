@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CodeTo.Core.ViewModel.Users
 {
-    public class UserDetailVm
+    public class UserDetailViewModel
     {
         public int Id { get; set; }
         public string UserName { get; set; }
@@ -17,16 +17,16 @@ namespace CodeTo.Core.ViewModel.Users
         public string Password { get; set; }
         public string ActiveCode { get; set; }
         public bool IsActive { get; set; }
-        public DateTime RegisterDate { get; set; }
+        public DateTime CreateDate { get; set; }
         public string AvatarName { get; set; }
         public int Wallet { get; set; }
 
     }
 
-    public class UserPanelDataVm
+    public class UserPanelDataViewModel
     {
         public string UserName { get; set; }
-        public DateTime RegisterDate { get; set; }
+        public DateTime CreateDate { get; set; }
         public string AvatarName { get; set; }
         public string AcatarFullName =>
           !string.IsNullOrEmpty(AvatarName)
@@ -34,7 +34,7 @@ namespace CodeTo.Core.ViewModel.Users
           : PathTools.UserImageDefautl;
 
     }
-    public class EditProfileVm
+    public class EditProfileViewModel
     {
         public int Id { get; set; }
         [Display(Name = "نام کاربری")]

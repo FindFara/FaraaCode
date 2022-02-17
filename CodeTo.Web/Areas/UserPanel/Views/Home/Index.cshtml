@@ -1,4 +1,4 @@
-﻿@model CodeTo.Core.ViewModel.Users.UserDetailVm
+﻿@model CodeTo.Core.ViewModel.Users.UserDetailViewModel
 @{
     ViewData["Title"] = "پنل کاربری " + User.Identity.Name;
 }
@@ -26,7 +26,7 @@
                                 <ul>
                                     <li> <i class="zmdi zmdi-assignment-account"></i> نام کاربری :  @Model.UserName </li>
                                     <li> <i class="zmdi zmdi-email"></i> ایمیل : @Model.Email </li>
-                                    <li> <i class="zmdi zmdi-calendar-check"></i> تاریخ عضویت : @Model.RegisterDate.toshamsi() </li>
+                                    <li> <i class="zmdi zmdi-calendar-check"></i> تاریخ عضویت : @Model.CreateDate.toshamsi() </li>
                                     <li> <i class="zmdi zmdi-account"></i> موجودی حساب : @Model.Wallet تومان </li>
                                 </ul>
                             </div>

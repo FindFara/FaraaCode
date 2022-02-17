@@ -47,7 +47,7 @@ namespace CodeTo.Domain.Entities.User
         #region Datetime
 
         [Display(Name = "تاریخ ثبت نام")]
-        public DateTime RegisterDate { get; set; }
+        public DateTime CreateDate { get; set; }
 
         [Display(Name = "تاریخ ویرایش")]
         public DateTime? LastModifyDate { get; set; }
