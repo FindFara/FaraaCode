@@ -1,4 +1,5 @@
 ﻿using CodeTo.Core.Services.AccountServices;
+using CodeTo.Core.Services.UserPanelServices;
 using CodeTo.Core.Utilities.Extension;
 using CodeTo.Core.Utilities.Other;
 using CodeTo.Core.Utilities.Security;
@@ -27,6 +28,7 @@ namespace CodeTo.IOC
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ISecurityService, SecurityService>();
             services.AddTransient<IViewRenderService, RenderViewToString>();
+            services.AddTransient<IUserPanelService, UserPanelService>();
 
             return services;
         }

@@ -39,14 +39,14 @@ namespace CodeTo.Web.Controllers
         [Route("login")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(AccountLoginViewModel vm)
+        public async Task<IActionResult> Login(AccountLoginViewModel register)
         {
-            if (!await _accountService.CheckEmailAndPasswordAsync(vm))
-                ModelState.AddModelError(nameof(vm.Password), "ایمیل یا پسورد وارد شده معتبر نمیباشد ");
+            if (!await _accountService.CheckEmailAndPasswordAsync(register))
+                ModelState.AddModelError(nameof(register.Password), "ایمیل یا پسورد وارد شده معتبر نمیباشد ");
 
             if (ModelState.IsValid)
             {
-                var user = await _accountService.GetUserByEmailAsync(vm.Email);
+                var user = await _accountService.GetUserByEmailAsync(register.Email);
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier,user.UserName.ToString()),
@@ -57,14 +57,14 @@ namespace CodeTo.Web.Controllers
                 var principal = new ClaimsPrincipal(identity);
                 var properties = new AuthenticationProperties
                 {
-                    IsPersistent = vm.RememberMe
+                    IsPersistent = register.RememberMe
                 };
                 await HttpContext.SignInAsync(principal,properties);
 
                     return RedirectToAction("Index", "Home");
 
             }
-            return View(vm);
+            return View(register);
         }
         #endregion
         #region Register
@@ -77,37 +77,39 @@ namespace CodeTo.Web.Controllers
         [Route("register")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(AccountRegisterViewModel vm)
+        public async Task<IActionResult> Register(AccountRegisterViewModel register)
         {
-            if (await _accountService.IsDuplicatedEmail(vm.Email))
-                ModelState.AddModelError(nameof(vm.Email), "ایمیل ورودی معتبر نمیباشد ");
+            if (register.UserName.Contains("Admin".ToLower().Trim()))
+            {
+                ModelState.AddModelError("UserName", "از این نام کاربری نمی توانید استفاده کنید");
+                return View(register);
+            }
 
-            if (await _accountService.IsDuplicatedUsername(vm.UserName))
-                ModelState.AddModelError(nameof(vm.UserName), "نام کاربری  ورودی معتبر نمیباشد ");
+            if (await _accountService.IsDuplicatedEmail(register.Email))
+                ModelState.AddModelError(nameof(register.Email), "ایمیل ورودی معتبر نمیباشد ");
+
+            if (await _accountService.IsDuplicatedUsername(register.UserName))
+                ModelState.AddModelError(nameof(register.UserName), "نام کاربری  ورودی معتبر نمیباشد ");
 
 
             if (!ModelState.IsValid)
             {
-                return View(vm);
+                return View(register);
             }
 
-             var user = await _accountService.RegisterAsync(vm);
+             var user = await _accountService.RegisterAsync(register);
            
 
             #region Send Activation Email
 
             string body = viewRenderService.RenderToStringAsync("_ActiveEmail",User);
-            SendEmail.Send(vm.Email, "فعالسازی", body);
+            SendEmail.Send(register.Email, "فعالسازی", body);
 
-            #endregion
+            #endregion //TODO: Activation Send Email
 
-
-
-
-            return View("SuccessRegister",vm);
+            return View("SuccessRegister",register);
         }
         #endregion
-
         #region Active Account
         public async Task<IActionResult> ActiveAccount(string id)
         {
@@ -116,7 +118,6 @@ namespace CodeTo.Web.Controllers
         }
 
         #endregion
-
         #region Logout
         [Route("logout")]
         public async Task<IActionResult> Logout()

@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace CodeTo.Web.Areas.UserPanel.Controllers
 {
-    [Area("Userpanel")]
     [Authorize]
-    public class UserPanelController : Controller { }
+    [Area("Userpanels")]
+    [Route("cpanel")]
+    public class BaseUserPanelController : Controller { }
 }
 

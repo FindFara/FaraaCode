@@ -29,7 +29,7 @@
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <div class="loggein">
-                                    <i class="zmdi zmdi-account"></i><a asp-controller="Userpanel"> @User.Identity.Name  خوش آمدی </a>
+                                    <i class="zmdi zmdi-account"></i><a asp-area="UserPanels" asp-controller="UserPanelHome" asp-action="Index" > @User.Identity.Name  </a>
                                     /
                                     <a asp-controller="Account"asp-action="Logout"> خروج </a>
                                 </div>

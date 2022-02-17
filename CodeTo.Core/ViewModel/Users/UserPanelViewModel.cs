@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CodeTo.Core.ViewModel.Users
 {
-    public class UserDetailViewModel
+    public class UserPanelInformationViewModel
     {
         public int Id { get; set; }
         public string UserName { get; set; }
@@ -22,13 +22,12 @@ namespace CodeTo.Core.ViewModel.Users
         public int Wallet { get; set; }
 
     }
-
     public class UserPanelDataViewModel
     {
         public string UserName { get; set; }
         public DateTime CreateDate { get; set; }
         public string AvatarName { get; set; }
-        public string AcatarFullName =>
+        public string AvatarFullName =>
           !string.IsNullOrEmpty(AvatarName)
           ? $"{PathTools.UserImagePath}{AvatarName}"
           : PathTools.UserImageDefautl;
@@ -50,10 +49,27 @@ namespace CodeTo.Core.ViewModel.Users
 
         public IFormFile AvatarFile { get; set; }
         public string AvatarName { get; set; }
-        public string AcatarFullName =>
+        public string AvatarFullName =>
            !string.IsNullOrEmpty(AvatarName)
            ? $"{PathTools.UserImagePath}{AvatarName}"
            : PathTools.UserImageDefautl;
 
+    }
+     public class ChangePasswordViewModel
+    {
+        [Display(Name = " کلمه عبور فعلی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string OldPassword { get; set; }
+        [Display(Name = "کلمه عبور جدید")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string Password { get; set; }
+
+        [Display(Name = "تکرار کلمه عبور جدید")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        [Compare("Password", ErrorMessage = "کلمه های عبور مغایرت دارند")]
+        public string RePassword { get; set; }
     }
 }

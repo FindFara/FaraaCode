@@ -21,16 +21,14 @@ namespace CodeTo.Core.Services.AccountServices
     {
         private readonly CodeToContext _context;
         private readonly ISecurityService _securityService;
-        private readonly ILoggerService<AccountService> _logger;
+     
 
-        public AccountService(CodeToContext context, ISecurityService securityService, ILoggerService<AccountService> logger)
+        public AccountService(CodeToContext context, ISecurityService securityService)
         {
             _context = context;
             _securityService = securityService;
-            _logger = logger;
+          
         }
-
-
 
         public async Task<bool> CheckEmailAndPasswordAsync(AccountLoginViewModel vm)
 
@@ -57,12 +55,6 @@ namespace CodeTo.Core.Services.AccountServices
             var user = await _context.Users
                .SingleOrDefaultAsync(c => c.Id == userId);
             return user.ToUserDetailViewModel();
-        }
-
-        public async Task<User> GetUserByUserNameAsync(string username)
-        {
-            return await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
-
         }
 
         public async Task<bool> IsDuplicatedEmail(string email)
@@ -111,83 +103,7 @@ namespace CodeTo.Core.Services.AccountServices
             return true;
         }
 
-        public async Task<UserDetailViewModel> GetUserInformation(string username)
-        {
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
 
-            UserDetailViewModel uv = new UserDetailViewModel();
-            {
-                uv.UserName = user.UserName;
-                uv.Email = user.Email;
-                uv.CreateDate = user.CreateDate;
-                uv.Wallet = 0;
-            }
-            return uv;
-        }
-
-        public async Task<UserPanelDataViewModel> GetUserPanelData(string username)
-        {
-            //UserPanelDataVm ud = new UserPanelDataVm();
-            //var user = await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
-            //ud.UserName = user.UserName;
-            //ud.RegisterDate = user.RegisterDate;
-            //ud.ImageName = user.UserAvatar; 
-
-            //return ud;
-
-            return await _context.Users
-            .Where(u => u.UserName == username)
-            .Select(u => new UserPanelDataViewModel()
-            {
-                UserName = u.UserName,
-                AvatarName = u.AvatarName,
-                CreateDate = u.CreateDate
-            }).SingleAsync();
-        }
-
-        public async Task<EditProfileViewModel> GetEditPrifileData(string username)
-        {
-            return await _context.Users
-            .Where(u => u.UserName == username)
-            .Select(u => new EditProfileViewModel()
-            {
-                UserName = u.UserName,
-                AvatarName = u.AvatarName,
-                Email = u.Email
-            }).SingleAsync();
-        }
-
-        public async Task<bool> EditProfile(string username, EditProfileViewModel profile)
-        {
-            try
-            {
-                var user = await GetUserByUserNameAsync(username);
-                string UserImageName = null;
-                if (profile.AvatarFile != null)
-                {
-                    UserImageName = GeneratorGuid.GeneratorUniqCode() + profile.AvatarFile.FileName;
-                    var thumbSize = new ThumbSize(100, 100);
-                    profile.AvatarFile.AddImageToServer(UserImageName, PathTools.UserImageServerPath, thumbSize, profile.AvatarName);
-                    user.AvatarName = UserImageName;
-                }
-
-
-
-
-                user.UserName = profile.UserName;
-                user.Email = profile.Email;
-                user.AvatarName = UserImageName;
-
-                _context.Users.Update(user);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e.Message);
-                return false;
-            }
-        }
 
        
     }
