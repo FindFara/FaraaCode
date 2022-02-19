@@ -79,7 +79,8 @@ namespace CodeTo.Web.Areas.UserPanel.Controllers
             }
 
              await _userpanel.ChangePassword(username, change.Password);
-            return View();
+
+            return View("index");
         }
     }
 }

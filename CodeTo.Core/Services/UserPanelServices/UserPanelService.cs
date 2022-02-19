@@ -113,16 +113,9 @@ namespace CodeTo.Core.Services.UserPanelServices
         public async Task<bool> compareOldPassword(string username, string oldpassword)
         {
 
-            var hashepasssword = _security.HashPassword(oldpassword);
-
-
             var user = await _context.Users.SingleOrDefaultAsync(u => u.UserName == username);
-            if (user == null)
-            {
-                return false;
-            }
-            return _security.VerifyHashedPassword(user.Password, hashepasssword);
 
+            return _security.VerifyHashedPassword(user.Password, oldpassword);
         }
 
         public async Task<bool> ChangePassword(string username, string newpassword)

@@ -10,45 +10,85 @@
     </ul>
 </nav>
 
-<main class="client-page">
-    <div class="container-content">
 
-        <header><h2> عضویت در سایت </h2></header>
 
-        <div class="form-layer">
+<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link href="/css/tobii.min.css" rel="stylesheet" type="text/css" />
+<link href="/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="unicons.iconscout.com/release/v3.0.6/css/line.css" />
+<link rel="stylesheet" href="css/tiny-slider.css" />
+<link href="/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+<link href="/css/colors/default.css" rel="stylesheet" id="color-opt">
+<!-- شوع آن -->
+<section class="bg-home bg-circle-gradiant d-flex align-items-center">
+    <div class="bg-overlay bg-overlay-white"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8">
+                <div class="card login-page bg-white shadow rounded border-0">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">وارد شدن </h4>
+                        <form asp-action="Register" method="post" class="login-form mt-4">
+                            <div class="row">
 
-            <form asp-action="Register" method="post">
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">ایمیل شما <span class="text-danger">*</span></label>
+                                        <div class="form-icon position-relative">
+                                            <i data-feather="user" class="fea icon-sm icons"></i>
+                                            <input asp-for="UserName" type="text" class="form-control ps-5" placeholder="ایمیل" name="email" required="">
+                                        </div>
+                                    </div>
+                                </div>
 
-                <div class="input-group">
-                    <span class="input-group-addon" id="username"><i class="zmdi zmdi-account"></i></span>
-                    <input asp-for="UserName" type="text" class="form-control" placeholder="نام و نام خانوادگی" aria-describedby="username">
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">ایمیل شما <span class="text-danger">*</span></label>
+                                        <div class="form-icon position-relative">
+                                            <i data-feather="user" class="fea icon-sm icons"></i>
+                                            <input asp-for="Email" type="email" class="form-control ps-5" placeholder="ایمیل" name="email" required="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">رمز عبور  <span class="text-danger">*</span></label>
+                                        <div class="form-icon position-relative">
+                                            <i data-feather="key" class="fea icon-sm icons"></i>
+                                            <input asp-for="Password" type="password" class="form-control ps-5" placeholder="رمز عبور " required="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">رمز عبور  <span class="text-danger">*</span></label>
+                                        <div class="form-icon position-relative">
+                                            <i data-feather="key" class="fea icon-sm icons"></i>
+                                            <input asp-for="RePassword" type="password" class="form-control ps-5" placeholder="رمز عبور " required="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 mb-0">
+                                    <div class="d-grid">
+                                        <button class="btn btn-success">ثبت نام</button>
+                                    </div>
+                                </div>
+
+                                <div asp-validation-summary="All" class="text-danger">
+
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-                <div class="input-group">
-                    <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-email"></i></span>
-                    <input asp-for="Email" type="text" class="form-control" placeholder="ایمیل" aria-describedby="email-address">
-                </div>
-
-                <div class="input-group">
-                    <span class="input-group-addon" id="password"><i class="zmdi zmdi-lock"></i></span>
-                    <input asp-for="Password" type="password" class="form-control" placeholder="رمز عبور " aria-describedby="password">
-                </div>
-
-                <div class="input-group">
-                    <span class="input-group-addon" id="password"><i class="zmdi zmdi-lock"></i></span>
-                    <input asp-for="RePassword" type="password" class="form-control" placeholder="تکرار رمز عبور " aria-describedby="password">
-                </div>
-
-                <div class="link">
-                    <a href="/Login"> <i class="zmdi zmdi-account"></i> ورود به سایت </a>
-                </div>
-                <div asp-validation-summary="All" class="text-danger">
-
-                </div>
-                <button class="btn btn-success"> عضویت در سایت </button>
-
-            </form>
+            </div>
         </div>
-
     </div>
-</main>
+</section>
+
