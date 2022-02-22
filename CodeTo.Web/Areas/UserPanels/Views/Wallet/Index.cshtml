@@ -30,12 +30,12 @@
             </tr>
         </thead>
         <tbody>
-            @*@foreach (var item in hs)
-            {*@
+            @foreach (var item in hs)
+            {
                 <tr>
-                    <td>@Model.Amount.ToString("#,0 تومان")</td>
+                    <td>@item.Amount.ToString("#,0 تومان")</td>
                     <td>
-                        @if (Model.Type == 1)
+                        @if (item.Type == 1)
                         {
                             <p class="text text-success">واریز</p>
                         }
@@ -44,14 +44,12 @@
                             <p class="text text-danger">برداشت</p>
                         }
                     </td>
-                    <td>@Model.Creatdate.ToShamsi()</td>
+                    <td>@item.Creatdate.ToShamsi()</td>
 
-                    <td>@Model.Description</td>
+                    <td>@item.Description</td>
                 </tr>
-            
+            }
         </tbody>
     </table>
 </div>
-
-
 

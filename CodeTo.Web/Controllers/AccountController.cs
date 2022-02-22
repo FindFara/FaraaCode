@@ -79,11 +79,7 @@ namespace CodeTo.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(AccountRegisterViewModel register)
         {
-            if (register.UserName.Contains("Admin".ToLower().Trim()))
-            {
-                ModelState.AddModelError("UserName", "از این نام کاربری نمی توانید استفاده کنید");
-                return View(register);
-            }
+            
 
             if (await _accountService.IsDuplicatedEmail(register.Email))
                 ModelState.AddModelError(nameof(register.Email), "ایمیل ورودی معتبر نمیباشد ");
@@ -100,14 +96,10 @@ namespace CodeTo.Web.Controllers
              var user = await _accountService.RegisterAsync(register);
            
 
-            #region Send Activation Email
+            //TODO: Activation Send Email
+            //TODO: Redirect to succssesfullView
 
-            string body = viewRenderService.RenderToStringAsync("_ActiveEmail",User);
-            SendEmail.Send(register.Email, "فعالسازی", body);
-
-            #endregion //TODO: Activation Send Email
-
-            return View("SuccessRegister",register);
+            return RedirectToAction("Login", "Account");
         }
         #endregion
         #region Active Account

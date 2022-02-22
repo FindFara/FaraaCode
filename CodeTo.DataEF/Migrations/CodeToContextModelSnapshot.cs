@@ -112,15 +112,14 @@ namespace CodeTo.DataEF.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("ISpay")
                         .HasColumnType("bit");
@@ -131,26 +130,27 @@ namespace CodeTo.DataEF.Migrations
                     b.Property<byte>("WalletTypeId")
                         .HasColumnType("tinyint");
 
+                    b.Property<int?>("WalletTypeTypeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("WalletTypeId");
+                    b.HasIndex("WalletTypeTypeId");
 
                     b.ToTable("Wallets");
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Wallet.WalletType", b =>
                 {
-                    b.Property<byte>("Id")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                    b.Property<string>("TypeTitle")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("TypeId");
 
                     b.ToTable("WalletTypes");
                 });
@@ -184,9 +184,7 @@ namespace CodeTo.DataEF.Migrations
 
                     b.HasOne("CodeTo.Domain.Entities.Wallet.WalletType", "WalletType")
                         .WithMany("Wallets")
-                        .HasForeignKey("WalletTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WalletTypeTypeId");
 
                     b.Navigation("User");
 

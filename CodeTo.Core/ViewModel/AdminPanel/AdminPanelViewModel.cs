@@ -1,0 +1,56 @@
+﻿using CodeTo.Domain.Entities.Users;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CodeTo.Core.ViewModel.AdminPanel
+{
+    public static class AdminVeiwConvertor
+    {
+        public static AdminPanelIndexViewModel ConvertorAdminPanelIndexViewModel(this User user)
+        {
+            return new AdminPanelIndexViewModel()
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Id = user.Id,
+                ImageName = user.AvatarName,
+                CreateDate = user.CreateDate,
+                IsActived = user.IsActive
+            };
+        }
+
+        public static IQueryable<AdminPanelIndexViewModel> ConvertorAdminPanelIndexViewModel(
+            this IQueryable<User> users)
+        {
+            return users.Select(u => u.ConvertorAdminPanelIndexViewModel());
+        }
+
+        public static IEnumerable<AdminPanelIndexViewModel> ConvertorAdminPanelIndexViewModel(
+            this IEnumerable<User> users)
+        {
+            return users.Select(u => u.ConvertorAdminPanelIndexViewModel());
+        }
+
+        public static AdminPanelCreateOrEditViewModel ConvertorAdminPanelCreatOrEditViewModel(this User user)
+        {
+            return new AdminPanelCreateOrEditViewModel()
+            {
+                Title = user.UserName,
+                Email = user.Email,
+                Id = user.Id,
+                ImageName = user.AvatarName,
+                CreateDate = user.CreateDate,
+                Password = user.Password,
+            };
+        }
+
+        public static IQueryable<AdminPanelCreateOrEditViewModel> ConvertorAdminPanelCreatOrEditViewModel(
+            this IQueryable<User> users)
+        {
+            return users.Select(u => u.ConvertorAdminPanelCreatOrEditViewModel());
+        }
+    }
+}

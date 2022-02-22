@@ -24,8 +24,4 @@
 	
 	  <ProjectReference Include="..\CodeTo.IOC\CodeTo.IOC.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Areas\Admin\Views\" />
-	</ItemGroup>
 </Project>

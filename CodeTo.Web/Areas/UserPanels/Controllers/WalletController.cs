@@ -22,9 +22,10 @@ namespace CodeTo.Web.Areas.UserPanels.Controllers
         public async Task<IActionResult> Index()
         {
             //How to use methods with different view models in one view
+            
             if (ViewBag.ShowHistory != null)
             {
-                ViewBag.ShowHistory = await _service.ShowHistory(User.Identity.Name);
+                ViewBag.ShowHistory =  _service.ShowHistory(User.Identity.Name);
             }
             return View();
         }
@@ -36,7 +37,7 @@ namespace CodeTo.Web.Areas.UserPanels.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.ShowHistory = await _service.ShowHistory(User.Identity.Name);
+                ViewBag.ShowHistory =  _service.ShowHistory(User.Identity.Name);
                 return View(wallet);
             }
 

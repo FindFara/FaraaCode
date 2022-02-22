@@ -11,13 +11,9 @@ namespace CodeTo.Domain.Entities.Wallet
    public class WalletType
    {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public byte Id { get; set; }
-        [Required]
-        [MaxLength(150)]
-        public string Type { get; set; }
+        public int TypeId { get; set; }
+        public string TypeTitle { get; set; }
         
-
-
         #region 
         public List<Wallet> Wallets { get; set; }
         #endregion

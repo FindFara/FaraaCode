@@ -84,7 +84,7 @@ namespace CodeTo.Core.ViewModel.Users
             Creatdate=wallet.CreatDate,
             Description=wallet.Description,
             UserId=wallet.UserId,
-            Type= (int)(wallet.WalletType?.Id)
+            Type= (int)(wallet.WalletType?.TypeId)
 
 
             };
