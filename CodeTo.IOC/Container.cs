@@ -26,9 +26,10 @@ namespace CodeTo.IOC
 
             services.AddSingleton(typeof(ILoggerService<>), typeof(LoggerService<>));
             services.AddTransient<IAccountService, AccountService>();
-            services.AddTransient<ISecurityService, SecurityService>();
+            services.AddSingleton<ISecurityService, SecurityService>();
             services.AddTransient<IViewRenderService, RenderViewToString>();
             services.AddTransient<IUserPanelService, UserPanelService>();
+            
 
             return services;
         }

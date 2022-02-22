@@ -50,7 +50,7 @@ namespace CodeTo.Web.Areas.UserPanel.Controllers
         
            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return Redirect("auth/Login?EditProfile=true");
+            return Redirect("auth/Login");
         }
         #endregion
         [Route("ChangePassword")]
@@ -70,8 +70,6 @@ namespace CodeTo.Web.Areas.UserPanel.Controllers
             {
                 return View(change);
             }
-
-            //Todo: old pass null rad miseh
             if (!await _userpanel.compareOldPassword(username, pass))
             {
                 ModelState.AddModelError("OldPassword", "کلمه عبور فعلی صحیح نمی باشد !");
@@ -80,7 +78,7 @@ namespace CodeTo.Web.Areas.UserPanel.Controllers
 
              await _userpanel.ChangePassword(username, change.Password);
 
-            return View("index");
+            return Redirect("auth/Login");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CodeTo.Core.ViewModel.Users;
-using CodeTo.Domain.Entities.User;
+using CodeTo.Domain.Entities.Users;
+using CodeTo.Domain.Entities.Wallet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,18 @@ namespace CodeTo.Core.Services.UserPanelServices
         Task<bool> EditProfile(string username, EditProfileViewModel profile);
         Task<bool> compareOldPassword(string username, string oldpassword);
         Task<bool> ChangePassword(string username, string newpassword);
+
+
+        #region Wallet
+        
+        int GetUserIdByUserName(string username);
+        double UserBalanceAsync(string username);
+        Task<List<WalletViewModel>> ShowHistory(string username);
+        long ChargeUserWallet(double amount, string username, string Description, bool ISpay = false);
+        long AddWallet(Wallet wallet);
+        public Wallet GetWalletByWalletId(long walletid);
+        public void UpdateWallet(Wallet wallet);
+
+        #endregion
     }
 }

@@ -1,0 +1,87 @@
+﻿@using CodeTo.Core.Services.UserPanelServices
+@using CodeTo.Core.ViewModel.Users
+@using CodeTo.Core.Utilities.Extension
+@inject IUserPanelService _UserPanelService
+
+@{
+    UserPanelDataViewModel user = await _UserPanelService.GetUserPanelData(User.Identity.Name);
+}
+
+<!-- Hero Start -->
+<section class="bg-profile d-table w-100 bg-primary" style="background: url('/images/digital/bg.png') center center;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card public-profile border-0 rounded shadow" style="z-index: 1;">
+                    <div class="card-body">
+
+                        <div class="row align-items-center">
+
+                            <div class="col-lg-2 col-md-3 text-md-start text-center">
+                                <img src="@user.AvatarFullName" class="avatar avatar-large rounded-circle shadow d-block mx-auto" alt="">
+                            </div>
+
+                            <div class="col-lg-10 col-md-9">
+
+                                <div class="col-lg-10 col-md-9">
+                                    <div class="row align-items-end">
+                                        <div class="col-md-7 text-md-start text-center mt-4 mt-sm-0">
+                                            <h3 class="title mb-0"> @user.UserName</h3>
+                                            <small class="text-muted h6 me-2">@user.CreateDate.ToShamsi()</small>
+                                            <small class="text-muted h6 me-2">توسعه وب</small>
+                                            <ul class="list-inline mb-0 mt-3">
+                                                <li class="list-inline-item me-2"><a href="javascript:void(0)" class="text-muted" title="اینستاگرام"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram fea icon-sm me-2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>jafar_abbasi</a></li>
+                                                <li class="list-inline-item"><a href="javascript:void(0)" class="text-muted" title="لینکدین"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin fea icon-sm me-2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>جعفر عباسی</a></li>
+                                            </ul>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+@*<div class="col-md-3 col-sm-4 col-xs-12">
+    <aside>
+
+        <div class="avatar-layer">
+            <div class="img-layer">
+                <a href="" class="change-image"><i class="zmdi zmdi-edit"></i></a>
+                
+            </div>
+
+            <div class="detail">
+                <span> </span>
+                <span> عضویت :  </span>
+            </div>
+        </div>
+
+        <section>
+            <header><h3> میز کار </h3></header>
+            <div class="inner">
+                <ul>
+                    <li><a href="/UserPanel"> مشاهده حساب کابری </a></li>
+                    <li><a > ویرایش حساب کابری </a></li>
+                    <li><a asp-area="Userpanels" asp-controller="UserPanelHome" asp-action="ChangePassword"> تغییر رمز عبور </a></li>
+                    <li><a href="/UserPanel/Wallet"> کیف پول شما </a></li>
+                    <li><a href="/UserPanel/MyOrders"> فاکتور ها </a></li>
+                    <li><a href=""> تنظیمات حساب کاربری </a></li>
+                    <li><a href="/Logout"> خروج از حساب کاربری </a></li>
+                </ul>
+            </div>
+        </section>
+    </aside>
+</div>*@

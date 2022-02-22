@@ -1,0 +1,57 @@
+﻿@model WalletViewModel
+@{
+    ViewData["Title"] = "کیف پول";
+
+}
+
+
+<form asp-action="Index" method="post" enctype="multipart/form-data" class="form-checkout">
+    <div class="form-checkout-row">
+        <label asp-for="Amount">مبلغ </label>
+        <input asp-for="Amount" type="number" class="input-num-checkout form-control">
+        <div class="AR-CR">
+            <button class="btn-registrar"> شارژ حساب </button>
+        </div>
+    </div>
+</form>
+
+@{
+    List<WalletViewModel> hs = ViewBag.ShowHistory as List<WalletViewModel>;
+}
+<div class="table-responsive bg-white shadow rounded">
+    <table class="table mb-0 table-center invoice-tb">
+        <thead class="bg-light">
+            <tr>
+                <th scope="col" class="border-bottom text-start">ردیف </th>
+                <th scope="col" class="border-bottom text-start">مورد </th>
+                <th scope="col" class="border-bottom">تعداد </th>
+                <th scope="col" class="border-bottom">قیمت</th>
+                <th scope="col" class="border-bottom">مجموع </th>
+            </tr>
+        </thead>
+        <tbody>
+            @*@foreach (var item in hs)
+            {*@
+                <tr>
+                    <td>@Model.Amount.ToString("#,0 تومان")</td>
+                    <td>
+                        @if (Model.Type == 1)
+                        {
+                            <p class="text text-success">واریز</p>
+                        }
+                        else
+                        {
+                            <p class="text text-danger">برداشت</p>
+                        }
+                    </td>
+                    <td>@Model.Creatdate.ToShamsi()</td>
+
+                    <td>@Model.Description</td>
+                </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+
+

@@ -1,11 +1,10 @@
-﻿using CodeTo.Core.Extensions;
-using CodeTo.Core.Statics;
+﻿using CodeTo.Core.Statics;
 using CodeTo.Core.Utilities.Extension;
 using CodeTo.Core.Utilities.Other;
 using CodeTo.Core.Utilities.Security;
 using CodeTo.Core.ViewModel.Users;
 using CodeTo.DataEF.Context;
-using CodeTo.Domain.Entities.User;
+using CodeTo.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -72,7 +71,7 @@ namespace CodeTo.Core.Services.AccountServices
             try
             {
                 var hassPassword = _securityService.HashPassword(vm.Password);
-                var user = await _context.Users.AddAsync(new Domain.Entities.User.User
+                var user = await _context.Users.AddAsync(new Domain.Entities.Users.User
                 {
                     ActiveCode = GeneratorGuid.GeneratorUniqCode(),
                     UserName = vm.UserName,

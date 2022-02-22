@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeTo.Domain.Entities.User
+namespace CodeTo.Domain.Entities.Users
 {
     public class UserRole : BaseEntity<int>
     {

@@ -1564,7 +1564,7 @@ small {
 }
 .btn.btn-lg {
  padding:14px 30px;
- font-size:16px
+ font-size:20px
 }
 .btn.searchbtn {
  padding:6px 20px
@@ -1621,13 +1621,13 @@ small {
 .btn.btn-icon.btn-lg {
  height:48px;
  width:48px;
- line-height:46px
+ line-height:51px
 }
-.btn.btn-icon.btn-lg .icons {
- height:20px;
- width:20px;
- font-size:20px
-}
+    .btn.btn-icon.btn-lg .icons {
+        height: 20px;
+        width: 20px;
+        font-size: 20px
+    }
 .btn.btn-icon.btn-sm {
  height:30px;
  width:30px;
@@ -3056,19 +3056,19 @@ padding: 60px 0
   color:rgba(255,255,255,0.9)
  }
  #topnav .navigation-menu.nav-light>li.active>a {
-  color:#f8f9fc !important
+  color:#fff !important
  }
  #topnav .navigation-menu.nav-light>li:hover>.menu-arrow {
-  border-color:#dcce2e !important
+  border-color:#fff !important
  }
     #topnav .navigation-menu.nav-light > li:hover > a {
-        color: #2f55d4 !important
+        color: #a09e9e !important
     }
  #topnav .navigation-menu.nav-light .has-submenu .menu-arrow {
   border-color:rgba(255,255,255,0.5)
  }
  #topnav .navigation-menu.nav-light .has-submenu.active .menu-arrow {
-  border-color:#5f0bd9 !important
+  border-color:#fff !important
  }
  #topnav .navigation-menu.nav-right {
   -webkit-box-pack:end !important;
@@ -5041,7 +5041,7 @@ padding: 60px 0
  }
 }
 .bg-profile {
- padding:100px 0;
+ padding:50px 0;
  background-size:cover;
  -ms-flex-item-align:center;
  -ms-grid-row-align:center;

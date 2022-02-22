@@ -4,8 +4,6 @@
     Layout = null;
 }
 
-
-
 <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" href="/images/favicon.ico">
 <link href="/css/tobii.min.css" rel="stylesheet" type="text/css" />
@@ -14,6 +12,7 @@
 <link rel="stylesheet" href="css/tiny-slider.css" />
 <link href="/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 <link href="/css/colors/default.css" rel="stylesheet" id="color-opt">
+
 <!-- شوع آن -->
 <section class="bg-home bg-circle-gradiant d-flex align-items-center">
     <div class="bg-overlay bg-overlay-white"></div>
@@ -49,14 +48,16 @@
                                 <div class="col-lg-12">
                                     <div class="d-flex justify-content-between">
                                         <div class="mb-3">
-                                     
-                                            <div class="form-check">
-                                                <input asp-for="RememberMe" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">مرا به خاطر بسپار </label>
+
+                                            <div class="text-dark fw-bold">
+                                                <label asp-for="RememberMe"class="text-dark fw-bold">
+                                                    <input asp-for="RememberMe" /> مرا به خاطر بسپار  
+                                                </label>
                                             </div>
                                         </div>
+                                       
 
-                                   
+
                                         <p class="forgot-pass mb-0"><a href="auth-re-password-three.html" class="text-dark fw-bold">فراموشی رمز عبور؟ </a></p>
                                     </div>
                                 </div>
@@ -67,7 +68,7 @@
                                     </div>
                                 </div>
 
-
+                                <div class="text-danger" asp-validation-summary="All"></div>
                                 <div class="col-12 text-center">
                                     <p class="mb-0 mt-3"><small class="text-dark me-2">حسابی ندارید؟ </small> <a asp-controller="Account" asp-action="Register" class="text-dark fw-bold">ثبت نام کنید </a></p>
                                 </div>

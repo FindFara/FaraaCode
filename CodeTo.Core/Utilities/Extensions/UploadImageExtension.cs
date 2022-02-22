@@ -6,7 +6,7 @@ using CodeTo.Core.Services;
 using CodeTo.Core.Utilities.Extension;
 using CodeTo.Core.Utilities.Other;
 
-namespace CodeTo.Core.Extensions
+namespace CodeTo.Core.Utilities.Extension
 {
     public class ThumbSize
     {

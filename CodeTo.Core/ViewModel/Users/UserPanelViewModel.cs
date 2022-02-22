@@ -19,7 +19,7 @@ namespace CodeTo.Core.ViewModel.Users
         public bool IsActive { get; set; }
         public DateTime CreateDate { get; set; }
         public string AvatarName { get; set; }
-        public int Wallet { get; set; }
+        public double Wallet { get; set; }
 
     }
     public class UserPanelDataViewModel

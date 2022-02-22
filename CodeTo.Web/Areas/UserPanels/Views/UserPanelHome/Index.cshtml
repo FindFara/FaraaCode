@@ -1,39 +1,99 @@
 ﻿@model CodeTo.Core.ViewModel.Users.UserPanelInformationViewModel
+@using CodeTo.Core.Utilities.Extension
 @{
     ViewData["Title"] = "پنل کاربری " + User.Identity.Name;
 }
 
-<div class="container">
-    <nav aria-label="breadcrumb">
-        <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">کدیتو</a></li>
-            <li class="breadcrumb-item active" aria-current="page"> پنل کاربری </li>
-        </ul>
-    </nav>
-</div>
-
-<main>
-    <div class="container">
-        <div class="user-account">
-            <div class="row">
-                <partial name="_SideBar" />
-                <div class="col-md-9 col-sm-8 col-xs-12">
-                    <section class="user-account-content">
-                        <header><h1> داشبورد </h1></header>
-                        <div class="inner">
-                            <div class="account-information">
-                                <h3> اطلاعات کاربری </h3>
-                                <ul>
-                                    <li> <i class="zmdi zmdi-assignment-account"></i> نام کاربری :  @Model.UserName </li>
-                                    <li> <i class="zmdi zmdi-email"></i> ایمیل : @Model.Email </li>
-                                    <li> <i class="zmdi zmdi-calendar-check"></i> تاریخ عضویت : @Model.CreateDate.toshamsi() </li>
-                                    <li> <i class="zmdi zmdi-account"></i> موجودی حساب : @Model.Wallet تومان </li>
-                                </ul>
-                            </div>
+<div class="col-lg-8 col-12">
+    <div class="border-bottom pb-4">
+        <div class="row">
+            <div class="col-md-6 mt-4">
+                <h5>جزئیات شخصی :</h5>
+                <div class="mt-4">
+                    <div class="d-flex align-items-center">
+                        <i data-feather="mail" class="fea icon-ex-md text-muted me-3"></i>
+                        <div class="flex-1">
+                            <h6 class="text-primary mb-0">نام کاربری :</h6>
+                            <a class="text-muted">@Model.UserName</a>
                         </div>
-                    </section>
+                    </div>
+                    <div class="d-flex align-items-center mt-3">
+                        <i data-feather="italic" class="fea icon-ex-md text-muted me-3"></i>
+                        <div class="flex-1">
+                            <h6 class="text-primary mb-0">ایمیل :</h6>
+                            <a href="javascript:void(0)" class="text-muted">@Model.Email</a>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mt-3">
+                        <i data-feather="bookmark" class="fea icon-ex-md text-muted me-3"></i>
+                        <div class="flex-1">
+                            <h6 class="text-primary mb-0">مهارت :</h6>
+                            <a href="javascript:void(0)" class="text-muted">html</a>, <a href="javascript:void(0)" class="text-muted">css</a>, <a href="javascript:void(0)" class="text-muted">js</a>, <a href="javascript:void(0)" class="text-muted">mysql</a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center mt-3">
+                        <i data-feather="globe" class="fea icon-ex-md text-muted me-3"></i>
+                        <div class="flex-1">
+                            <h6 class="text-primary mb-0"> وضعیت حساب :</h6>
+                            @if (Model.IsActive = true)
+                            {
+                                <a class="text-muted">فعال</a>
+                            }
+                            else
+                            {
+                                <a class="text-muted"> غیرفعال</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mt-3">
+                        <i data-feather="gift" class="fea icon-ex-md text-muted me-3"></i>
+                        <div class="flex-1">
+                            <h6 class="text-primary mb-0">تاریخ تولد :</h6>
+                            <p class="text-muted mb-0">تیر 1377</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center mt-3">
+                        <i data-feather="phone" class="fea icon-ex-md text-muted me-3"></i>
+                        <div class="flex-1">
+                            <h6 class="text-primary mb-0">تاریخ عضویت  :</h6>
+                            <a href="javascript:void(0)" class="text-muted">@Model.CreateDate.ToShamsi()</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-4 pt-2 pt-sm-0">
+                @*<h5>تجربه :</h5>*@
+
+                <div class="d-flex key-feature align-items-center p-3 rounded shadow mt-4">
+                    <img src="images/job/Circleci.svg" class="avatar avatar-ex-sm" alt="">
+                    <div class="flex-1 content ms-3">
+                        <h4 class="title mb-0">موجودی حساب :</h4>
+
+                        <p class="text-muted mb-0"> @Model.Wallet تومان</p>
+                    </div>
+                </div>
+
+                <div class="d-flex key-feature align-items-center p-3 rounded shadow mt-4">
+                    <img src="images/job/Codepen.svg" class="avatar avatar-ex-sm" alt="">
+                    <div class="flex-1 content ms-3">
+                        <h4 class="title mb-0">طراحی وب</h4>
+                        <p class="text-muted mb-0">2 سال تجربه</p>
+                        <p class="text-muted mb-0"><a href="javascript:void(0)" class="text-primary">راست چین</a> آمریکا </p>
+                    </div>
+                </div>
+
+                <div class="d-flex key-feature align-items-center p-3 rounded shadow mt-4">
+                    <img src="images/job/Gitlab.svg" class="avatar avatar-ex-sm" alt="">
+                    <div class="flex-1 content ms-3">
+                        <h4 class="title mb-0">UI طراح </h4>
+                        <p class="text-muted mb-0">2 سال تجربه</p>
+                        <p class="text-muted mb-0"><a href="javascript:void(0)" class="text-primary">گیتلب </a> آمریکا </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</div>

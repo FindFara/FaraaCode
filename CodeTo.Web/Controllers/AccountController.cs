@@ -2,7 +2,7 @@
 using CodeTo.Core.Utilities.Extension;
 using CodeTo.Core.Utilities.Senders;
 using CodeTo.Core.ViewModel.Users;
-using CodeTo.Domain.Entities.User;
+using CodeTo.Domain.Entities.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;

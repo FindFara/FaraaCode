@@ -13,7 +13,7 @@ namespace CodeTo.Core.ViewModel.Users
         #region ToUserDetailViewModel
 
 
-        public static UserDetailViewModel ToUserDetailViewModel(this Domain.Entities.User.User user)
+        public static UserDetailViewModel ToUserDetailViewModel(this Domain.Entities.Users.User user)
         {
             return new UserDetailViewModel
             {
@@ -28,7 +28,7 @@ namespace CodeTo.Core.ViewModel.Users
 
             };
         }
-        public static IQueryable<UserDetailViewModel> ToUserDetailViewModel(this IQueryable<Domain.Entities.User.User> users)
+        public static IQueryable<UserDetailViewModel> ToUserDetailViewModel(this IQueryable<Domain.Entities.Users.User> users)
         {
             return users.Select(user => user.ToUserDetailViewModel());
         }
@@ -36,7 +36,7 @@ namespace CodeTo.Core.ViewModel.Users
         #region ToEditProfileViewModel
 
 
-        public static EditProfileViewModel ToEditProfileViewModel(this Domain.Entities.User.User user)
+        public static EditProfileViewModel ToEditProfileViewModel(this Domain.Entities.Users.User user)
         {
             return new EditProfileViewModel
             {
@@ -49,13 +49,13 @@ namespace CodeTo.Core.ViewModel.Users
 
             };
         }
-        public static IQueryable<EditProfileViewModel> ToEditProfileViewModel(this IQueryable<Domain.Entities.User.User> users)
+        public static IQueryable<EditProfileViewModel> ToEditProfileViewModel(this IQueryable<Domain.Entities.Users.User> users)
         {
             return users.Select(user => user.ToEditProfileViewModel());
         }
         #endregion
         #region ToAccountRegisterViewModel
-        public static AccountRegisterViewModel ToAccountRegisterViewModel(this Domain.Entities.User.User user)
+        public static AccountRegisterViewModel ToAccountRegisterViewModel(this Domain.Entities.Users.User user)
         {
             return new AccountRegisterViewModel
             {
@@ -71,12 +71,28 @@ namespace CodeTo.Core.ViewModel.Users
 
             };
         }
-        public static IQueryable<AccountRegisterViewModel> ToAccountRegisterViewModel(this IQueryable<Domain.Entities.User.User> users)
+        public static IQueryable<AccountRegisterViewModel> ToAccountRegisterViewModel(this IQueryable<Domain.Entities.Users.User> users)
         {
             return users.Select(user => user.ToAccountRegisterViewModel());
         }
         #endregion
+        public static WalletViewModel ToWalletViewModel(this Domain.Entities.Wallet.Wallet wallet)
+        {
+            return new WalletViewModel
+            {
+            Amount=wallet.Amount,
+            Creatdate=wallet.CreatDate,
+            Description=wallet.Description,
+            UserId=wallet.UserId,
+            Type= (int)(wallet.WalletType?.Id)
 
+
+            };
+        }
+        public static IQueryable<WalletViewModel> ToWalletViewModel(this IQueryable<Domain.Entities.Wallet.Wallet> wallet)
+        {
+            return wallet.Select(wallet => wallet.ToWalletViewModel());
+        }
     }
 }
 

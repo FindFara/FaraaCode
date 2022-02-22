@@ -1,5 +1,5 @@
 ﻿using CodeTo.Core.ViewModel.Users;
-using CodeTo.Domain.Entities.User;
+using CodeTo.Domain.Entities.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;

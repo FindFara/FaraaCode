@@ -6,15 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeTo.Domain.Entities.User
+namespace CodeTo.Domain.Entities.Users
 {
     public class User : BaseEntity<int>, IDateEntity
     {
-        public User()
-        {
-
-        }
-
+ 
         [Display(Name = "نام کاربری")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
@@ -55,8 +51,9 @@ namespace CodeTo.Domain.Entities.User
         #endregion
 
         #region Relations
-
-        public virtual List<UserRole> UserRoles { get; set; }
+        public List<Wallet.Wallet> Wallets { get; set; }
+        public long WalletsId { get; set; }
+        public List<UserRole> UserRoles { get; set; }
     
         #endregion
 

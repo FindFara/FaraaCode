@@ -9,8 +9,7 @@ namespace CodeTo.Core.Utilities.Extension
 {
     public  static class DataTimeExtension
     {
-
-        public static string toshamsi(this DateTime dateTime)
+        public static string ToShamsi(this DateTime dateTime)
         {
             PersianCalendar p = new PersianCalendar();
             return p.GetYear(dateTime).ToString("00") + "/" +

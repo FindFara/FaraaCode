@@ -4,14 +4,16 @@ using CodeTo.DataEF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CodeTo.DataEF.Migrations
 {
     [DbContext(typeof(CodeToContext))]
-    partial class CodeToContextModelSnapshot : ModelSnapshot
+    [Migration("20220220165456_migi-Wallet")]
+    partial class migiWallet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,9 +76,6 @@ namespace CodeTo.DataEF.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<long>("WalletsId")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -150,6 +149,9 @@ namespace CodeTo.DataEF.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<long>("WalletsId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.ToTable("WalletTypes");
@@ -177,7 +179,7 @@ namespace CodeTo.DataEF.Migrations
             modelBuilder.Entity("CodeTo.Domain.Entities.Wallet.Wallet", b =>
                 {
                     b.HasOne("CodeTo.Domain.Entities.Users.User", "User")
-                        .WithMany("Wallets")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -201,8 +203,6 @@ namespace CodeTo.DataEF.Migrations
             modelBuilder.Entity("CodeTo.Domain.Entities.Users.User", b =>
                 {
                     b.Navigation("UserRoles");
-
-                    b.Navigation("Wallets");
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Wallet.WalletType", b =>

@@ -1,11 +1,12 @@
-﻿using CodeTo.Core.Extensions;
+﻿
 using CodeTo.Core.Statics;
 using CodeTo.Core.Utilities.Extension;
 using CodeTo.Core.Utilities.Other;
 using CodeTo.Core.Utilities.Security;
 using CodeTo.Core.ViewModel.Users;
 using CodeTo.DataEF.Context;
-using CodeTo.Domain.Entities.User;
+using CodeTo.Domain.Entities.Users;
+using CodeTo.Domain.Entities.Wallet;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,12 +21,14 @@ namespace CodeTo.Core.Services.UserPanelServices
         private readonly CodeToContext _context;
         private readonly ILoggerService<UserPanelService> _logger;
         private readonly ISecurityService _security;
+        
 
-        public UserPanelService(CodeToContext context, ILoggerService<UserPanelService> logger, ISecurityService security)
+        public UserPanelService(CodeToContext context, ILoggerService<UserPanelService> logger, ISecurityService security )
         {
             _context = context;
             _logger = logger;
             _security = security;
+           
         }
         public async Task<User> GetUserByUserNameAsync(string username)
         {
@@ -41,7 +44,7 @@ namespace CodeTo.Core.Services.UserPanelServices
                 uv.UserName = user.UserName;
                 uv.Email = user.Email;
                 uv.CreateDate = user.CreateDate;
-                uv.Wallet = 0;
+                uv.Wallet =UserBalanceAsync(username); 
             }
             return uv;
         }
@@ -75,6 +78,7 @@ namespace CodeTo.Core.Services.UserPanelServices
                 UserName = u.UserName,
                 AvatarName = u.AvatarName,
                 Email = u.Email
+                
             }).SingleAsync();
         }
 
@@ -92,13 +96,10 @@ namespace CodeTo.Core.Services.UserPanelServices
                     user.AvatarName = UserImageName;
                 }
 
-
-
-
                 user.UserName = profile.UserName;
                 user.Email = profile.Email;
                 user.AvatarName = UserImageName;
-
+                
                 _context.Users.Update(user);
                 _context.SaveChanges();
                 return true;
@@ -126,6 +127,71 @@ namespace CodeTo.Core.Services.UserPanelServices
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return true;
+        }
+
+
+
+        public int GetUserIdByUserName(string username)
+        {
+            return _context.Users.SingleOrDefault(u => u.UserName == username).Id;
+        }
+
+        public double UserBalanceAsync(string username)
+        {
+            var Userid = GetUserIdByUserName(username);
+            var deposit = _context.Wallets.Where(w => w.UserId == Userid && w.WalletTypeId == 1 && w.ISpay)
+                .Select(w => w.Amount)
+                .ToList();
+            var withdraw = _context.Wallets.Where(w => w.UserId == Userid && w.WalletTypeId == 2 && w.ISpay)
+                .Select(w => w.Amount)
+                .ToList();
+            return (deposit.Sum() - withdraw.Sum());
+
+        }
+
+        public async Task<List<WalletViewModel>> ShowHistory(string username)
+        {
+            
+            var userid = GetUserIdByUserName(username);
+            return _context.Wallets.Where(w => w.UserId == userid/* &&TODO : w.ISpay*/)
+                .Select(w => new WalletViewModel()
+                {
+                    Amount = w.Amount,
+                    Creatdate = w.CreatDate,
+                    Description = w.Description,
+                    Type = w.WalletTypeId
+                }).ToList();
+        }
+
+        public long ChargeUserWallet(double amount, string username, string Description, bool ISpay = false)
+        {
+            Wallet wallet = new Wallet()
+            {
+                Amount = amount,
+                UserId =  GetUserIdByUserName(username),
+                CreatDate = DateTime.Now,
+                Description = Description,
+                WalletTypeId = 1
+            };
+            return AddWallet(wallet);
+        }
+
+        public long AddWallet(Wallet wallet)
+        {
+            _context.Wallets.Add(wallet);
+            _context.SaveChanges();
+            return wallet.Id;
+        }
+
+        public Wallet GetWalletByWalletId(long walletid)
+        {
+            return _context.Wallets.Find(walletid);
+        }
+
+        public void UpdateWallet(Wallet wallet)
+        {
+            _context.Wallets.Update(wallet);
+            _context.SaveChanges();
         }
     }
 }

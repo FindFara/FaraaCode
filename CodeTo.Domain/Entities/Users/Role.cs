@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeTo.Domain.Entities.User
+namespace CodeTo.Domain.Entities.Users
 {
     public class Role : BaseEntity<int>
     {
@@ -16,8 +16,6 @@ namespace CodeTo.Domain.Entities.User
         }
 
      
-        
-
         [Display(Name = "")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
