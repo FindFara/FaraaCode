@@ -83,14 +83,13 @@ namespace CodeTo.DataEF.Migrations
                 name: "Wallets",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ISpay = table.Column<bool>(type: "bit", nullable: false),
                     CreatDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    WalletTypeTypeId = table.Column<int>(type: "int", nullable: true),
-                    WalletTypeId = table.Column<byte>(type: "tinyint", nullable: false),
+                    WalletTypeId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -103,11 +102,11 @@ namespace CodeTo.DataEF.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Wallets_WalletTypes_WalletTypeTypeId",
-                        column: x => x.WalletTypeTypeId,
+                        name: "FK_Wallets_WalletTypes_WalletTypeId",
+                        column: x => x.WalletTypeId,
                         principalTable: "WalletTypes",
                         principalColumn: "TypeId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -126,9 +125,9 @@ namespace CodeTo.DataEF.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Wallets_WalletTypeTypeId",
+                name: "IX_Wallets_WalletTypeId",
                 table: "Wallets",
-                column: "WalletTypeTypeId");
+                column: "WalletTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

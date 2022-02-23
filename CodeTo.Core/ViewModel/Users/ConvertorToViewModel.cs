@@ -80,7 +80,7 @@ namespace CodeTo.Core.ViewModel.Users
         {
             return new WalletViewModel
             {
-            Amount=wallet.Amount,
+            Amount=(int)wallet.Amount,
             Creatdate=wallet.CreatDate,
             Description=wallet.Description,
             UserId=wallet.UserId,

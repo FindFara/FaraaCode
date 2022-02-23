@@ -22,7 +22,7 @@ namespace CodeTo.Web.Areas.UserPanels.Controllers
         }
 
         [Route("Wallet")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(WalletHistoryViewModel wallet)
         {
             //How to use methods with different view models in one view
             
@@ -30,7 +30,7 @@ namespace CodeTo.Web.Areas.UserPanels.Controllers
             {
                 ViewBag.ShowHistory =  _service.ShowHistory(User.Identity.Name);
             }
-            return View();
+            return View(wallet);
         }
 
         [Route("Wallet")]
@@ -38,12 +38,12 @@ namespace CodeTo.Web.Areas.UserPanels.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(WalletViewModel wallet)
         {
-            if (!ModelState.IsValid)
-            {
-                Debug.Assert(User.Identity != null, "User.Identity != null");
-                ViewBag.ShowHistory =  _service.ShowHistory(User.Identity.Name);
-                if (wallet != null) return View(wallet);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    Debug.Assert(User.Identity != null, "User.Identity != null");
+            //    ViewBag.ShowHistory =  _service.ShowHistory(User.Identity.Name);
+            //    if (wallet != null) return View(wallet);
+            //}
 
 
             Debug.Assert(wallet != null, nameof(wallet) + " != null");

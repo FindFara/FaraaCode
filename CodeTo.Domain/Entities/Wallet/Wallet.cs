@@ -9,12 +9,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CodeTo.Domain.Entities.Wallet
 {
-    public class Wallet : BaseEntity<long>
+    public class Wallet : BaseEntity<int>
     {
     
         public int Amount { get; set; }
         public string Description { get; set; }
-        public bool ISpay { get; set; }
+        public bool Ispay { get; set; }
         public DateTime CreatDate { get; set; }
 
         #region Relation

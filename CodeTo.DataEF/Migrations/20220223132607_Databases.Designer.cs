@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeTo.DataEF.Migrations
 {
     [DbContext(typeof(CodeToContext))]
-    [Migration("20220222151410_Database")]
-    partial class Database
+    [Migration("20220223132607_Databases")]
+    partial class Databases
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -109,12 +109,12 @@ namespace CodeTo.DataEF.Migrations
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Wallet.Wallet", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Amount")
+                    b.Property<int?>("Amount")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatDate")
@@ -129,17 +129,14 @@ namespace CodeTo.DataEF.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("WalletTypeId")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int?>("WalletTypeTypeId")
+                    b.Property<int>("WalletTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("WalletTypeTypeId");
+                    b.HasIndex("WalletTypeId");
 
                     b.ToTable("Wallets");
                 });
@@ -186,7 +183,9 @@ namespace CodeTo.DataEF.Migrations
 
                     b.HasOne("CodeTo.Domain.Entities.Wallet.WalletType", "WalletType")
                         .WithMany("Wallets")
-                        .HasForeignKey("WalletTypeTypeId");
+                        .HasForeignKey("WalletTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
 

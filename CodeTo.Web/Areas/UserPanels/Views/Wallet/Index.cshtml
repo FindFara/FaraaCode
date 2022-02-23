@@ -5,7 +5,7 @@
 }
 
 
-<form asp-action="Index" method="post" enctype="multipart/form-data" class="form-checkout">
+<form asp-action="Index" class="form-checkout" enctype="multipart/form-data" method="post">
     <div class="form-checkout-row">
         <label asp-for="Amount">مبلغ </label>
         <input asp-for="Amount" type="number" class="input-num-checkout form-control">
@@ -16,7 +16,8 @@
 </form>
 
 @{
-    List<WalletHistoryViewModel> hs = ViewBag.ShowHistory as List<WalletHistoryViewModel>;
+    List<WalletHistoryViewModel> hs;
+    hs = ViewBag.ShowHistory as List<WalletHistoryViewModel>;
 }
 <div class="table-responsive bg-white shadow rounded">
     <table class="table mb-0 table-center invoice-tb">
@@ -39,7 +40,7 @@
         @foreach (var item in hs)
         {
             <tr>
-                <td>@item.Amount.ToString("#,0 تومان")</td>
+                <td>@item.Amount?.ToString("#,0 تومان")</td>
                 <td>
                     @if (item.TypeId == 1)
                     {

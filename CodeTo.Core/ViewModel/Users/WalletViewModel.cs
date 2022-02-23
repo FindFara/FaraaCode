@@ -16,7 +16,7 @@ namespace CodeTo.Core.ViewModel.Users
 
     public class WalletHistoryViewModel
     {
-        public int Amount { get; set; }
+        public int? Amount { get; set; }
         public string Description { get; set; }
         public int TypeId { get; set; }
         public DateTime Creatdate { get; set; }

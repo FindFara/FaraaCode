@@ -1,5 +1,4 @@
-﻿
-using CodeTo.Core.Statics;
+﻿using CodeTo.Core.Statics;
 using CodeTo.Core.Utilities.Extension;
 using CodeTo.Core.Utilities.Other;
 using CodeTo.Core.Utilities.Security;
@@ -139,13 +138,13 @@ namespace CodeTo.Core.Services.UserPanelServices
         public int UserBalanceAsync(string username)
         {
             var Userid = GetUserIdByUserName(username);
-            var deposit = _context.Wallets.Where(w => w.UserId == Userid && w.WalletTypeId == 1 && w.ISpay)
+            var deposit = _context.Wallets.Where(w => w.UserId == Userid && w.WalletTypeId == 1 && w.Ispay)
                 .Select(w => w.Amount)
                 .ToList();
-            var withdraw = _context.Wallets.Where(w => w.UserId == Userid && w.WalletTypeId == 2 && w.ISpay)
+            var withdraw = _context.Wallets.Where(w => w.UserId == Userid && w.WalletTypeId == 2 && w.Ispay)
                 .Select(w => w.Amount)
                 .ToList();
-            return (deposit.Sum() - withdraw.Sum());
+            return ((int)(deposit.Sum() - withdraw.Sum()));
 
         }
 
@@ -153,7 +152,7 @@ namespace CodeTo.Core.Services.UserPanelServices
         {
             
             var userid = GetUserIdByUserName(username);
-            return _context.Wallets.Where(w => w.UserId == userid && w.ISpay)
+            return _context.Wallets.Where(w => w.UserId == userid && w.Ispay)
                 .Select(w => new WalletHistoryViewModel()
                 {
                     Amount = w.Amount,
@@ -163,7 +162,7 @@ namespace CodeTo.Core.Services.UserPanelServices
                 }).ToList();
         }
 
-        public long ChargeUserWallet(int amount, string username, string Description, bool ISpay = false)
+        public int ChargeUserWallet(int amount, string username, string Description, bool ISpay = false)
         {
             Wallet wallet = new Wallet()
             {
@@ -173,7 +172,7 @@ namespace CodeTo.Core.Services.UserPanelServices
                 Description = Description,
                 WalletTypeId = 1
             };
-            return AddWallet(wallet);
+            return (int)AddWallet(wallet);
         }
 
         public long AddWallet(Wallet wallet)
