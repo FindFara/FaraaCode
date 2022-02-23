@@ -19,7 +19,7 @@ namespace CodeTo.Domain.Entities.Wallet
 
         #region Relation
         public WalletType WalletType { get; set; }
-        public byte WalletTypeId { get; set; }
+        public int WalletTypeId { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
         #endregion

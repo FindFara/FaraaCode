@@ -149,17 +149,17 @@ namespace CodeTo.Core.Services.UserPanelServices
 
         }
 
-        public List<WalletViewModel> ShowHistory(string username)
+        public List<WalletHistoryViewModel> ShowHistory(string username)
         {
             
             var userid = GetUserIdByUserName(username);
-            return _context.Wallets.Where(w => w.UserId == userid/* &&TODO : w.ISpay*/)
-                .Select(w => new WalletViewModel()
+            return _context.Wallets.Where(w => w.UserId == userid && w.ISpay)
+                .Select(w => new WalletHistoryViewModel()
                 {
                     Amount = w.Amount,
                     Creatdate = w.CreatDate,
                     Description = w.Description,
-                    Type = w.WalletTypeId
+                    TypeId = w.WalletTypeId
                 }).ToList();
         }
 

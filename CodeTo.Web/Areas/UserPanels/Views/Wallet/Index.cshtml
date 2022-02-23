@@ -1,4 +1,4 @@
-﻿@model WalletViewModel
+﻿@model  WalletHistoryViewModel
 @{
     ViewData["Title"] = "کیف پول";
 
@@ -16,7 +16,7 @@
 </form>
 
 @{
-    List<WalletViewModel> hs = ViewBag.ShowHistory as List<WalletViewModel>;
+    List<WalletHistoryViewModel> hs = ViewBag.ShowHistory as List<WalletHistoryViewModel>;
 }
 <div class="table-responsive bg-white shadow rounded">
     <table class="table mb-0 table-center invoice-tb">
@@ -30,25 +30,32 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in hs)
-            {
-                <tr>
-                    <td>@item.Amount.ToString("#,0 تومان")</td>
-                    <td>
-                        @if (item.Type == 1)
-                        {
-                            <p class="text text-success">واریز</p>
-                        }
-                        else
-                        {
-                            <p class="text text-danger">برداشت</p>
-                        }
-                    </td>
-                    <td>@item.Creatdate.ToShamsi()</td>
 
-                    <td>@item.Description</td>
-                </tr>
-            }
+
+
+        @{
+            System.Diagnostics.Debug.Assert(hs != null, nameof(hs) + " != null");
+        }
+        @foreach (var item in hs)
+        {
+            <tr>
+                <td>@item.Amount.ToString("#,0 تومان")</td>
+                <td>
+                    @if (item.TypeId == 1)
+                    {
+                        <p class="text text-success">واریز</p>
+                    }
+                    else
+                    {
+                        <p class="text text-danger">برداشت</p>
+                    }
+                </td>
+                <td>@item.Creatdate.ToShamsi()</td>
+
+                <td>@item.Description</td>
+            </tr>
+        }
+           
         </tbody>
     </table>
 </div>

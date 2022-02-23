@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 namespace CodeTo.Core.Services.UserPanelServices
 {
@@ -24,7 +25,8 @@ namespace CodeTo.Core.Services.UserPanelServices
         
         int GetUserIdByUserName(string username);
         int UserBalanceAsync(string username);
-        List<WalletViewModel> ShowHistory(string username);
+        [ItemNotNull]
+        List<WalletHistoryViewModel> ShowHistory(string username);
         long ChargeUserWallet(int amount, string username, string Description, bool ISpay = false);
         long AddWallet(Wallet wallet);
         public Wallet GetWalletByWalletId(long walletid);

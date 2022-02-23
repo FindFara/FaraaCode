@@ -4,14 +4,17 @@ using CodeTo.Web.Areas.UserPanel.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using ZarinpalSandbox;
+using ZarinpalSandbox.Models;
 
 namespace CodeTo.Web.Areas.UserPanels.Controllers
 {
     public class WalletController : BaseUserPanelController
     {
-        private readonly IUserPanelService _service;
+        private  IUserPanelService _service;
 
         public WalletController(IUserPanelService service)
         {
@@ -37,20 +40,27 @@ namespace CodeTo.Web.Areas.UserPanels.Controllers
         {
             if (!ModelState.IsValid)
             {
+                Debug.Assert(User.Identity != null, "User.Identity != null");
                 ViewBag.ShowHistory =  _service.ShowHistory(User.Identity.Name);
-                return View(wallet);
+                if (wallet != null) return View(wallet);
             }
 
+
+            Debug.Assert(wallet != null, nameof(wallet) + " != null");
+            Debug.Assert(User.Identity != null, "User.Identity != null");
+            
             var walletid = _service.ChargeUserWallet(wallet.Amount, User.Identity.Name, "شارژ حساب ");
 
             #region OnlinePaymnet
 
-            var paymnet = new ZarinpalSandbox.Payment(Convert.ToInt32(wallet.Amount));
-            var res = paymnet.PaymentRequest("شارژ حساب ", "https://localhost:44328/OnlinePayment" + walletid);
-            if (res.Result.Status == 100)
-            {
-                return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
-            }
+                Payment paymnet = new ZarinpalSandbox.Payment(Convert.ToInt32(wallet.Amount));
+                Task<PaymentRequestResponse> res = paymnet.PaymentRequest("شارژ حساب ", "https://localhost:44328/OnlinePayment" + walletid);
+                if (res.Result.Status == 100)
+                {
+                    return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
+                }
+            
+
             #endregion
 
             return null;

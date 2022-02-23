@@ -93,6 +93,20 @@ namespace CodeTo.Core.ViewModel.Users
         {
             return wallet.Select(wallet => wallet.ToWalletViewModel());
         }
+        public static WalletHistoryViewModel ToWalletHistoryViewModel(this Domain.Entities.Wallet.Wallet wallet)
+        {
+            return new WalletHistoryViewModel
+            {
+                Amount = wallet.Amount,
+                Creatdate = wallet.CreatDate,
+                Description = wallet.Description,
+                TypeId = wallet.WalletTypeId
+            };
+        }
+        public static IQueryable<WalletHistoryViewModel> ToWalletHistoryViewModel(this IQueryable<Domain.Entities.Wallet.Wallet> wallet)
+        {
+            return wallet.Select(wallet => wallet.ToWalletHistoryViewModel());
+        }
     }
 }
 

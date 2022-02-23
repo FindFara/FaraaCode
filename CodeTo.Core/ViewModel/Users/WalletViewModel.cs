@@ -14,13 +14,13 @@ namespace CodeTo.Core.ViewModel.Users
         public double Amount { get; set; }
     }
 
-    //public class WalletHistoryViewModel
-    //{
-    //    public double Amount { get; set; }
-    //    public string Description { get; set; }
-    //    public int Type { get; set; }
-    //    public DateTime Creatdate { get; set; }
-    //}
+    public class WalletHistoryViewModel
+    {
+        public int Amount { get; set; }
+        public string Description { get; set; }
+        public int TypeId { get; set; }
+        public DateTime Creatdate { get; set; }
+    }
 
     public class WalletViewModel
     {
