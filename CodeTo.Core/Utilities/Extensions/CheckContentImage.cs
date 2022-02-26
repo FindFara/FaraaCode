@@ -4,7 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
 
-namespace CodeTo.Core.Utilities.Extension
+namespace CodeTo.Core.Utilities.Extensions
 {
         public static class CheckContentImage
     {

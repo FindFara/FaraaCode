@@ -14,7 +14,7 @@ namespace CodeTo.Web.Areas.UserPanels.Controllers
 {
     public class WalletController : BaseUserPanelController
     {
-        private  IUserPanelService _service;
+        private readonly IUserPanelService _service;
 
         public WalletController(IUserPanelService service)
         {
@@ -38,17 +38,13 @@ namespace CodeTo.Web.Areas.UserPanels.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(WalletViewModel wallet)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    Debug.Assert(User.Identity != null, "User.Identity != null");
-            //    ViewBag.ShowHistory =  _service.ShowHistory(User.Identity.Name);
-            //    if (wallet != null) return View(wallet);
-            //}
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ShowHistory = _service.ShowHistory(User.Identity.Name);
+                if (wallet != null) return View(wallet);
+            }
 
-
-            Debug.Assert(wallet != null, nameof(wallet) + " != null");
-            Debug.Assert(User.Identity != null, "User.Identity != null");
-            
+            //TODO:null rad shodan hs
             var walletid = _service.ChargeUserWallet(wallet.Amount, User.Identity.Name, "شارژ حساب ");
 
             #region OnlinePaymnet
@@ -61,7 +57,7 @@ namespace CodeTo.Web.Areas.UserPanels.Controllers
                 }
             
 
-            #endregion
+            #endregion 
 
             return null;
         }

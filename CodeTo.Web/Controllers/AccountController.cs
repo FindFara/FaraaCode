@@ -1,5 +1,5 @@
 ﻿using CodeTo.Core.Services.AccountServices;
-using CodeTo.Core.Utilities.Extension;
+using CodeTo.Core.Utilities.Extensions;
 using CodeTo.Core.Utilities.Senders;
 using CodeTo.Core.ViewModel.Users;
 using CodeTo.Domain.Entities.Users;

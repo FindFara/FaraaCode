@@ -1,4 +1,5 @@
-﻿using CodeTo.Domain.Entities.Users;
+﻿using CodeTo.Domain.Entities.Permissions;
+using CodeTo.Domain.Entities.Users;
 using CodeTo.Domain.Entities.Wallet;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,5 +23,8 @@ namespace CodeTo.DataEF.Context
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
         public DbSet<WalletType> WalletTypes { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
+
     }
 }

@@ -1,0 +1,18 @@
+﻿@model PermissionCreateorEditeViewModel
+@{
+    ViewData["Title"] = "حذف نقش";
+    Layout = "~/Areas/Admins/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container alert alert-danger">
+    <form method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Title" />
+        <h2>آیا از حذف نقش "@Model.Title" مطمئن هستید </h2>
+        <p>
+            <input type="submit" value="حذف کن" class="btn btn-outline btn-danger" />
+            <a asp-area="Admins" asp-controller="Role" asp-action="ShowPermissions" class="btn btn-outline btn-info">انصراف</a>
+        </p>
+    </form>
+</div>
+

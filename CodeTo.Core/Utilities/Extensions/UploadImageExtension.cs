@@ -3,10 +3,9 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
 using CodeTo.Core.Services;
-using CodeTo.Core.Utilities.Extension;
 using CodeTo.Core.Utilities.Other;
 
-namespace CodeTo.Core.Utilities.Extension
+namespace CodeTo.Core.Utilities.Extensions
 {
     public class ThumbSize
     {

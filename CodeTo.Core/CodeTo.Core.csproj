@@ -21,9 +21,4 @@
 	  <ProjectReference Include="..\CodeTo.DataEF\CodeTo.DataEF.csproj" />
 	  <ProjectReference Include="..\CodeTo.Domain\CodeTo.Domain.csproj" />
 	</ItemGroup>
-
-
-	<ItemGroup>
-	  <Folder Include="Services\AdminPanelServices\" />
-	</ItemGroup>
 </Project>

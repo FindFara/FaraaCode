@@ -1,5 +1,5 @@
 ﻿using CodeTo.Core.Statics;
-using CodeTo.Core.Utilities.Extension;
+using CodeTo.Core.Utilities.Extensions;
 using CodeTo.Core.Utilities.Other;
 using CodeTo.Core.Utilities.Security;
 using CodeTo.Core.ViewModel.Users;
@@ -73,12 +73,12 @@ namespace CodeTo.Core.Services.AccountServices
                 var hassPassword = _securityService.HashPassword(vm.Password);
                 var user = await _context.Users.AddAsync(new Domain.Entities.Users.User
                 {
-                    ActiveCode = GeneratorGuid.GeneratorUniqCode(),
+                    EmailActiveCode = GeneratorGuid.GeneratorUniqCode(),
                     UserName = vm.UserName,
                     Email = vm.Email,
                     Password = hassPassword,
                     CreateDate = DateTime.Now,
-                    IsActive = false
+                    IsEmailActive = false
 
                 });
                 await _context.SaveChangesAsync();
@@ -91,13 +91,13 @@ namespace CodeTo.Core.Services.AccountServices
             }
         }
 
-        public async Task<bool> ActiveAccountAsync(string activecode)
+        public async Task<bool> ActiveAccountAsync(string EmailActiveCode)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.ActiveCode == activecode);
-            if (user == null || user.IsActive == false)
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.EmailActiveCode == EmailActiveCode);
+            if (user == null || user.IsEmailActive == false)
                 return false;
-            user.IsActive = true;
-            user.ActiveCode = GeneratorGuid.GeneratorUniqCode();
+            user.IsEmailActive = true;
+            user.EmailActiveCode = GeneratorGuid.GeneratorUniqCode();
             _context.SaveChanges();
             return true;
         }

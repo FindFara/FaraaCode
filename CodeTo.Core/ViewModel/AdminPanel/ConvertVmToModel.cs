@@ -14,10 +14,10 @@ namespace CodeTo.Core.ViewModel.AdminPanel
         {
             return new User()
             {
-                AvatarName = admin.ImageName,
+                AvatarName = admin.AvatarName,
                 CreateDate = admin.CreateDate,
                 Email = admin.Email,
-                IsActive = admin.IsActived,
+                IsEmailActive = admin.IsActived,
                 UserName = admin.UserName
             };
         }

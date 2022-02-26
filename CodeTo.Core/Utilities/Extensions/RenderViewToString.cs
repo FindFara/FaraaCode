@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 
-namespace CodeTo.Core.Utilities.Extension
+namespace CodeTo.Core.Utilities.Extensions
 {
     public interface IViewRenderService
     {

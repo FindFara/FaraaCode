@@ -1,5 +1,5 @@
 ﻿using CodeTo.Core.Statics;
-using CodeTo.Core.Utilities.Extension;
+using CodeTo.Core.Utilities.Extensions;
 using CodeTo.Core.Utilities.Other;
 using CodeTo.Core.Utilities.Security;
 using CodeTo.Core.ViewModel.Users;

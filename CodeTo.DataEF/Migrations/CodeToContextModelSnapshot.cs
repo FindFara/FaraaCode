@@ -19,19 +19,67 @@ namespace CodeTo.DataEF.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CodeTo.Domain.Entities.Users.Role", b =>
+            modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.Permission", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PermissionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("PermissionId");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("Permissions");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.RolePermission", b =>
+                {
+                    b.Property<int>("RP_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("RoleId")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("RP_Id");
+
+                    b.HasIndex("PermissionId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("RolePermissions");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Users.Role", b =>
+                {
+                    b.Property<byte>("RoleID")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("CreatDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("RoleTitle")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("Id");
+                    b.HasKey("RoleID");
 
                     b.ToTable("Roles");
                 });
@@ -42,10 +90,6 @@ namespace CodeTo.DataEF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ActiveCode")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("AvatarName")
                         .HasMaxLength(200)
@@ -59,7 +103,17 @@ namespace CodeTo.DataEF.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<string>("EmailActiveCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("IsBlocked")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsEmailActive")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModifyDate")
@@ -85,18 +139,18 @@ namespace CodeTo.DataEF.Migrations
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Users.UserRole", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UR")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                    b.Property<byte>("RoleId")
+                        .HasColumnType("tinyint");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("UR");
 
                     b.HasIndex("RoleId");
 
@@ -120,6 +174,9 @@ namespace CodeTo.DataEF.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Ispay")
                         .HasColumnType("bit");
@@ -150,6 +207,32 @@ namespace CodeTo.DataEF.Migrations
                     b.HasKey("TypeId");
 
                     b.ToTable("WalletTypes");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.Permission", b =>
+                {
+                    b.HasOne("CodeTo.Domain.Entities.Permissions.Permission", null)
+                        .WithMany("Permissions")
+                        .HasForeignKey("ParentId");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.RolePermission", b =>
+                {
+                    b.HasOne("CodeTo.Domain.Entities.Permissions.Permission", "Permission")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CodeTo.Domain.Entities.Users.Role", "Role")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Permission");
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Users.UserRole", b =>
@@ -190,8 +273,17 @@ namespace CodeTo.DataEF.Migrations
                     b.Navigation("WalletType");
                 });
 
+            modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.Permission", b =>
+                {
+                    b.Navigation("Permissions");
+
+                    b.Navigation("RolePermissions");
+                });
+
             modelBuilder.Entity("CodeTo.Domain.Entities.Users.Role", b =>
                 {
+                    b.Navigation("RolePermissions");
+
                     b.Navigation("UserRoles");
                 });
 

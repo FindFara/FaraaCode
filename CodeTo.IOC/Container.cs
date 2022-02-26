@@ -1,6 +1,7 @@
 ﻿using CodeTo.Core.Services.AccountServices;
+using CodeTo.Core.Services.AdminPanelServices;
 using CodeTo.Core.Services.UserPanelServices;
-using CodeTo.Core.Utilities.Extension;
+using CodeTo.Core.Utilities.Extensions;
 using CodeTo.Core.Utilities.Other;
 using CodeTo.Core.Utilities.Security;
 using CodeTo.DataEF.Context;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeTo.Core.Services.PermiossionServices;
 
 namespace CodeTo.IOC
 {
@@ -29,7 +31,8 @@ namespace CodeTo.IOC
             services.AddSingleton<ISecurityService, SecurityService>();
             services.AddTransient<IViewRenderService, RenderViewToString>();
             services.AddTransient<IUserPanelService, UserPanelService>();
-            
+            services.AddTransient<IAdminPanelService, AdminPanelService>();
+            services.AddTransient<IPermiossionService, PermiossionService>();
 
             return services;
         }

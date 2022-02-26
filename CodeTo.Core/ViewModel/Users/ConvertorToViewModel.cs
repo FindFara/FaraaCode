@@ -23,8 +23,8 @@ namespace CodeTo.Core.ViewModel.Users
                 Password = user.Password,
                 CreateDate = user.CreateDate,
                 //AvatarName = user.UserAvatar,
-                IsActive = user.IsActive,
-                ActiveCode = user.ActiveCode,
+                IsActive = user.IsEmailActive,
+                ActiveCode = user.EmailActiveCode,
 
             };
         }
@@ -63,8 +63,8 @@ namespace CodeTo.Core.ViewModel.Users
                 UserName = user.UserName,
                 Email = user.Email,
                 AvatarName = user.AvatarName,
-                ActiveCode=user.ActiveCode,
-                IsActive=user.IsActive,
+                ActiveCode=user.EmailActiveCode,
+                IsActive=user.IsEmailActive,
                 Password=user.Password,
                 CreateDate=user.CreateDate
 

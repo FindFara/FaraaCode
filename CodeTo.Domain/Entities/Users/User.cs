@@ -29,16 +29,16 @@ namespace CodeTo.Domain.Entities.Users
 
         [Display(Name = "کد فعال سازی")]
         [MaxLength(50, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-        public string ActiveCode { get; set; }
+        public string EmailActiveCode { get; set; }
 
         [Display(Name = "وضعیت")]
-        public bool IsActive { get; set; }
+        public bool IsEmailActive { get; set; }
 
         [Display(Name = "آواتار")]
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string AvatarName { get; set; }
 
-
+        public bool IsBlocked { get; set; }
 
         #region Datetime
 

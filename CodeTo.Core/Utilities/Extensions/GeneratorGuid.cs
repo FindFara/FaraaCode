@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeTo.Core.Utilities.Extension
+namespace CodeTo.Core.Utilities.Extensions
 {
    public static class GeneratorGuid
     {

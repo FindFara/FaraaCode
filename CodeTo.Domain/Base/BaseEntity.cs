@@ -11,6 +11,7 @@ namespace CodeTo.Domain.Base
     {
         [Key]
         public T Id { get; set; }
+        public bool IsDeleted { get; set; }
     }
     
     

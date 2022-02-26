@@ -15,117 +15,118 @@
             </div>
         </div>*@
     <!-- Loader -->
-   
-            <header id="topnav" class="defaultscroll sticky">
-                <div class="container">
-                    <!-- Logo container-->
-                    <div>
-                        <a class="logo" href="index.html">
-                            <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
-                            <img src="images/logo-light.png" class="l-light" height="24" alt="">
+
+    <header id="topnav" class="defaultscroll sticky">
+        <div class="container">
+            <!-- Logo container-->
+            <div>
+                <a class="logo" href="index.html">
+                    <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
+                    <img src="images/logo-light.png" class="l-light" height="24" alt="">
+                </a>
+            </div>
+            <div class="buy-button">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-area="UserPanels" asp-controller="UserPanelHome" asp-action="Index"
+                       class="uil-user  btn btn-icon btn-lg btn-primary mt-2"></a>
+
+                    <a asp-controller="Account" asp-action="Logout" class="uil-sign-out-alt btn btn-icon btn-lg btn-outline-primary mt-2"></a>
+
+                }
+                else
+                {
+                    <div class="buy-button">
+                        <a asp-controller="Account" asp-action="Login">
+                            <div class="btn btn-primary login-btn-primary">ورود | ثبت نام </div>
+                            <div class="btn btn-light login-btn-light">ورود | ثبت نام </div>
                         </a>
                     </div>
-                    <div class="buy-button">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <a asp-area="UserPanels" asp-controller="UserPanelHome" asp-action="Index"
-                               class="uil-user  btn btn-icon btn-lg btn-primary mt-2"></a>
 
-                            <a asp-controller="Account" asp-action="Logout" class="uil-sign-out-alt btn btn-icon btn-lg btn-outline-primary mt-2"></a>
-
-                        }
-                        else
-                        {
-                            <div class="buy-button">
-                                <a asp-controller="Account" asp-action="Login">
-                                    <div class="btn btn-primary login-btn-primary">ورود | ثبت نام </div>
-                                    <div class="btn btn-light login-btn-light">ورود | ثبت نام </div>
-                                </a>
-                            </div>
-
-                        }
-                    </div>
-                    <!-- End Logo container-->
-                    <div class="menu-extras">
-                        <div class="menu-item">
-                            <!-- Mobile menu toggle-->
-                            <a class="navbar-toggle open" id="isToggle" onclick="toggleMenu()">
-                                <div class="lines">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </a>
-                            <!-- End mobile menu toggle-->
+                }
+            </div>
+            <!-- End Logo container-->
+            <div class="menu-extras">
+                <div class="menu-item">
+                    <!-- Mobile menu toggle-->
+                    <a class="navbar-toggle open" id="isToggle" onclick="toggleMenu()">
+                        <div class="lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
-                    </div>
+                    </a>
+                    <!-- End mobile menu toggle-->
+                </div>
+            </div>
 
-                    <div id="navigation" style="display: block;">
-                        <!-- Navigation Menu-->
-                        <ul class="navigation-menu nav-light">
-                            <li><a href="index.html" class="sub-menu-item">صفحه اصلی </a></li>
-                            <li class="has-submenu parent-parent-menu-item active">
+            <div id="navigation" style="display: block;">
+                <!-- Navigation Menu-->
+                <ul class="navigation-menu nav-light">
+                    <li><a asp-controller="Home" asp-action="index" class="sub-menu-item">صفحه اصلی </a></li>
+                    <li><a asp-area="Admins" asp-controller="AdminHome" asp-action="index" class="sub-menu-item">ادمین </a></li>
+                    <li class="has-submenu parent-parent-menu-item active">
 
 
-                            <li class="has-submenu parent-parent-menu-item">
-                                <a href="javascript:void(0)">صفحات </a><span class="menu-arrow"></span>
+                    <li class="has-submenu parent-parent-menu-item">
+                        <a href="javascript:void(0)">صفحات </a><span class="menu-arrow"></span>
+                        <ul class="submenu">
+                            <li class="has-submenu parent-menu-item">
+                                <a href="javascript:void(0)"> کمپانی  </a><span class="submenu-arrow"></span>
                                 <ul class="submenu">
-                                    <li class="has-submenu parent-menu-item">
-                                        <a href="javascript:void(0)"> کمپانی  </a><span class="submenu-arrow"></span>
-                                        <ul class="submenu">
-                                            <li><a href="page-aboutus.html" class="sub-menu-item"> درباره ما </a></li>
-                                            <li><a href="page-aboutus-two.html" class="sub-menu-item"> درباره ما 2 </a></li>
-                                            <li><a href="page-services.html" class="sub-menu-item">خدمات </a></li>
-                                            <li><a href="page-history.html" class="sub-menu-item">تاریخچه </a></li>
-                                            <li><a href="page-team.html" class="sub-menu-item"> تیم </a></li>
-                                            <li><a href="page-pricing.html" class="sub-menu-item">قیمت گذاری </a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-submenu parent-menu-item">
-                                        <a href="javascript:void(0)"> نرم افزار </a><span class="submenu-arrow"></span>
-                                        <ul class="submenu">
-                                            <li><a href="page-terms.html" class="sub-menu-item">خدمات سایت </a></li>
-                                            <li><a href="page-privacy.html" class="sub-menu-item">حریم خصوصی </a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-submenu parent-menu-item">
-                                        <a href="javascript:void(0)"> صفحات خاص </a><span class="submenu-arrow"></span>
-                                        <ul class="submenu">
-                                            <li><a href="page-comingsoon.html" class="sub-menu-item">به زودی </a></li>
-                                            <li><a href="page-comingsoon2.html" class="sub-menu-item">به زودی 2</a></li>
-                                            <li><a href="page-maintenance.html" class="sub-menu-item">در دست ساخت </a></li>
-                                            <li><a href="page-error.html" class="sub-menu-item">خطا </a></li>
-                                            <li><a href="page-thankyou.html" class="sub-menu-item">صفحه تشکر </a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-submenu parent-menu-item">
-                                        <a href="javascript:void(0)"> تماس با ما </a><span class="submenu-arrow"></span>
-                                        <ul class="submenu">
-                                            <li><a href="page-contact-detail.html" class="sub-menu-item">جزئیات تماس </a></li>
-                                            <li><a href="page-contact-one.html" class="sub-menu-item">تماس 1</a></li>
-                                            <li><a href="page-contact-two.html" class="sub-menu-item">تماس 2</a></li>
-                                            <li><a href="page-contact-three.html" class="sub-menu-item">تماس 3</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a href="page-aboutus.html" class="sub-menu-item"> درباره ما </a></li>
+                                    <li><a href="page-aboutus-two.html" class="sub-menu-item"> درباره ما 2 </a></li>
+                                    <li><a href="page-services.html" class="sub-menu-item">خدمات </a></li>
+                                    <li><a href="page-history.html" class="sub-menu-item">تاریخچه </a></li>
+                                    <li><a href="page-team.html" class="sub-menu-item"> تیم </a></li>
+                                    <li><a href="page-pricing.html" class="sub-menu-item">قیمت گذاری </a></li>
                                 </ul>
                             </li>
                             <li class="has-submenu parent-menu-item">
-                                <a href="javascript:void(0)">اسناد </a><span class="menu-arrow"></span>
+                                <a href="javascript:void(0)"> نرم افزار </a><span class="submenu-arrow"></span>
                                 <ul class="submenu">
-                                    <li><a href="documentation.html" class="sub-menu-item">مستند </a></li>
-                                    <li><a href="changelog.html" class="sub-menu-item">تغییرات </a></li>
-                                    <li><a href="components.html" class="sub-menu-item">اجزاء </a></li>
-                                    <li><a href="widget.html" class="sub-menu-item">ابزارک </a></li>
+                                    <li><a href="page-terms.html" class="sub-menu-item">خدمات سایت </a></li>
+                                    <li><a href="page-privacy.html" class="sub-menu-item">حریم خصوصی </a></li>
+                                </ul>
+                            </li>
+                            <li class="has-submenu parent-menu-item">
+                                <a href="javascript:void(0)"> صفحات خاص </a><span class="submenu-arrow"></span>
+                                <ul class="submenu">
+                                    <li><a href="page-comingsoon.html" class="sub-menu-item">به زودی </a></li>
+                                    <li><a href="page-comingsoon2.html" class="sub-menu-item">به زودی 2</a></li>
+                                    <li><a href="page-maintenance.html" class="sub-menu-item">در دست ساخت </a></li>
+                                    <li><a href="page-error.html" class="sub-menu-item">خطا </a></li>
+                                    <li><a href="page-thankyou.html" class="sub-menu-item">صفحه تشکر </a></li>
+                                </ul>
+                            </li>
+                            <li class="has-submenu parent-menu-item">
+                                <a href="javascript:void(0)"> تماس با ما </a><span class="submenu-arrow"></span>
+                                <ul class="submenu">
+                                    <li><a href="page-contact-detail.html" class="sub-menu-item">جزئیات تماس </a></li>
+                                    <li><a href="page-contact-one.html" class="sub-menu-item">تماس 1</a></li>
+                                    <li><a href="page-contact-two.html" class="sub-menu-item">تماس 2</a></li>
+                                    <li><a href="page-contact-three.html" class="sub-menu-item">تماس 3</a></li>
                                 </ul>
                             </li>
                         </ul>
-                    </div>
-                </div>
-            </header>
+                    </li>
+                    <li class="has-submenu parent-menu-item">
+                        <a href="javascript:void(0)">اسناد </a><span class="menu-arrow"></span>
+                        <ul class="submenu">
+                            <li><a href="documentation.html" class="sub-menu-item">مستند </a></li>
+                            <li><a href="changelog.html" class="sub-menu-item">تغییرات </a></li>
+                            <li><a href="components.html" class="sub-menu-item">اجزاء </a></li>
+                            <li><a href="widget.html" class="sub-menu-item">ابزارک </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
-            @RenderBody()
-            <partial name="_Footer" />
-            <partial name="_Script">
-      
+    @RenderBody()
+    <partial name="_Footer" />
+    <partial name="_Script">
+
 </body>
 </html>

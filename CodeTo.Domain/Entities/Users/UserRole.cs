@@ -8,22 +8,18 @@ using System.Threading.Tasks;
 
 namespace CodeTo.Domain.Entities.Users
 {
-    public class UserRole : BaseEntity<int>
+    public class UserRole 
     {
-        public UserRole()
-        {
-
-        }
-
-      
+        [Key]
+        public int UR { get; set; }
         public int UserId { get; set; }
-        public int RoleId { get; set; }
+        public byte RoleId { get; set; }
 
 
         #region Relations
 
-        public virtual User User { get; set; }
-        public virtual Role Role { get; set; }
+        public  User User { get; set; }
+        public  Role Role { get; set; }
 
         #endregion
 

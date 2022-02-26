@@ -1,56 +1,82 @@
-﻿using CodeTo.Domain.Entities.Users;
+﻿using CodeTo.Core.Interfase;
+using CodeTo.Domain.Entities.Users;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CodeTo.Core.ViewModel.AdminPanel
 {
-    public static class AdminVeiwConvertor
+    public class AdminPanelIndexViewModel : IIndexVeiwModel<int>
     {
-        public static AdminPanelIndexViewModel ConvertorAdminPanelIndexViewModel(this User user)
-        {
-            return new AdminPanelIndexViewModel()
-            {
-                UserName = user.UserName,
-                Email = user.Email,
-                Id = user.Id,
-                ImageName = user.AvatarName,
-                CreateDate = user.CreateDate,
-                IsActived = user.IsActive
-            };
-        }
+        public int Id { get; set; }
+        [Display(Name = "ایمیل")]
+        public string Email { get; set; }
+        [Display(Name = "نام کاربری")]
+        public string UserName { get; set; }
+        
+        [Display(Name = "تصویر کاربر")]
+        public string AvatarName { get; set; }
+        [Display(Name = "تاریخ ثبت نام")]
+        public DateTime CreateDate { get; set; }
+        public List<AdminPanelIndexViewModel> users { get; set; }
+        [Display(Name = "تعداد صفحه")]
+        public int PageCount { get; set; }
+        [Display(Name = "صحفه فعلی")]
+        public int CurrentPage { get; set; }
+        public bool IsActived { get; set; }
 
-        public static IQueryable<AdminPanelIndexViewModel> ConvertorAdminPanelIndexViewModel(
-            this IQueryable<User> users)
-        {
-            return users.Select(u => u.ConvertorAdminPanelIndexViewModel());
-        }
+        public List<Role> PermissionList { get; set; }
+        public bool IsDelete { get; set; }
+    }
 
-        public static IEnumerable<AdminPanelIndexViewModel> ConvertorAdminPanelIndexViewModel(
-            this IEnumerable<User> users)
-        {
-            return users.Select(u => u.ConvertorAdminPanelIndexViewModel());
-        }
 
-        public static AdminPanelCreateOrEditViewModel ConvertorAdminPanelCreatOrEditViewModel(this User user)
-        {
-            return new AdminPanelCreateOrEditViewModel()
-            {
-                Title = user.UserName,
-                Email = user.Email,
-                Id = user.Id,
-                ImageName = user.AvatarName,
-                CreateDate = user.CreateDate,
-                Password = user.Password,
-            };
-        }
+    public class AdminPanelCreateOrEditViewModel : ICreateOrEditeViewModel<int>
+    {
+        public int Id { get; set; }
 
-        public static IQueryable<AdminPanelCreateOrEditViewModel> ConvertorAdminPanelCreatOrEditViewModel(
-            this IQueryable<User> users)
-        {
-            return users.Select(u => u.ConvertorAdminPanelCreatOrEditViewModel());
-        }
+        [Display(Name = "نام کاربری")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200)]
+        public string Title { get; set; }
+
+        [Display(Name = "تاریخ ثبت نام")]
+        public DateTime CreateDate { get; set; }
+
+        [Display(Name = "تاریخ به روز رسانی")]
+        public DateTime? LastModifyDate { get; set; }
+
+        [Display(Name = "ایمیل")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200)]
+        [EmailAddress(ErrorMessage = "لطفا آدرس ایمیل را صحیح وارد نمایید")]
+        public string Email { get; set; }
+
+        [Display(Name = "تصویر کاربر")]
+        public string AvatarName { get; set; }
+
+        [Display(Name = "تصویر کاربر")]
+        public IFormFile AvatarFile { get; set; }
+
+        [Display(Name = "کلمه عبور")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200)]
+        public string Password { get; set; }
+        public List<byte> PermissionList { get; set; }
+    }
+
+
+
+    public class AminUserListForShow
+    {
+        public List<AdminPanelIndexViewModel> users { get; set; }
+        [Display(Name = "تعداد صفحه")]
+        public int PageCount { get; set; }
+        [Display(Name = "صحفه فعلی")]
+        public int CurrentPage { get; set; }
+
     }
 }

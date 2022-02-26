@@ -1,0 +1,68 @@
+﻿@using CodeTo.Core.Utilities.Extensions
+@using CodeTo.Core.ViewModel.PermiossionSelfViewModel
+@model PermissionCreateorEditeViewModel
+@{
+    ViewData["Title"] = "افزودن نقش";
+    List<PermiossionViewModel> list = ViewData["permission"] as List<PermiossionViewModel>;
+    Layout = "~/Areas/Admins/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a asp-area="Admins" asp-controller="AdminHome" asp-action="Index">خانه</a>
+        </li>
+        <li class="active"><a asp-area="Admins" asp-controller="AdminHome" asp-action="ShowAllUsers">مدیریت نقش</a></li>
+        <li class="active">@ViewData["Title"]</li>
+    </ul>
+</div>
+
+<div class="row" style="margin: 1%">
+    <form asp-area="Admins" asp-controller="Role"  asp-action="AddRole" method="post" asp-antiforgery="true" autocomplete="off">
+        <div class="col-md-12">
+            <div class="col-lg-7 col-sm-7 col-md-7 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header">
+                        <span class="widget-caption"style="font-size: large">نام نقش</span>
+                    </div>
+                    <div class="widget-body bordered-top bordered-sky">
+                        <div class="collapse in">
+
+                          <div class="form-group">
+                                <span class="input-icon icon-right">
+                                    <input asp-for="Title" type="text" class="form-control"  >
+                                    <i class="fa fa-group pink shiny circular"></i>
+                                </span>
+                            </div>
+                           <button class="btn-lg btn-success active" type="submit" >ثبت</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                <div class="widget flat radius-bordered">
+                    <div class="widget-header  bordered-bottom bordered-pink">
+                        <span class="widget-caption" style="font-size: large">همه دسترسی ها</span>
+                    </div>
+                    <div class="widget-body bordered-bottom bordered-sky">
+                        <div class="form-group">
+                            <hr class="wide">
+                            <h6>دسترسی ها</h6>
+                            <div class="horizontal-space"></div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <label>
+                                        <input class="checkbox-slider colored-blue" type="checkbox">
+                                        <span class="text"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
