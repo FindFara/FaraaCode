@@ -1,4 +1,4 @@
-﻿using CodeTo.Core.ViewModel.Users;
+﻿using CodeTo.Core.ViewModel.Accounts;
 using CodeTo.Domain.Entities.Users;
 using System;
 using System.Collections.Generic;

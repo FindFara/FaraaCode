@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeTo.Core.ViewModel.Users
+namespace CodeTo.Core.ViewModel.Accounts
 {
     public class UserPanelInformationViewModel
     {
@@ -18,7 +18,7 @@ namespace CodeTo.Core.ViewModel.Users
         public string ActiveCode { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreateDate { get; set; }
-        public string AvatarName { get; set; }
+        public string AvatarImageName { get; set; }
         public double Wallet { get; set; }
 
     }
@@ -26,11 +26,11 @@ namespace CodeTo.Core.ViewModel.Users
     {
         public string UserName { get; set; }
         public DateTime CreateDate { get; set; }
-        public string AvatarName { get; set; }
+        public string AvatarImageName { get; set; }
         public string AvatarFullName =>
-          !string.IsNullOrEmpty(AvatarName)
-          ? $"{PathTools.UserImagePath}{AvatarName}"
-          : PathTools.UserImageDefautl;
+          !string.IsNullOrEmpty(AvatarImageName)
+          ? $"{UserPathTools.UserImagePath}{AvatarImageName}"
+          : UserPathTools.UserImageDefautl;
 
     }
     public class EditProfileViewModel
@@ -47,12 +47,12 @@ namespace CodeTo.Core.ViewModel.Users
         [EmailAddress(ErrorMessage = "ایمیل وارد شده معتبر نمی باشد")]
         public string Email { get; set; }
 
-        public IFormFile AvatarFile { get; set; }
-        public string AvatarName { get; set; }
+        public IFormFile AvatarImageFile { get; set; }
+        public string AvatarImageName { get; set; }
         public string AvatarFullName =>
-           !string.IsNullOrEmpty(AvatarName)
-           ? $"{PathTools.UserImagePath}{AvatarName}"
-           : PathTools.UserImageDefautl;
+           !string.IsNullOrEmpty(AvatarImageName)
+           ? $"{UserPathTools.UserImagePath}{AvatarImageName}"
+           : UserPathTools.UserImageDefautl;
 
     }
      public class ChangePasswordViewModel

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeTo.Domain.Base
 {
-   public  interface IDateEntity
+   public  interface DateEntity
     {
         DateTime CreateDate { get; set; }
         DateTime? LastModifyDate { get; set; }

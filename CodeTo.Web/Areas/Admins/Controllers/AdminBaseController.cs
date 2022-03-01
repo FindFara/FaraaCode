@@ -9,7 +9,7 @@ namespace CodeTo.Web.Areas.Admins.Controllers
     [Area("Admins")]
     [Route("AP")]
     //Todo Put Authorize attribut for this controller and its chileds
-    public class AdminBaseController : Controller
+    public class ArticleBaseController : Controller
     {
 
     }

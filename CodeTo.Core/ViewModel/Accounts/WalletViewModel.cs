@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeTo.Core.ViewModel.Users
+namespace CodeTo.Core.ViewModel.Accounts
 {
     public class WalletChargeViewModel
     {

@@ -2,7 +2,7 @@
 using CodeTo.Core.Utilities.Extensions;
 using CodeTo.Core.Utilities.Other;
 using CodeTo.Core.Utilities.Security;
-using CodeTo.Core.ViewModel.Users;
+using CodeTo.Core.ViewModel.Accounts;
 using CodeTo.DataEF.Context;
 using CodeTo.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;

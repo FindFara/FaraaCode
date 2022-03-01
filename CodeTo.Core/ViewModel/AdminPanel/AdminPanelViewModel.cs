@@ -19,7 +19,7 @@ namespace CodeTo.Core.ViewModel.AdminPanel
         public string UserName { get; set; }
         
         [Display(Name = "تصویر کاربر")]
-        public string AvatarName { get; set; }
+        public string AvatarImageName { get; set; }
         [Display(Name = "تاریخ ثبت نام")]
         public DateTime CreateDate { get; set; }
         public List<AdminPanelIndexViewModel> users { get; set; }
@@ -32,8 +32,6 @@ namespace CodeTo.Core.ViewModel.AdminPanel
         public List<Role> PermissionList { get; set; }
         public bool IsDelete { get; set; }
     }
-
-
     public class AdminPanelCreateOrEditViewModel : ICreateOrEditeViewModel<int>
     {
         public int Id { get; set; }
@@ -56,7 +54,7 @@ namespace CodeTo.Core.ViewModel.AdminPanel
         public string Email { get; set; }
 
         [Display(Name = "تصویر کاربر")]
-        public string AvatarName { get; set; }
+        public string AvatarImageName { get; set; }
 
         [Display(Name = "تصویر کاربر")]
         public IFormFile AvatarFile { get; set; }
@@ -67,9 +65,6 @@ namespace CodeTo.Core.ViewModel.AdminPanel
         public string Password { get; set; }
         public List<byte> PermissionList { get; set; }
     }
-
-
-
     public class AminUserListForShow
     {
         public List<AdminPanelIndexViewModel> users { get; set; }

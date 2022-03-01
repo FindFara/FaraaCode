@@ -20,7 +20,7 @@
 <div style="margin: 2%">
     <h2>افزودن کاربر</h2>
     <form asp-action="EditUserFromAdmin" method="post" autocomplete="off" asp-antiforgery="true" enctype="multipart/form-data">
-        <input asp-for="AvatarName" type="hidden"/>
+        <input asp-for="AvatarImageName" type="hidden"/>
         <input asp-for="Id" type="hidden"/>
         <div class="col-md-8">
             <div class="widget flat radius-bordered">
@@ -89,7 +89,7 @@
                             تصویر کاربر
                         </div>
                         <div class="panel-body">
-                            <img id="userAvatar" class="thumbnail" style="max-width: 250px" src="/images/Profile/@Model.AvatarName" />
+                            <img id="userAvatar" class="thumbnail" style="max-width: 250px" src="/images/Profile/@Model.AvatarImageName" />
                             <div class="form-group">
                                 <label>انتخاب تصویر</label>
                                 <input type="file" asp-for="AvatarFile">

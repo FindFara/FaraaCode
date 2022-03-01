@@ -2,7 +2,7 @@
 using CodeTo.Core.Utilities.Extensions;
 using CodeTo.Core.Utilities.Other;
 using CodeTo.Core.Utilities.Security;
-using CodeTo.Core.ViewModel.Users;
+using CodeTo.Core.ViewModel.Accounts;
 using CodeTo.DataEF.Context;
 using CodeTo.Domain.Entities.Users;
 using CodeTo.Domain.Entities.Wallet;
@@ -63,7 +63,7 @@ namespace CodeTo.Core.Services.UserPanelServices
             .Select(u => new UserPanelDataViewModel()
             {
                 UserName = u.UserName,
-                AvatarName = u.AvatarName,
+                AvatarImageName = u.AvatarImageName,
                 CreateDate = u.CreateDate
             }).SingleAsync();
         }
@@ -75,7 +75,7 @@ namespace CodeTo.Core.Services.UserPanelServices
             .Select(u => new EditProfileViewModel()
             {
                 UserName = u.UserName,
-                AvatarName = u.AvatarName,
+                AvatarImageName = u.AvatarImageName,
                 Email = u.Email
                 
             }).SingleAsync();
@@ -87,17 +87,17 @@ namespace CodeTo.Core.Services.UserPanelServices
             {
                 var user = await GetUserByUserNameAsync(username);
                 string UserImageName = null;
-                if (profile.AvatarFile != null)
+                if (profile.AvatarImageFile != null)
                 {
-                    UserImageName = GeneratorGuid.GeneratorUniqCode() + profile.AvatarFile.FileName;
+                    UserImageName = GeneratorGuid.GeneratorUniqCode() + profile.AvatarImageFile.FileName;
                     var thumbSize = new ThumbSize(100, 100);
-                    profile.AvatarFile.AddImageToServer(UserImageName, PathTools.UserImageServerPath, thumbSize, profile.AvatarName);
-                    user.AvatarName = UserImageName;
+                    profile.AvatarImageFile.AddImageToServer(UserImageName, UserPathTools.UserImageServerPath, thumbSize, profile.AvatarImageName);
+                    user.AvatarImageName = UserImageName;
                 }
 
                 user.UserName = profile.UserName;
                 user.Email = profile.Email;
-                user.AvatarName = UserImageName;
+                user.AvatarImageName = UserImageName;
                 
                 _context.Users.Update(user);
                 _context.SaveChanges();
@@ -148,11 +148,11 @@ namespace CodeTo.Core.Services.UserPanelServices
 
         }
 
-        public List<WalletHistoryViewModel> ShowHistory(string username)
+        public async Task<List<WalletHistoryViewModel>> ShowHistory(string username)
         {
             
             var userid = GetUserIdByUserName(username);
-            return _context.Wallets.Where(w => w.UserId == userid && w.Ispay)
+            return  _context.Wallets.Where(w => w.UserId == userid && w.Ispay)
                 .Select(w => new WalletHistoryViewModel()
                 {
                     Amount = w.Amount,

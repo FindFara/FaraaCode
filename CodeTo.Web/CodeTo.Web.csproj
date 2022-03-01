@@ -24,4 +24,9 @@
 	
 	  <ProjectReference Include="..\CodeTo.IOC\CodeTo.IOC.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Areas\Articles\Data\" />
+	  <Folder Include="Areas\Articles\Models\" />
+	</ItemGroup>
 </Project>

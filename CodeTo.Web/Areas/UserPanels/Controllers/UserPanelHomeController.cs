@@ -2,7 +2,7 @@
 using Bz.ClassFinder.Attributes;
 using CodeTo.Core.Services.AccountServices;
 using CodeTo.Core.Services.UserPanelServices;
-using CodeTo.Core.ViewModel.Users;
+using CodeTo.Core.ViewModel.Accounts;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;

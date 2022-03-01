@@ -8,7 +8,7 @@ using CodeTo.Core.ViewModel.AdminPanel;
 
 namespace CodeTo.Core.Services.AdminPanelServices
 {
-   public interface IAdminPanelService : IGenericInterface<int, AdminPanelIndexViewModel, AdminPanelCreateOrEditViewModel>
+   public interface IAdminPanelService : IGenericService<int, AdminPanelIndexViewModel, AdminPanelCreateOrEditViewModel>
     {
 
         public Task<AdminPanelIndexViewModel> GetAllToShowAsync(int pageId = 1, string FilterEmail = "",

@@ -9,7 +9,7 @@ using CodeTo.Core.ViewModel.PermiossionViewModel;
 
 namespace CodeTo.Core.Services.PermiossionServices
 {
-   public interface IPermiossionService : IGenericInterface<byte, PermissionIndexViewModel, PermissionCreateorEditeViewModel>
+   public interface IPermiossionService : IGenericService<byte, PermissionIndexViewModel, PermissionCreateorEditeViewModel>
     {
         Task<bool> AddPermissionToUserAsync(List<byte> roleId, int userid);
         Task<bool> EditPermissionToUserAsync(List<byte> roleId, int userid);

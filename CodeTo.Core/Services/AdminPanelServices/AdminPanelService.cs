@@ -24,7 +24,7 @@ namespace CodeTo.Core.Services.AdminPanelServices
             _context = context;
             _security = security;
         }
-        public Task<AdminPanelCreateOrEditViewModel> Find(int id)
+        public Task<AdminPanelCreateOrEditViewModel> FindAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -49,9 +49,9 @@ namespace CodeTo.Core.Services.AdminPanelServices
             if (vm.AvatarFile != null)
             {
                 var imagepath = "";
-                adduser.AvatarName = "pic" + GeneratorGuid.GeneratorUniqCode() + Path.GetExtension(vm.AvatarFile.FileName);
+                adduser.AvatarImageName = "pic" + GeneratorGuid.GeneratorUniqCode() + Path.GetExtension(vm.AvatarFile.FileName);
                 imagepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/Profile",
-                    adduser.AvatarName);
+                    adduser.AvatarImageName);
                 await using (var stream = new FileStream(imagepath, FileMode.Create))
                 {
                     vm.AvatarFile.CopyTo(stream);
@@ -116,9 +116,9 @@ namespace CodeTo.Core.Services.AdminPanelServices
                 if (vm.AvatarFile != null)
                 {
                     var imagepath = "";
-                    adduser.AvatarName = "pic" + GeneratorGuid.GeneratorUniqCode() + Path.GetExtension(vm.AvatarFile.FileName);
+                    adduser.AvatarImageName = "pic" + GeneratorGuid.GeneratorUniqCode() + Path.GetExtension(vm.AvatarFile.FileName);
                     imagepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/Profile",
-                        adduser.AvatarName);
+                        adduser.AvatarImageName);
                     using (var stream = new FileStream(imagepath, FileMode.Create))
                     {
                         vm.AvatarFile.CopyTo(stream);
@@ -171,15 +171,15 @@ namespace CodeTo.Core.Services.AdminPanelServices
             if (vm.AvatarFile!= null)
             {
                 var DeletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/Profile",
-                    user.AvatarName);
+                    user.AvatarImageName);
                 if (File.Exists(DeletePath))
                 {
                     File.Delete(DeletePath);
                 }
 
-                user.AvatarName = "pic" + GeneratorGuid.GeneratorUniqCode() + Path.GetExtension(vm.AvatarFile.FileName);
+                user.AvatarImageName = "pic" + GeneratorGuid.GeneratorUniqCode() + Path.GetExtension(vm.AvatarFile.FileName);
                 var imagepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/Profile",
-                    user.AvatarName);
+                    user.AvatarImageName);
                 using (var stream = new FileStream(imagepath, FileMode.Create))
                 {
                     vm.AvatarFile.CopyTo(stream);
@@ -192,7 +192,7 @@ namespace CodeTo.Core.Services.AdminPanelServices
             return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             User user = await _context.Users.FindAsync(id);
             user.IsDeleted = true;
@@ -251,7 +251,7 @@ namespace CodeTo.Core.Services.AdminPanelServices
             {
                 Email = u.Email,
                 CreateDate = u.CreateDate,
-                AvatarName = u.AvatarName,
+                AvatarImageName = u.AvatarImageName,
                 Title = u.UserName,
                 PermissionList = u.UserRoles.Select(r => r.RoleId).ToList()
             }).Single();
@@ -262,7 +262,7 @@ namespace CodeTo.Core.Services.AdminPanelServices
             return user.Id;
         }
 
-        public Task<List<AdminPanelIndexViewModel>> GetAll()
+        public Task<List<AdminPanelIndexViewModel>> GetAllAsync()
         {
             IQueryable<AdminPanelIndexViewModel> result = _context.Users.ConvertorAdminPanelIndexViewModel();
             return result.ToListAsync();

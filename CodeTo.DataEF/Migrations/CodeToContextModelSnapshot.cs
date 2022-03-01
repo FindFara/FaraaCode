@@ -19,6 +19,262 @@ namespace CodeTo.DataEF.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.Article", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ArticleDescription")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("ArticleGroupId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ArticleImageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArticleTitle")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Writer")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleGroupId");
+
+                    b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.ArticleComment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("ArticleId1")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId1");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ArticleComments");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.ArticleGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ArticleGroupTitle")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ArticleGroups");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.Course", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CourseDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseImageName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("CourseLevelId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CoursePrice")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CourseStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CourseTitle")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LevelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SubGroup")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tags")
+                        .HasMaxLength(600)
+                        .HasColumnType("nvarchar(600)");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseLevelId");
+
+                    b.HasIndex("CourseStatusId");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("SubGroup");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GroupTitle")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("CourseGroups");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseLevel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LevelTitle")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CourseLevels");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StatusTitle")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CourseStatuses");
+                });
+
             modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.Permission", b =>
                 {
                     b.Property<int>("PermissionId")
@@ -91,7 +347,7 @@ namespace CodeTo.DataEF.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AvatarName")
+                    b.Property<string>("AvatarImageName")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -209,6 +465,78 @@ namespace CodeTo.DataEF.Migrations
                     b.ToTable("WalletTypes");
                 });
 
+            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.Article", b =>
+                {
+                    b.HasOne("CodeTo.Domain.Entities.Articles.ArticleGroup", "ArticleGroup")
+                        .WithMany("Article")
+                        .HasForeignKey("ArticleGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ArticleGroup");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.ArticleComment", b =>
+                {
+                    b.HasOne("CodeTo.Domain.Entities.Articles.Article", "Article")
+                        .WithMany("ArticleComment")
+                        .HasForeignKey("ArticleId1");
+
+                    b.HasOne("CodeTo.Domain.Entities.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.Course", b =>
+                {
+                    b.HasOne("CodeTo.Domain.Entities.Courses.CourseLevel", "CourseLevel")
+                        .WithMany("Courses")
+                        .HasForeignKey("CourseLevelId");
+
+                    b.HasOne("CodeTo.Domain.Entities.Courses.CourseStatus", "CourseStatus")
+                        .WithMany("Courses")
+                        .HasForeignKey("CourseStatusId");
+
+                    b.HasOne("CodeTo.Domain.Entities.Courses.CourseGroup", "CourseGroup")
+                        .WithMany("Courses")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CodeTo.Domain.Entities.Courses.CourseGroup", "Group")
+                        .WithMany("SubGroup")
+                        .HasForeignKey("SubGroup");
+
+                    b.HasOne("CodeTo.Domain.Entities.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CourseGroup");
+
+                    b.Navigation("CourseLevel");
+
+                    b.Navigation("CourseStatus");
+
+                    b.Navigation("Group");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseGroup", b =>
+                {
+                    b.HasOne("CodeTo.Domain.Entities.Courses.CourseGroup", null)
+                        .WithMany("CourseGroups")
+                        .HasForeignKey("ParentId");
+                });
+
             modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.Permission", b =>
                 {
                     b.HasOne("CodeTo.Domain.Entities.Permissions.Permission", null)
@@ -271,6 +599,35 @@ namespace CodeTo.DataEF.Migrations
                     b.Navigation("User");
 
                     b.Navigation("WalletType");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.Article", b =>
+                {
+                    b.Navigation("ArticleComment");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.ArticleGroup", b =>
+                {
+                    b.Navigation("Article");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseGroup", b =>
+                {
+                    b.Navigation("CourseGroups");
+
+                    b.Navigation("Courses");
+
+                    b.Navigation("SubGroup");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseLevel", b =>
+                {
+                    b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseStatus", b =>
+                {
+                    b.Navigation("Courses");
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.Permission", b =>

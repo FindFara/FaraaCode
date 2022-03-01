@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeTo.Core.ViewModel.Users
+namespace CodeTo.Core.ViewModel.Accounts
 {
     public class UserDetailViewModel
     {
@@ -16,7 +16,7 @@ namespace CodeTo.Core.ViewModel.Users
         public string ActiveCode { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreateDate { get; set; }
-        public string AvatarName { get; set; }
+        public string AvatarImageName { get; set; }
         public int Wallet { get; set; }
 
     }
@@ -47,7 +47,7 @@ namespace CodeTo.Core.ViewModel.Users
         public string ActiveCode { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreateDate { get; set; }
-        public string AvatarName { get; set; }
+        public string AvatarImageName { get; set; }
         public int Id { get; set; }
     }
     public class AccountLoginViewModel

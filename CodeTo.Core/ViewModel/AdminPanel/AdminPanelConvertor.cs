@@ -16,7 +16,7 @@ namespace CodeTo.Core.ViewModel.AdminPanel
                 UserName = user.UserName,
                 Email = user.Email,
                 Id = user.Id,
-                AvatarName = user.AvatarName,
+                AvatarImageName = user.AvatarImageName,
                 CreateDate = user.CreateDate,
                 IsActived = user.IsEmailActive
             };
@@ -41,7 +41,7 @@ namespace CodeTo.Core.ViewModel.AdminPanel
                 Title = user.UserName,
                 Email = user.Email,
                 Id = user.Id,
-                AvatarName = user.AvatarName,
+                AvatarImageName = user.AvatarImageName,
                 CreateDate = user.CreateDate,
                 Password = user.Password,
             };

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CodeTo.Domain.Entities.Users
 {
-    public class User : BaseEntity<int>, IDateEntity
+    public class User : BaseEntity<int>, DateEntity
     {
  
         [Display(Name = "نام کاربری")]
@@ -36,7 +36,7 @@ namespace CodeTo.Domain.Entities.Users
 
         [Display(Name = "آواتار")]
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-        public string AvatarName { get; set; }
+        public string AvatarImageName { get; set; }
 
         public bool IsBlocked { get; set; }
 

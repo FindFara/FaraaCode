@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeTo.Core.ViewModel.Users;
+using CodeTo.Core.ViewModel.Accounts;
+using CodeTo.Domain.Entities.Wallet;
 
 
-namespace CodeTo.Core.ViewModel.Users
+namespace CodeTo.Core.ViewModel.Accounts
 {
     public static class ConvertorToViewModel
     {
-        #region ToUserDetailViewModel
+        #region UserDetail
 
 
         public static UserDetailViewModel ToUserDetailViewModel(this Domain.Entities.Users.User user)
@@ -33,7 +34,7 @@ namespace CodeTo.Core.ViewModel.Users
             return users.Select(user => user.ToUserDetailViewModel());
         }
         #endregion
-        #region ToEditProfileViewModel
+        #region EditProfile
 
 
         public static EditProfileViewModel ToEditProfileViewModel(this Domain.Entities.Users.User user)
@@ -43,7 +44,7 @@ namespace CodeTo.Core.ViewModel.Users
                 Id = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
-                AvatarName = user.AvatarName
+                AvatarImageName = user.AvatarImageName
 
 
 
@@ -54,7 +55,7 @@ namespace CodeTo.Core.ViewModel.Users
             return users.Select(user => user.ToEditProfileViewModel());
         }
         #endregion
-        #region ToAccountRegisterViewModel
+        #region AccountRegister
         public static AccountRegisterViewModel ToAccountRegisterViewModel(this Domain.Entities.Users.User user)
         {
             return new AccountRegisterViewModel
@@ -62,7 +63,7 @@ namespace CodeTo.Core.ViewModel.Users
                 Id = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
-                AvatarName = user.AvatarName,
+                AvatarImageName = user.AvatarImageName,
                 ActiveCode=user.EmailActiveCode,
                 IsActive=user.IsEmailActive,
                 Password=user.Password,
@@ -76,24 +77,31 @@ namespace CodeTo.Core.ViewModel.Users
             return users.Select(user => user.ToAccountRegisterViewModel());
         }
         #endregion
-        public static WalletViewModel ToWalletViewModel(this Domain.Entities.Wallet.Wallet wallet)
+
+        #region Walet
+
+        public static WalletViewModel ToWalletViewModel(this Wallet wallet)
         {
             return new WalletViewModel
             {
-            Amount=(int)wallet.Amount,
-            Creatdate=wallet.CreatDate,
-            Description=wallet.Description,
-            UserId=wallet.UserId,
-            Type= (int)(wallet.WalletType?.TypeId)
+                Amount=(int)wallet.Amount,
+                Creatdate=wallet.CreatDate,
+                Description=wallet.Description,
+                UserId=wallet.UserId,
+                Type= (int)(wallet.WalletType?.TypeId)
 
 
             };
         }
-        public static IQueryable<WalletViewModel> ToWalletViewModel(this IQueryable<Domain.Entities.Wallet.Wallet> wallet)
+        public static IQueryable<WalletViewModel> ToWalletViewModel(this IQueryable<Wallet> wallet)
         {
             return wallet.Select(wallet => wallet.ToWalletViewModel());
         }
-        public static WalletHistoryViewModel ToWalletHistoryViewModel(this Domain.Entities.Wallet.Wallet wallet)
+
+        #endregion
+        #region WaletHistory
+
+        public static WalletHistoryViewModel ToWalletHistoryViewModel(this Wallet wallet)
         {
             return new WalletHistoryViewModel
             {
@@ -103,10 +111,12 @@ namespace CodeTo.Core.ViewModel.Users
                 TypeId = wallet.WalletTypeId
             };
         }
-        public static IQueryable<WalletHistoryViewModel> ToWalletHistoryViewModel(this IQueryable<Domain.Entities.Wallet.Wallet> wallet)
+        public static IQueryable<WalletHistoryViewModel> ToWalletHistoryViewModel(this IQueryable<Wallet> wallet)
         {
             return wallet.Select(wallet => wallet.ToWalletHistoryViewModel());
         }
+
+        #endregion
     }
 }
 

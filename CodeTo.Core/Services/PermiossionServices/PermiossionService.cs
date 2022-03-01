@@ -20,7 +20,7 @@ namespace CodeTo.Core.Services.PermiossionServices
             _context = context;
         }
 
-        public async Task<PermissionCreateorEditeViewModel> Find(byte id)
+        public async Task<PermissionCreateorEditeViewModel> FindAsync(byte id)
         {
             throw new NotImplementedException();
         }
@@ -44,7 +44,7 @@ namespace CodeTo.Core.Services.PermiossionServices
             return true;
         }
 
-        public async Task<bool> Delete(byte id)
+        public async Task<bool> DeleteAsync(byte id)
         {
             var role = await _context.Roles.SingleOrDefaultAsync(r => r.RoleID == id);
             role.IsDeleted = true;
@@ -53,13 +53,13 @@ namespace CodeTo.Core.Services.PermiossionServices
             return true;
         }
 
-        public async Task<List<PermissionIndexViewModel>> GetAll()
+        public async Task<List<PermissionIndexViewModel>> GetAllAsync()
         {
             var roles = _context.Roles;
             return await roles.permissionToVM().ToListAsync();
         }
 
-        public async Task<bool> IsExist(int id)
+        public async Task<bool> IsExist(byte id)
         {
             throw new NotImplementedException();
         }

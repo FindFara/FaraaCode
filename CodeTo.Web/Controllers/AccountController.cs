@@ -1,7 +1,7 @@
 ﻿using CodeTo.Core.Services.AccountServices;
 using CodeTo.Core.Utilities.Extensions;
 using CodeTo.Core.Utilities.Senders;
-using CodeTo.Core.ViewModel.Users;
+using CodeTo.Core.ViewModel.Accounts;
 using CodeTo.Domain.Entities.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;

@@ -14,7 +14,7 @@ namespace CodeTo.Core.ViewModel.AdminPanel
         {
             return new User()
             {
-                AvatarName = admin.AvatarName,
+                AvatarImageName = admin.AvatarImageName,
                 CreateDate = admin.CreateDate,
                 Email = admin.Email,
                 IsEmailActive = admin.IsActived,

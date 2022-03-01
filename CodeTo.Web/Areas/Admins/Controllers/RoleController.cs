@@ -9,7 +9,7 @@ using CodeTo.Core.ViewModel.PermiossionViewModel;
 
 namespace CodeTo.Web.Areas.Admins.Controllers
 {
-    public class RoleController : AdminBaseController
+    public class RoleController : ArticleBaseController
     {
         private readonly IPermiossionService _permiossion;
 
@@ -23,7 +23,7 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         [Route("ShowPermissions")]
         public async Task<IActionResult> ShowPermissions()
         {
-            return View(await _permiossion.GetAll());
+            return View(await _permiossion.GetAllAsync());
         }
 
         [Route("AddRole")]
@@ -80,7 +80,7 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Remove(PermissionCreateorEditeViewModel model)
         {
-            await _permiossion.Delete(model.Id);
+            await _permiossion.DeleteAsync(model.Id);
             return RedirectToAction("ShowPermissions");
         }
 

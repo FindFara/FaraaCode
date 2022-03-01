@@ -9,7 +9,7 @@ using CodeTo.Core.ViewModel.AdminPanel;
 
 namespace CodeTo.Web.Areas.Admins.Controllers
 {
-    public class AdminHomeController : AdminBaseController
+    public class AdminHomeController : ArticleBaseController
     {
         private readonly IAdminPanelService _service;
         private readonly IPermiossionService _permiossion;
@@ -36,7 +36,7 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         [Route("AddUserAp")]
         public async Task<IActionResult> AddUserFromAdmin()
         {
-            ViewData["PermissionList"] = await _permiossion.GetAll();
+            ViewData["PermissionList"] = await _permiossion.GetAllAsync();
             return View();
         }
         [HttpPost]
@@ -44,7 +44,7 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         [Route("AddUserAp")]
         public async Task<IActionResult> AddUserFromAdmin(AdminPanelCreateOrEditViewModel model, List<byte> PermissionList)
         {
-            ViewData["PermissionList"] = await _permiossion.GetAll();
+            ViewData["PermissionList"] = await _permiossion.GetAllAsync();
 
             #region Validation
 
@@ -83,7 +83,7 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         [Route("EditUserFromAdmin/{id}")]
         public async Task<IActionResult> EditUserFromAdmin(int id)
         {
-            ViewData["PermissionList"] = await _permiossion.GetAll();
+            ViewData["PermissionList"] = await _permiossion.GetAllAsync();
             return View(await _service.ShowUserForEditAsync(id));
         }
 
@@ -92,7 +92,7 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         [Route("EditUserFromAdmin/{id}")]
         public async Task<IActionResult> EditUserFromAdmin(AdminPanelCreateOrEditViewModel model, List<byte> PermissionList)
         {
-            ViewData["PermissionList"] = await _permiossion.GetAll();
+            ViewData["PermissionList"] = await _permiossion.GetAllAsync();
 
             
             await _service.EditAsync(model);
@@ -103,7 +103,7 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         [Route("DeleteUser/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            await _service.Delete(id);
+            await _service.DeleteAsync(id);
             return RedirectToAction("ShowAllUsers", "AdminHome");
         }
         #endregion
