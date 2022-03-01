@@ -3,27 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CodeTo.Core.Services.ArticleServices;
-using CodeTo.Core.ViewModel.Articles;
+using CodeTo.Core.Services.CourseServices;
+using CodeTo.Core.ViewModel.Courses;
 using Microsoft.EntityFrameworkCore;
 
-namespace CodeTo.Web.Areas.Articles.Controllers
+namespace CodeTo.Web.Areas.Admins.Controllers
 {
-    public class ArticleController : ArticleBaseController
+    public class CourseController : AdminBaseController
     {
-        private readonly IArticleService _articleService;
+        private readonly ICourseService _courseService;
 
-        public ArticleController(IArticleService articleService)
+        public CourseController(ICourseService courseService)
         {
-            _articleService = articleService;
+            _courseService = courseService;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _articleService.GetAllAsync());
+            return View(await _courseService.GetAllAsync());
         }
 
-        [HttpGet("Articles/Article/Details")]
+        [HttpGet("courses/course/Details")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -31,7 +31,7 @@ namespace CodeTo.Web.Areas.Articles.Controllers
                 return NotFound();
             }
 
-            var bookGroup = await _articleService.FindAsync(id.Value);
+            var bookGroup = await _courseService.FindAsync(id.Value);
             if (bookGroup == null)
             {
                 return NotFound();
@@ -40,32 +40,32 @@ namespace CodeTo.Web.Areas.Articles.Controllers
             return View(bookGroup);
         }
 
-        // GET: Admin/ArticleGroups/Create
-        [HttpGet("Articles/Article/Create")]
+        // GET: Admin/courseGroups/Create
+        [HttpGet("courses/course/Create")]
         public IActionResult Create()
         {
-            return View("CreateOrEdit", new ArticleCreateOrEditViewModel());
+            return View("CreateOrEdit", new CourseCreateOrEditViewModel());
         }
 
-        // POST: Admin/ArticleGroups/Create
+        // POST: Admin/courseGroups/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ArticleCreateOrEditViewModel article)
+        public async Task<IActionResult> Create(CourseCreateOrEditViewModel course)
         {
             if (ModelState.IsValid)
             {
-                await _articleService.AddAsync(article);
+                await _courseService.AddAsync(course);
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(article);
+            return View(course);
         }
 
-        // GET: Admin/ArticleGroups/Edit/5
-        [HttpGet("Articles/Article/Edit")]
+        // GET: Admin/courseGroups/Edit/5
+        [HttpGet("courses/course/Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,23 +73,23 @@ namespace CodeTo.Web.Areas.Articles.Controllers
                 return NotFound();
             }
 
-            var article = await _articleService.FindAsync(id.Value);
-            if (article == null)
+            var course = await _courseService.FindAsync(id.Value);
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return View("CreateOrEdit", article);
+            return View("CreateOrEdit", course);
         }
 
-        // POST: Admin/ArticleGroups/Edit/5
+        // POST: Admin/courseGroups/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edite")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, ArticleCreateOrEditViewModel Article)
+        public async Task<IActionResult> Edit(int id, CourseCreateOrEditViewModel course)
         {
-            if (id != Article.Id)
+            if (id != course.Id)
             {
                 return NotFound();
             }
@@ -98,11 +98,11 @@ namespace CodeTo.Web.Areas.Articles.Controllers
             {
                 try
                 {
-                    await _articleService.EditAsync(Article);
+                    await _courseService.EditAsync(course);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!await _articleService.IsExist(Article.Id))
+                    if (!await _courseService.IsExist(course.Id))
                     {
                         return NotFound();
                     }
@@ -115,11 +115,11 @@ namespace CodeTo.Web.Areas.Articles.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View("CreateOrEdit", Article);
+            return View("CreateOrEdit", course);
         }
 
-        // GET: Admin/ArticleGroups/Delete/5
-        [HttpGet("Articles/Article/Delete")]
+        // GET: Admin/courseGroups/Delete/5
+        [HttpGet("courses/course/Delete")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,23 +127,24 @@ namespace CodeTo.Web.Areas.Articles.Controllers
                 return NotFound();
             }
 
-            var Article = await _articleService.FindAsync(id.Value);
-            if (Article == null)
+            var course = await _courseService.FindAsync(id.Value);
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return View(Article);
+            return View(course);
         }
 
-        // POST: Admin/ArticleGroups/Delete/5
+        // POST: Admin/courseGroups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _articleService.DeleteAsync(id);
+            await _courseService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
     }
 }
+

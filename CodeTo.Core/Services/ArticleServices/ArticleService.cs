@@ -25,9 +25,11 @@ namespace CodeTo.Core.Services.ArticleServices
         }
 
 
-        public Task<ArticleCreateOrEditViewModel> FindAsync(long id)
+        public async Task<ArticleCreateOrEditViewModel> FindAsync(long id)
         {
-            throw new NotImplementedException();
+            var model = await _context.Articles
+                .FirstOrDefaultAsync(m => m.Id == id);
+            return model.ToCreateOrEditViewModel();
         }
 
         public async Task<bool> AddAsync(ArticleCreateOrEditViewModel vm)

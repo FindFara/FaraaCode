@@ -1,5 +1,5 @@
 ﻿@using CodeTo.Core.Utilities.Extensions
-@model IEnumerable<CodeTo.Core.ViewModel.Articles.ArticleIndexViewModel>
+@model IEnumerable<CodeTo.Core.ViewModel.Courses.CourseIndexViewModel>
 
 @{
     ViewData["Title"] = "Article";
@@ -32,13 +32,19 @@
                         @Html.DisplayNameFor(model => model.Id)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ArticleTile)
+                        @Html.DisplayNameFor(model => model.CourseTitle)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Writer)
+                        @Html.DisplayNameFor(model => model.LevelId)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ArtileGroupTitle)
+                        @Html.DisplayNameFor(model => model.StatusId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GroupId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TeacherId)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.CreateDate)
@@ -46,6 +52,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.LastModifyDate)
                     </th>
+
                     <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 273px;">
                     </th>
                 </tr>
@@ -63,14 +70,21 @@
                             @item.Id
                         </th>
                         <th>
-                            @item.ArticleTile
+                            @item.CourseTitle
                         </th>
                         <th>
-                            @item.Writer
+                            @item.LevelId
                         </th>
                         <th>
-                            @item.ArtileGroupTitle
+                            @item.StatusId
                         </th>
+                        <th>
+                            @item.GroupId
+                        </th>
+                        <th>
+                            @item.TeacherId
+                        </th>
+
                         <th>
                             @item.CreateDate.ToShamsi()
                         </th>

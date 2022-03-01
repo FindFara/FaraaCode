@@ -21,6 +21,7 @@ namespace CodeTo.Core.ViewModel.Courses
         public int LevelId { get; set; }
         public int? CoursePrice { get; set; }
         public DateTime CreateDate { get; set; }
+        public DateTime? LastModifyDate { get; set; }
     }
 
     public class CourseCreateOrEditViewModel : ICreateOrEditeViewModel<int>
@@ -34,7 +35,7 @@ namespace CodeTo.Core.ViewModel.Courses
         [Display(Name = "شناسه استاد")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public int TeacherId { get; set; }
-
+        
         [Display(Name = "تاریخ ایجاد")]
         public DateTime CreateDate { get; set; }
 

@@ -7,9 +7,10 @@ using CodeTo.Core.Services.PermiossionServices;
 using CodeTo.Core.ViewModel.PermiossionViewModel;
 
 
+
 namespace CodeTo.Web.Areas.Admins.Controllers
 {
-    public class RoleController : ArticleBaseController
+    public class RoleController : AdminBaseController
     {
         private readonly IPermiossionService _permiossion;
 

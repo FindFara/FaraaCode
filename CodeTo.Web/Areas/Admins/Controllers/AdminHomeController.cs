@@ -9,7 +9,7 @@ using CodeTo.Core.ViewModel.AdminPanel;
 
 namespace CodeTo.Web.Areas.Admins.Controllers
 {
-    public class AdminHomeController : ArticleBaseController
+    public class AdminHomeController : AdminBaseController
     {
         private readonly IAdminPanelService _service;
         private readonly IPermiossionService _permiossion;

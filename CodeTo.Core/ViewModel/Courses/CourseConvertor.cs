@@ -14,7 +14,7 @@ namespace CodeTo.Core.ViewModel.Courses
         public static CourseCreateOrEditViewModel ToCreateOrEditViewModel(this Course course)
         {
             if (course == null) return null;
-            return new()
+            return new CourseCreateOrEditViewModel
             {
                 Id = course.Id,
                 CourseTitle = course.CourseTitle,
@@ -41,7 +41,7 @@ namespace CodeTo.Core.ViewModel.Courses
         public static CourseIndexViewModel ToIndexViewModel(this Course course)
         {
             if (course == null) return null;
-            return new()
+            return new CourseIndexViewModel()
             {
                 Id = course.Id,
                 CourseTitle = course.CourseTitle,
@@ -49,7 +49,8 @@ namespace CodeTo.Core.ViewModel.Courses
                 LevelId = course.LevelId,
                 StatusId = course.StatusId,
                 TeacherId = course.TeacherId,
-                GroupId = course.GroupId
+                GroupId = course.GroupId,
+                LastModifyDate =course.LastModifyDate
             };
         }
         public static IEnumerable<CourseIndexViewModel> ToIndexViewModel(this IEnumerable<Course> course)

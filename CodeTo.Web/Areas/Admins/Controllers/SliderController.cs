@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeTo.Web.Areas.Admins.Controllers
 {
-    public class SliderController : ArticleBaseController
+    public class SliderController : AdminBaseController
     {
         [Route("Sliders")]
         public IActionResult Index()
