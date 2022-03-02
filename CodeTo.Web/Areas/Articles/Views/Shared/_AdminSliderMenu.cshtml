@@ -40,48 +40,35 @@
                 <li>
                     <a asp-area="Articles" asp-controller="Article" asp-action="Index" class="menu-dropdown">
                         <span class="menu-text">
-                           مقالات
+                            مقالات
                         </span>
                     </a>
                 </li>
-                <li>
-                    <a href="#" class="menu-dropdown">
-                        <span class="menu-text">
-                            اسلایدرها
-                        </span>
-                        <i class="menu-expand"></i>
-                    </a>
 
-                    <ul class="submenu">
-                        <li>
-                            <a href="weather-icons.html">
-                                <i class="fa fa-picture-o bg-yellow shiny"></i>
-                                <span class="menu-text"> مشاهده اسلایدرهای فعال </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="font-awesome.html">
-                                <i class="menu-icon fa fa-plus-circle blue shiny"></i>
-                                <span class="menu-text">افزودن اسلایدر جدید</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="glyph-icons.html">
-                                <i class="menu-icon fa fa-edit green shiny"></i>
-                                <span class="menu-text">ویرایش اسلایدر</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="typicon.html">
-                                <i class="menu-icon fa fa-remove red shiny"></i>
-                                <span class="menu-text"> حذف اسلایدر</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
             </ul>
         <li>
+        <li>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa fa-folder-open-o blue "></i>
+                <span class="menu-text">دوره ها </span>
+
+                <i class="menu-expand"></i>
+            </a>
+
+            <ul class="submenu">
+
+                <li>
+                    <a asp-area="Admins" asp-controller="Course" asp-action="Index" class="menu-dropdown">
+                        <span class="menu-text">
+                            دوره
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+        <li>
+
+
             <a href="#" class="menu-dropdown">
                 <i class="menu-icon fa fa-desktop pink"></i>
                 <span class="menu-text"> مدیریت پوسته </span>

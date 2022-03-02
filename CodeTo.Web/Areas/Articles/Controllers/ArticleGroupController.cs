@@ -4,26 +4,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CodeTo.Core.Services.ArticleServices;
-using CodeTo.Core.ViewModel.Articles;
+using CodeTo.Core.ViewModel.ArticleGroups;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeTo.Web.Areas.Articles.Controllers
 {
-    public class ArticleController : ArticleBaseController
+    public class ArticleGroupController :ArticleBaseController
     {
-        private readonly IArticleService _articleService;
+        //private readonly ShopContext _context;
+        private readonly IArticleGroupService _service;
 
-        public ArticleController(IArticleService articleService)
+        public ArticleGroupController(IArticleGroupService service)
         {
-            _articleService = articleService;
+            _service = service;
         }
-      
+
+
+        // GET: Admin/ArticleGroups
         public async Task<IActionResult> Index()
         {
-            return View(await _articleService.GetAllAsync());
+            return View(await _service.GetAllAsync());
         }
 
-        [HttpGet("Articles/Article/details")]
+        // GET: Admin/ArticleGroups/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -31,41 +34,37 @@ namespace CodeTo.Web.Areas.Articles.Controllers
                 return NotFound();
             }
 
-            var article = await _articleService.FindAsync(id.Value);
-            if (article == null)
+            var articleGroup = await _service.FindAsync(id.Value);
+            if (articleGroup == null)
             {
                 return NotFound();
             }
 
-            return View(article);
+            return View(articleGroup);
         }
 
         // GET: Admin/ArticleGroups/Create
-        [HttpGet("Articles/Article/Create")]
         public IActionResult Create()
         {
-            return View("CreateOrEdit", new ArticleCreateOrEditViewModel());
+            return View("CreateOrEdit", new ArticleGroupCreateOrEditViewModel());
         }
 
         // POST: Admin/ArticleGroups/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ArticleCreateOrEditViewModel article)
+        public async Task<IActionResult> Create(ArticleGroupCreateOrEditViewModel articleGroup)
         {
             if (ModelState.IsValid)
             {
-                await _articleService.AddAsync(article);
+                await _service.AddAsync(articleGroup);
                 return RedirectToAction(nameof(Index));
             }
-
-            return View(article);
+            return View("CreateOrEdit", articleGroup);
         }
 
         // GET: Admin/ArticleGroups/Edit/5
-        [HttpGet("Articles/Article/Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,13 +72,12 @@ namespace CodeTo.Web.Areas.Articles.Controllers
                 return NotFound();
             }
 
-            var article = await _articleService.FindAsync(id.Value);
-            if (article == null)
+            var articleGroup = await _service.FindAsync(id.Value);
+            if (articleGroup == null)
             {
                 return NotFound();
             }
-
-            return View("CreateOrEdit", article);
+            return View("CreateOrEdit", articleGroup);
         }
 
         // POST: Admin/ArticleGroups/Edit/5
@@ -87,9 +85,9 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, ArticleCreateOrEditViewModel Article)
+        public async Task<IActionResult> Edit(int id, ArticleGroupCreateOrEditViewModel articleGroup)
         {
-            if (id != Article.Id)
+            if (id != articleGroup.Id)
             {
                 return NotFound();
             }
@@ -98,11 +96,11 @@ namespace CodeTo.Web.Areas.Articles.Controllers
             {
                 try
                 {
-                    await _articleService.EditAsync(Article);
+                    await _service.EditAsync(articleGroup);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!await _articleService.IsExist(Article.Id))
+                    if (!await _service.IsExist(articleGroup.Id))
                     {
                         return NotFound();
                     }
@@ -111,15 +109,12 @@ namespace CodeTo.Web.Areas.Articles.Controllers
                         throw;
                     }
                 }
-
                 return RedirectToAction(nameof(Index));
             }
-
-            return View("CreateOrEdit", Article);
+            return View("CreateOrEdit", articleGroup);
         }
 
         // GET: Admin/ArticleGroups/Delete/5
-        [HttpGet("Articles/Article/Delete")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,13 +122,13 @@ namespace CodeTo.Web.Areas.Articles.Controllers
                 return NotFound();
             }
 
-            var Article = await _articleService.FindAsync(id.Value);
-            if (Article == null)
+            var articleGroup = await _service.FindAsync(id.Value);
+            if (articleGroup == null)
             {
                 return NotFound();
             }
 
-            return View(Article);
+            return View(articleGroup);
         }
 
         // POST: Admin/ArticleGroups/Delete/5
@@ -141,9 +136,13 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _articleService.DeleteAsync(id);
+            await _service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
+        //private bool ArticleGroupExists(int id)
+        //{
+        //    return _context.ArticleGroups.Any(e => e.Id == id);
+        //}
     }
 }

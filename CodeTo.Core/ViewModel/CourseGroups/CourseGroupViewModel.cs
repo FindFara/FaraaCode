@@ -20,7 +20,7 @@ namespace CodeTo.Core.ViewModel.CourseGroups
                 Title = group.GroupTitle,
                 CreateDate = group.CreateDate,
                 LastModifyDate = group.LastModifyDate,
-                IsDelete = group.IsDelete
+                IsDelete = group.IsDeleted
             };
         }
         public static IQueryable<CourseGroupCreateOrEditViewModel> ToCreateOrEditViewModel(this IQueryable<CourseGroup> groups)
@@ -39,7 +39,7 @@ namespace CodeTo.Core.ViewModel.CourseGroups
                 Title = group.GroupTitle,
                 CreateDate = group.CreateDate,
                 LastModifyDate = group.LastModifyDate,
-                ParentId = group.ParentId
+               
             };
         }
         public static IEnumerable<CourseGroupIndexViewModel> ToIndexViewModel(this IEnumerable<CourseGroup> groups)

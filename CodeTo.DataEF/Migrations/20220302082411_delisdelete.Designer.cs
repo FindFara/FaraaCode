@@ -4,14 +4,16 @@ using CodeTo.DataEF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CodeTo.DataEF.Migrations
 {
     [DbContext(typeof(CodeToContext))]
-    partial class CodeToContextModelSnapshot : ModelSnapshot
+    [Migration("20220302082411_delisdelete")]
+    partial class delisdelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,8 +145,14 @@ namespace CodeTo.DataEF.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int?>("CourseLevelId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("CoursePrice")
                         .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CourseStatusId")
                         .HasColumnType("int");
 
                     b.Property<string>("CourseTitle")
@@ -164,6 +172,15 @@ namespace CodeTo.DataEF.Migrations
                     b.Property<DateTime?>("LastModifyDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("LevelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SubGroup")
+                        .HasColumnType("int");
+
                     b.Property<string>("Tags")
                         .HasMaxLength(600)
                         .HasColumnType("nvarchar(600)");
@@ -173,7 +190,13 @@ namespace CodeTo.DataEF.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseLevelId");
+
+                    b.HasIndex("CourseStatusId");
+
                     b.HasIndex("GroupId");
+
+                    b.HasIndex("SubGroup");
 
                     b.HasIndex("TeacherId");
 
@@ -201,9 +224,54 @@ namespace CodeTo.DataEF.Migrations
                     b.Property<DateTime?>("LastModifyDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentId");
+
                     b.ToTable("CourseGroups");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseLevel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LevelTitle")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CourseLevels");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StatusTitle")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CourseStatuses");
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.Permission", b =>
@@ -426,11 +494,23 @@ namespace CodeTo.DataEF.Migrations
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Courses.Course", b =>
                 {
+                    b.HasOne("CodeTo.Domain.Entities.Courses.CourseLevel", "CourseLevel")
+                        .WithMany("Courses")
+                        .HasForeignKey("CourseLevelId");
+
+                    b.HasOne("CodeTo.Domain.Entities.Courses.CourseStatus", "CourseStatus")
+                        .WithMany("Courses")
+                        .HasForeignKey("CourseStatusId");
+
                     b.HasOne("CodeTo.Domain.Entities.Courses.CourseGroup", "CourseGroup")
                         .WithMany("Courses")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("CodeTo.Domain.Entities.Courses.CourseGroup", "Group")
+                        .WithMany("SubGroup")
+                        .HasForeignKey("SubGroup");
 
                     b.HasOne("CodeTo.Domain.Entities.Users.User", "User")
                         .WithMany()
@@ -440,7 +520,20 @@ namespace CodeTo.DataEF.Migrations
 
                     b.Navigation("CourseGroup");
 
+                    b.Navigation("CourseLevel");
+
+                    b.Navigation("CourseStatus");
+
+                    b.Navigation("Group");
+
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseGroup", b =>
+                {
+                    b.HasOne("CodeTo.Domain.Entities.Courses.CourseGroup", null)
+                        .WithMany("CourseGroups")
+                        .HasForeignKey("ParentId");
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.Permission", b =>
@@ -518,6 +611,20 @@ namespace CodeTo.DataEF.Migrations
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseGroup", b =>
+                {
+                    b.Navigation("CourseGroups");
+
+                    b.Navigation("Courses");
+
+                    b.Navigation("SubGroup");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseLevel", b =>
+                {
+                    b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseStatus", b =>
                 {
                     b.Navigation("Courses");
                 });

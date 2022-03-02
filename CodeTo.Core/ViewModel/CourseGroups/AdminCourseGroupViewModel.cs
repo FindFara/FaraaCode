@@ -31,6 +31,6 @@ namespace CodeTo.Core.ViewModel.CourseGroups
         public DateTime CreateDate { get; set; }
         [Display(Name = "آخرین بروزرسانی")]
         public DateTime? LastModifyDate { get; set; }
-        public int? ParentId { get; set; }
+      
     }
 }

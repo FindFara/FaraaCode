@@ -12,7 +12,7 @@ namespace CodeTo.Core.Utilities.Extensions
         public static string ToShamsi(this DateTime dateTime)
         {
             PersianCalendar p = new PersianCalendar();
-            return p.GetYear(dateTime).ToString("00") + "/" +
+            return p.GetYear(dateTime).ToString("0000") + "/" +
                     p.GetMonth(dateTime).ToString("00") + "/" +
                     p.GetDayOfMonth(dateTime).ToString("00");
         }

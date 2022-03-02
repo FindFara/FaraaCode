@@ -32,8 +32,7 @@ namespace CodeTo.DataEF.Context
         public DbSet<ArticleComment> ArticleComments { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseGroup> CourseGroups { get; set; }
-        public DbSet<CourseStatus> CourseStatuses { get; set; }
-        public DbSet<CourseLevel> CourseLevels { get; set; }
+       
 
     }
 }

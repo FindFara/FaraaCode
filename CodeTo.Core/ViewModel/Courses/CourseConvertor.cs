@@ -21,8 +21,6 @@ namespace CodeTo.Core.ViewModel.Courses
                 CoursePrice = course.CoursePrice,
                 CourseDescription = course.CourseDescription,
                 CourseImageName = course.CourseImageName,
-                LevelId = course.LevelId,
-                StatusId = course.StatusId,
                 Tags = course.Tags,
                 TeacherId = course.TeacherId,
                 GroupId = course.GroupId
@@ -46,8 +44,6 @@ namespace CodeTo.Core.ViewModel.Courses
                 Id = course.Id,
                 CourseTitle = course.CourseTitle,
                 CoursePrice = course.CoursePrice,
-                LevelId = course.LevelId,
-                StatusId = course.StatusId,
                 TeacherId = course.TeacherId,
                 GroupId = course.GroupId,
                 LastModifyDate =course.LastModifyDate

@@ -7,6 +7,7 @@ using CodeTo.Core.Services.CourseServices;
 using CodeTo.Core.Statics;
 using CodeTo.Core.Utilities.Extensions;
 using CodeTo.Core.Utilities.Other;
+using CodeTo.Core.ViewModel.Articles;
 using CodeTo.Core.ViewModel.Courses;
 using CodeTo.DataEF.Context;
 using CodeTo.Domain.Entities.Courses;
@@ -26,9 +27,11 @@ namespace CodeTo.Core.Services.CourseServices
         }
 
 
-        public Task<CourseCreateOrEditViewModel> FindAsync(int id)
+        public async Task<CourseCreateOrEditViewModel> FindAsync(int id)
         {
-            throw new NotImplementedException();
+            var model = await _context.Courses
+                .FirstOrDefaultAsync(m => m.Id == id);
+            return model.ToCreateOrEditViewModel();
         }
 
         public async Task<bool> AddAsync(CourseCreateOrEditViewModel vm)
@@ -50,11 +53,9 @@ namespace CodeTo.Core.Services.CourseServices
                     Id = vm.Id,
                     CourseTitle = vm.CourseTitle,
                     CoursePrice = vm.CoursePrice,
-                    LevelId = vm.LevelId,
                     CourseDescription = vm.CourseDescription,
                     GroupId = vm.GroupId,
                     LastModifyDate = DateTime.Now,
-                    StatusId = vm.StatusId,
                     Tags = vm.Tags,
                     TeacherId = vm.TeacherId,
                     
@@ -88,11 +89,9 @@ namespace CodeTo.Core.Services.CourseServices
 
                 Course.CourseTitle = vm.CourseTitle;
                 Course.CoursePrice = vm.CoursePrice;
-                Course.LevelId = vm.LevelId;
                 Course.CourseDescription = vm.CourseDescription;
                 Course.GroupId = vm.GroupId;
                 Course.LastModifyDate = DateTime.Now;
-                Course.StatusId = vm.StatusId;
                 Course.Tags = vm.Tags;
                 Course.TeacherId = vm.TeacherId;
 

@@ -18,13 +18,6 @@ namespace CodeTo.Domain.Entities.Courses
         [Required] 
         public int TeacherId { get; set; }
 
-        [Required] 
-        public int StatusId { get; set; }
-
-        [Required]
-        public int LevelId { get; set; }
-
-        public int? SubGroup { get; set; }
 
         [Display(Name = "عنوان دوره")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
@@ -55,8 +48,6 @@ namespace CodeTo.Domain.Entities.Courses
 
         #endregion
         #region Relations
-        public CourseStatus CourseStatus { get; set; }
-        public CourseLevel CourseLevel { get; set; }
 
         [ForeignKey("TeacherId")] 
         public Users.User User { get; set; }
@@ -64,8 +55,7 @@ namespace CodeTo.Domain.Entities.Courses
         [ForeignKey("GroupId")]
         public CourseGroup CourseGroup { get; set; }
 
-        [ForeignKey("SubGroup")]
-        public CourseGroup Group { get; set; }
+      
 
         #endregion
 

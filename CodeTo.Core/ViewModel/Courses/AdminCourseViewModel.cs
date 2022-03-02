@@ -17,8 +17,6 @@ namespace CodeTo.Core.ViewModel.Courses
         public string CourseTitle { get; set; }
         public int GroupId { get; set; }
         public int TeacherId { get; set; }
-        public int StatusId { get; set; }
-        public int LevelId { get; set; }
         public int? CoursePrice { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? LastModifyDate { get; set; }
@@ -55,11 +53,6 @@ namespace CodeTo.Core.ViewModel.Courses
         [MaxLength(600)] 
         public string Tags { get; set; }
 
-        [Required] 
-        public int StatusId { get; set; }
-
-        [Required] 
-        public int LevelId { get; set; }
         public IFormFile CourseImageFile { get; set; }
         public string CourseImageName { get; set; }
         public string CourseFullName =>
