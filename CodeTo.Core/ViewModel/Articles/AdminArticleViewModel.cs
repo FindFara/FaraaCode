@@ -33,7 +33,7 @@ namespace CodeTo.Core.ViewModel.Articles
     public class ArticleCreateOrEditViewModel : ICreateOrEditeViewModel<long>
     {
         public long Id { get; set; }
-        [Display(Name = "شماره گروه")]
+        [Display(Name = "شناسه گروه")]
         public int GroupId { get; set; }
 
         [Display(Name = "موضوع مقاله")]

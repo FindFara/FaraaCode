@@ -18,7 +18,7 @@ namespace CodeTo.Core.ViewModel.ArticleGroups
 
         [Display(Name = "تاریخ ایجاد")]
         public DateTime CreateDate { get; set; }
-        public DateTime? LastModifyDate { get; set; }
+       
 
     }
 
