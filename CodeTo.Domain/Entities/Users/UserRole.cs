@@ -13,7 +13,7 @@ namespace CodeTo.Domain.Entities.Users
         [Key]
         public int UR { get; set; }
         public int UserId { get; set; }
-        public byte RoleId { get; set; }
+        public int RoleId { get; set; }
 
 
         #region Relations

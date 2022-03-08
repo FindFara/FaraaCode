@@ -1,5 +1,4 @@
-﻿using CodeTo.Core.Interfase;
-using CodeTo.Domain.Entities.Users;
+﻿using CodeTo.Domain.Entities.Users;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeTo.Core.Interfaces;
 
 namespace CodeTo.Core.ViewModel.AdminPanel
 {
@@ -63,7 +63,7 @@ namespace CodeTo.Core.ViewModel.AdminPanel
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(200)]
         public string Password { get; set; }
-        public List<byte> PermissionList { get; set; }
+        public List<int> PermissionList { get; set; }
     }
     public class AminUserListForShow
     {

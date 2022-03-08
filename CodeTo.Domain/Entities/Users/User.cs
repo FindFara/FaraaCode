@@ -51,7 +51,7 @@ namespace CodeTo.Domain.Entities.Users
         #endregion
 
         #region Relations
-        public List<Wallet.Wallet> Wallets { get; set; }
+        public double Wallets { get; set; }
         public long WalletsId { get; set; }
         public List<UserRole> UserRoles { get; set; }
     

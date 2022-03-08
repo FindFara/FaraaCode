@@ -84,12 +84,11 @@ namespace CodeTo.Core.ViewModel.Accounts
         {
             return new WalletViewModel
             {
-                Amount=(int)wallet.Amount,
+                Amount=wallet.Amount,
                 Creatdate=wallet.CreatDate,
                 Description=wallet.Description,
                 UserId=wallet.UserId,
-                Type= (int)(wallet.WalletType?.TypeId)
-
+                Type= wallet.WalletType?.TypeId
 
             };
         }

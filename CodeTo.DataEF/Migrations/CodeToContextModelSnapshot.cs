@@ -206,44 +206,23 @@ namespace CodeTo.DataEF.Migrations
                     b.ToTable("CourseGroups");
                 });
 
-            modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.Permission", b =>
-                {
-                    b.Property<int>("PermissionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("PermissionId");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("Permissions");
-                });
-
             modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.RolePermission", b =>
                 {
-                    b.Property<int>("RP_Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("PermissionId")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PermissionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("RoleId")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("RP_Id");
-
-                    b.HasIndex("PermissionId");
+                    b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
@@ -252,21 +231,18 @@ namespace CodeTo.DataEF.Migrations
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Users.Role", b =>
                 {
-                    b.Property<byte>("RoleID")
-                        .HasColumnType("tinyint");
-
-                    b.Property<DateTime>("CreatDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("RoleTitle")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RoleID");
+                    b.HasKey("Id");
 
                     b.ToTable("Roles");
                 });
@@ -316,6 +292,9 @@ namespace CodeTo.DataEF.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<double>("Wallets")
+                        .HasColumnType("float");
+
                     b.Property<long>("WalletsId")
                         .HasColumnType("bigint");
 
@@ -331,8 +310,8 @@ namespace CodeTo.DataEF.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte>("RoleId")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -443,30 +422,15 @@ namespace CodeTo.DataEF.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.Permission", b =>
-                {
-                    b.HasOne("CodeTo.Domain.Entities.Permissions.Permission", null)
-                        .WithMany("Permissions")
-                        .HasForeignKey("ParentId");
-                });
-
             modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.RolePermission", b =>
                 {
-                    b.HasOne("CodeTo.Domain.Entities.Permissions.Permission", "Permission")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CodeTo.Domain.Entities.Users.Role", "Role")
+                    b.HasOne("CodeTo.Domain.Entities.Users.Role", "Roles")
                         .WithMany("RolePermissions")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Permission");
-
-                    b.Navigation("Role");
+                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Users.UserRole", b =>
@@ -491,7 +455,7 @@ namespace CodeTo.DataEF.Migrations
             modelBuilder.Entity("CodeTo.Domain.Entities.Wallet.Wallet", b =>
                 {
                     b.HasOne("CodeTo.Domain.Entities.Users.User", "User")
-                        .WithMany("Wallets")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -522,13 +486,6 @@ namespace CodeTo.DataEF.Migrations
                     b.Navigation("Courses");
                 });
 
-            modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.Permission", b =>
-                {
-                    b.Navigation("Permissions");
-
-                    b.Navigation("RolePermissions");
-                });
-
             modelBuilder.Entity("CodeTo.Domain.Entities.Users.Role", b =>
                 {
                     b.Navigation("RolePermissions");
@@ -539,8 +496,6 @@ namespace CodeTo.DataEF.Migrations
             modelBuilder.Entity("CodeTo.Domain.Entities.Users.User", b =>
                 {
                     b.Navigation("UserRoles");
-
-                    b.Navigation("Wallets");
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Wallet.WalletType", b =>

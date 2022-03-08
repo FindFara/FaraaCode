@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeTo.Core.Interfase;
+using CodeTo.Core.Interfaces;
+
 using CodeTo.Core.ViewModel.AdminPanel;
+using X.PagedList;
 
 namespace CodeTo.Core.Services.AdminPanelServices
 {

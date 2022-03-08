@@ -16,13 +16,13 @@
             </a>
         </li>
         <li>
-            <a asp-area="Admins" asp-controller="AdminHome" asp-action="ShowAllUsers">
+            <a asp-area="Admins" asp-controller="Permission" asp-action="Index">
                 <i class="menu-icon glyphicon glyphicon-user colored-orange"></i>
                 <span class="menu-text"> مدیریت کاربران </span>
             </a>
         </li>
         <li>
-            <a asp-area="Admins" asp-controller="Role" asp-action="ShowPermissions">
+            <a asp-area="Admins" asp-controller="Permission" asp-action="Index">
                 <i class="menu-icon glyphicon glyphicon-king purple"></i>
                 <span class="menu-text"> مدیریت دسترسی ها </span>
             </a>
@@ -47,33 +47,42 @@
                 <li>
                     <a asp-area="Articles" asp-controller="ArticleGroup" asp-action="Index" class="menu-dropdown">
                         <span class="menu-text">
-                          گروه مقالات 
+                            گروه مقالات
                         </span>
                     </a>
                 </li>
             </ul>
         <li>
         <li>
-        <a href="#" class="menu-dropdown">
-            <i class="menu-icon fa fa-folder-open-o blue "></i>
-            <span class="menu-text">دوره ها </span>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa fa-folder-open-o blue "></i>
+                <span class="menu-text">دوره ها</span>
 
-            <i class="menu-expand"></i>
-        </a>
+                <i class="menu-expand"></i>
+            </a>
 
-        <ul class="submenu">
+            <ul class="submenu">
 
-            <li>
-                <a asp-area="Admins" asp-controller="Course" asp-action="Index" class="menu-dropdown">
-                    <span class="menu-text">
-                       دوره
-                    </span>
-                </a>
-            </li>
-               
-        </ul>
+                <li>
+                    <a asp-area="Courses" asp-controller="Course" asp-action="Index" class="menu-dropdown">
+                        <span class="menu-text">
+                            دوره ها
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Courses" asp-controller="CourseGroup" asp-action="Index" class="menu-dropdown">
+                        <span class="menu-text">
+                            گروه دوره ها
+                        </span>
+                    </a>
+                </li>
+            </ul>
         <li>
-          
+
+        </li>
+        <li>
+
 
             <a href="#" class="menu-dropdown">
                 <i class="menu-icon fa fa-desktop pink"></i>

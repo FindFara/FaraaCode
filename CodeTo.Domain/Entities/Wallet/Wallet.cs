@@ -11,7 +11,6 @@ namespace CodeTo.Domain.Entities.Wallet
 {
     public class Wallet : BaseEntity<int>
     {
-    
         public int Amount { get; set; }
         public string Description { get; set; }
         public bool Ispay { get; set; }

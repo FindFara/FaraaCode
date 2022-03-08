@@ -49,7 +49,7 @@ namespace CodeTo.Web.Controllers
                 var user = await _accountService.GetUserByEmailAsync(register.Email);
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier,user.UserName.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
                     new Claim(ClaimTypes.Name,user.UserName),
                     new Claim(ClaimTypes.Email,user.Email)
                 };
@@ -118,6 +118,12 @@ namespace CodeTo.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
         #endregion
+
+        [Route("access-denied")]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 
 }

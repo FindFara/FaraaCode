@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -210,13 +211,15 @@ namespace CodeTo.Core.Services.AdminPanelServices
                 result = result.Where(u => u.Email.Contains(FilterEmail)).ToList();
             }
 
+            //TODO: error CS0103: The name ' ' does not exist in the current context
             if (!string.IsNullOrEmpty(FilterUserName))
             {
-                result = result.Where(u => u.UserName.Contains(FilterUserName));
+                IEnumerable<AdminPanelIndexViewModel> v= _context.Users.Select(c => c.ConvertorAdminPanelIndexViewModel())
+                    .Where(u => u.UserName.Contains(FilterUserName)).ToList();
             }
 
             //take shows in each page
-            int take = 20;
+            int take = 20; 
             int skip = (pageId - 1) * take;
 
             AdminPanelIndexViewModel list = new AdminPanelIndexViewModel();

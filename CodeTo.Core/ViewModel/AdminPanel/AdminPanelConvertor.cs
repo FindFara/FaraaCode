@@ -11,6 +11,7 @@ namespace CodeTo.Core.ViewModel.AdminPanel
     {
         public static AdminPanelIndexViewModel ConvertorAdminPanelIndexViewModel(this User user)
         {
+            if (user == null) return null;
             return new AdminPanelIndexViewModel()
             {
                 UserName = user.UserName,

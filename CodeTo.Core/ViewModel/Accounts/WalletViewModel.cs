@@ -11,7 +11,7 @@ namespace CodeTo.Core.ViewModel.Accounts
     {
         [Display(Name = "مبلغ")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید !")]
-        public double Amount { get; set; }
+        public int Amount { get; set; }
     }
 
     public class WalletHistoryViewModel
@@ -26,7 +26,7 @@ namespace CodeTo.Core.ViewModel.Accounts
     {
         public int Amount { get; set; }
         public string Description { get; set; }
-        public int Type { get; set; }
+        public int? Type { get; set; }
         public DateTime Creatdate { get; set; }
         public int UserId { get; set; }
     }

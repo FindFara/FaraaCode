@@ -21,14 +21,14 @@ namespace CodeTo.Web.Areas.Articles.Controllers
 
 
         // GET: Admin/ArticleGroups
-        [HttpGet("Articles/ArticleGroup/index")]
+       
         public async Task<IActionResult> Index()
         {
             return View(await _service.GetAllAsync());
         }
 
         // GET: Admin/ArticleGroups/Details/5
-        [HttpGet("Articles/ArticleGroup/Details")]
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,7 +46,7 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         }
 
         // GET: Admin/ArticleGroups/Create
-        [HttpGet("Articles/ArticleGroup/Create")]
+       
         public IActionResult Create()
         {
             return View("CreateOrEdit", new ArticleGroupCreateOrEditViewModel());
@@ -119,7 +119,7 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         }
 
         // GET: Admin/ArticleGroups/Delete/5
-        [HttpGet("Articles/ArticleGroup/Delete")]
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CodeTo.Core.Interfaces;
+using CodeTo.Web.Services;
 
 namespace CodeTo.Web
 {
@@ -23,9 +25,6 @@ namespace CodeTo.Web
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIOCServices(_configuration);
-            services.AddControllersWithViews();
-
             #region Authentication
             services.AddAuthentication(op =>
             {
@@ -40,6 +39,15 @@ namespace CodeTo.Web
                 op.ExpireTimeSpan = TimeSpan.FromMinutes(143200);
             });
             #endregion
+            services.AddHttpContextAccessor();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddIOCServices(_configuration);
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+            });
+            services.AddControllersWithViews();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

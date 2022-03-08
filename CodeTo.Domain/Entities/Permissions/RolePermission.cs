@@ -4,21 +4,20 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeTo.Domain.Base;
 using CodeTo.Domain.Entities.Users;
 
 namespace CodeTo.Domain.Entities.Permissions
 {
-   public class RolePermission
+    public class RolePermission : BaseEntity<int>
     {
-        [Key]
-        public int RP_Id { get; set; }
-        public int PermissionId { get; set; }
-        public byte RoleId { get; set; }
+        public int RoleId { get; set; }
+        public string PermissionName { get; set; }
+
         #region Relations
-        public Role Role { get; set; }
-        public Permission Permission { get; set; }
-
-
+        public Role Roles { get; set; }
         #endregion
+
+
     }
 }

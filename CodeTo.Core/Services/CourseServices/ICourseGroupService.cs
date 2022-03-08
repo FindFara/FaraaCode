@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeTo.Core.Interfase;
+using CodeTo.Core.Interfaces;
 using CodeTo.Core.ViewModel.CourseGroups;
 
 namespace CodeTo.Core.Services.CourseServices

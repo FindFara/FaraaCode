@@ -12,7 +12,7 @@ namespace CodeTo.Web.Areas.Articles.Controllers
     public class ArticleController : ArticleBaseController
     {
         private readonly IArticleService _articleService;
-
+          
         public ArticleController(IArticleService articleService)
         {
             _articleService = articleService;
@@ -23,7 +23,7 @@ namespace CodeTo.Web.Areas.Articles.Controllers
             return View(await _articleService.GetAllAsync());
         }
 
-        [HttpGet("Articles/Article/details")]
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,7 +41,7 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         }
 
         // GET: Admin/ArticleGroups/Create
-        [HttpGet("Articles/Article/Create")]
+        
         public IActionResult Create()
         {
             return View("CreateOrEdit", new ArticleCreateOrEditViewModel());
@@ -65,7 +65,6 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         }
 
         // GET: Admin/ArticleGroups/Edit/5
-        [HttpGet("Articles/Article/Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -119,7 +118,6 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         }
 
         // GET: Admin/ArticleGroups/Delete/5
-        [HttpGet("Articles/Article/Delete")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

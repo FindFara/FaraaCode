@@ -15,7 +15,8 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeTo.Core.Services.ArticleServices;
 using CodeTo.Core.Services.CourseServices;
-using CodeTo.Core.Services.PermiossionServices;
+using CodeTo.Core.Services.PermissionServices;
+
 
 namespace CodeTo.IOC
 {
@@ -34,7 +35,7 @@ namespace CodeTo.IOC
             services.AddTransient<IViewRenderService, RenderViewToString>();
             services.AddTransient<IUserPanelService, UserPanelService>();
             services.AddTransient<IAdminPanelService, AdminPanelService>();
-            services.AddTransient<IPermiossionService, PermiossionService>();
+            services.AddTransient<IPermissionService, PermissionService>();
             services.AddTransient<IArticleService, ArticleService>();
             services.AddTransient<ICourseService, CourseService>();
             services.AddTransient<IArticleGroupService,ArticleGroupService>();
