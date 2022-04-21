@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bz.ClassFinder.Attributes;
 using CodeTo.Core.Services.CourseServices;
 using CodeTo.Core.ViewModel.Courses;
 using CodeTo.Web.Areas.Courses.Controllers;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeTo.Web.Areas.Courses.Controllers
 {
+    [BzDescription("مدیریت دوره")]
     public class CourseController : CourseBaseController
     {
         private readonly ICourseService _courseService;
@@ -18,13 +20,13 @@ namespace CodeTo.Web.Areas.Courses.Controllers
         {
             _courseService = courseService;
         }
-
+        [BzDescription("دوره ها")]
         public async Task<IActionResult> Index()
         {
             return View(await _courseService.GetAllAsync());
         }
 
-       
+        [BzDescription("جزییات دوره")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,7 +43,8 @@ namespace CodeTo.Web.Areas.Courses.Controllers
             return View(bookGroup);
         }
 
-        // GET: Admin/courseGroups/Create
+       
+        [BzDescription("افزودن دوره")]
         public IActionResult Create()
         {
             return View("CreateOrEdit", new CourseCreateOrEditViewModel());
@@ -53,6 +56,7 @@ namespace CodeTo.Web.Areas.Courses.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [BzDescription("افزودن دوره")]
         public async Task<IActionResult> Create(CourseCreateOrEditViewModel course)
         {
             if (ModelState.IsValid)
@@ -65,6 +69,7 @@ namespace CodeTo.Web.Areas.Courses.Controllers
         }
 
         // GET: Admin/courseGroups/Edit/5
+        [BzDescription("ویرایش دوره")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +91,7 @@ namespace CodeTo.Web.Areas.Courses.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [BzDescription("ویرایش دوره")]
         public async Task<IActionResult> Edit(int id, CourseCreateOrEditViewModel course)
         {
             if (id != course.Id)
@@ -118,6 +124,7 @@ namespace CodeTo.Web.Areas.Courses.Controllers
         }
 
         // GET: Admin/courseGroups/Delete/5
+        [BzDescription("حذف دوره")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +144,7 @@ namespace CodeTo.Web.Areas.Courses.Controllers
         // POST: Admin/courseGroups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [BzDescription("حذف دوره")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _courseService.DeleteAsync(id);

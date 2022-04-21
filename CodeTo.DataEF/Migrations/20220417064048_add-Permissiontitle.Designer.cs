@@ -4,14 +4,16 @@ using CodeTo.DataEF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CodeTo.DataEF.Migrations
 {
     [DbContext(typeof(CodeToContext))]
-    partial class CodeToContextModelSnapshot : ModelSnapshot
+    [Migration("20220417064048_add-Permissiontitle")]
+    partial class addPermissiontitle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,9 +218,6 @@ namespace CodeTo.DataEF.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("PermissionName")
                         .HasColumnType("nvarchar(max)");
 
@@ -229,8 +228,6 @@ namespace CodeTo.DataEF.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
 
                     b.HasIndex("RoleId");
 
@@ -432,10 +429,6 @@ namespace CodeTo.DataEF.Migrations
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.RolePermission", b =>
                 {
-                    b.HasOne("CodeTo.Domain.Entities.Permissions.RolePermission", null)
-                        .WithMany("Permissions")
-                        .HasForeignKey("ParentId");
-
                     b.HasOne("CodeTo.Domain.Entities.Users.Role", "Roles")
                         .WithMany("RolePermissions")
                         .HasForeignKey("RoleId")
@@ -496,11 +489,6 @@ namespace CodeTo.DataEF.Migrations
             modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseGroup", b =>
                 {
                     b.Navigation("Courses");
-                });
-
-            modelBuilder.Entity("CodeTo.Domain.Entities.Permissions.RolePermission", b =>
-                {
-                    b.Navigation("Permissions");
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Users.Role", b =>

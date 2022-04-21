@@ -1,8 +1,45 @@
-﻿
+﻿@model CodeTo.Core.ViewModel.Permission.RolePermissionAddOrEditViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "جزییات دسترسی";
+    Layout = "~/Areas/Admins/Views/Shared/_AdminLayout.cshtml";
 }
 
+<h4>@ViewData["Title"]</h4>
+<div class="col-xs-12 col-md-12">
 
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RoleId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RoleId)
+        </dd>
+        <dt class=" col-sm-2">
+            @Html.DisplayNameFor(model => model.RoleName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RoleName)
+        </dd>
+        <dt class=" col-sm-2">
+            @Html.DisplayNameFor(model => model.Permissions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Permissions)
+        </dd>
+        <dt class=" col-sm-2">
+            @Html.DisplayNameFor(model => model.PermissionNames)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PermissionNames)
+        </dd>
+        <dt class=" col-sm-2">
+
+    </dl>
+</div>
+<div>
+    <a asp-area="Admins" asp-controller="Permission" asp-action="Edit" asp-route-id="@Model.RoleId" type="button" class="btn btn-success">ویرایش</a> |
+    <a asp-area="Admins" asp-controller="Permission" asp-action="Index" type="button" class="btn btn-success">برگشت</a>
+</div>
 
 

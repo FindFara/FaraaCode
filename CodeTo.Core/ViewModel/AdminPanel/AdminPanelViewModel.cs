@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeTo.Core.Interfaces;
+using CodeTo.Core.Statics;
+using JetBrains.Annotations;
 
 namespace CodeTo.Core.ViewModel.AdminPanel
 {
@@ -17,9 +19,13 @@ namespace CodeTo.Core.ViewModel.AdminPanel
         public string Email { get; set; }
         [Display(Name = "نام کاربری")]
         public string UserName { get; set; }
-        
+
         [Display(Name = "تصویر کاربر")]
         public string AvatarImageName { get; set; }
+        public string AvatarFullName =>
+            !string.IsNullOrEmpty(AvatarImageName)
+                ? $"{UserPathTools.UserImagePath}{AvatarImageName}"
+                : UserPathTools.UserImageDefautl;
         [Display(Name = "تاریخ ثبت نام")]
         public DateTime CreateDate { get; set; }
         public List<AdminPanelIndexViewModel> users { get; set; }
@@ -39,7 +45,7 @@ namespace CodeTo.Core.ViewModel.AdminPanel
         [Display(Name = "نام کاربری")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(200)]
-        public string Title { get; set; }
+        public string UserName { get; set; }
 
         [Display(Name = "تاریخ ثبت نام")]
         public DateTime CreateDate { get; set; }
@@ -56,13 +62,19 @@ namespace CodeTo.Core.ViewModel.AdminPanel
         [Display(Name = "تصویر کاربر")]
         public string AvatarImageName { get; set; }
 
-        [Display(Name = "تصویر کاربر")]
+        [Display(Name = "تصویر کاربر")] 
         public IFormFile AvatarFile { get; set; }
+        public string AvatarFullName =>
+            !string.IsNullOrEmpty(AvatarImageName)
+                ? $"{UserPathTools.UserImagePath}{AvatarImageName}"
+                : UserPathTools.UserImageDefautl;
 
         [Display(Name = "کلمه عبور")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(200)]
         public string Password { get; set; }
+
+        [CanBeNull]
         public List<int> PermissionList { get; set; }
     }
     public class AminUserListForShow

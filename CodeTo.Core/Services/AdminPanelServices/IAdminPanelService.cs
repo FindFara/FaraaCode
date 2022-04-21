@@ -13,7 +13,7 @@ namespace CodeTo.Core.Services.AdminPanelServices
    public interface IAdminPanelService : IGenericService<int, AdminPanelIndexViewModel, AdminPanelCreateOrEditViewModel>
     {
 
-        public Task<AdminPanelIndexViewModel> GetAllToShowAsync(int pageId = 1, string FilterEmail = "",
+        public Task<IPagedList<AdminPanelIndexViewModel>> GetAllToShowAsync(int pageId = 1, string FilterEmail = "",
             string FilterUserName = "");
 
         public Task<List<AdminPanelIndexViewModel>> ShowDetail();
@@ -22,7 +22,6 @@ namespace CodeTo.Core.Services.AdminPanelServices
         Task<AdminPanelCreateOrEditViewModel> ShowUserForEditAsync(int id);
         Task<int> getUserId(AdminPanelCreateOrEditViewModel model);
         Task<int> SecondAddAsync(AdminPanelCreateOrEditViewModel vm);
-
         Task<AdminPanelIndexViewModel> GetAllDeletedToShowAsync(int pageId = 1, string FilterEmail = "",
             string FilterUserName = "");
     }

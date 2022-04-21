@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bz.ClassFinder.Attributes;
 using CodeTo.Core.Services.ArticleServices;
 using CodeTo.Core.ViewModel.Articles;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeTo.Web.Areas.Articles.Controllers
 {
+    [BzDescription("نویسنده")]
     public class ArticleController : ArticleBaseController
     {
         private readonly IArticleService _articleService;
@@ -17,13 +19,13 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         {
             _articleService = articleService;
         }
-      
+        [BzDescription("مطالب")]
         public async Task<IActionResult> Index()
         {
             return View(await _articleService.GetAllAsync());
         }
 
-        
+        [BzDescription(" جزییات مطلب")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,7 +43,7 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         }
 
         // GET: Admin/ArticleGroups/Create
-        
+        [BzDescription(" افزودن مطلب")]
         public IActionResult Create()
         {
             return View("CreateOrEdit", new ArticleCreateOrEditViewModel());
@@ -53,6 +55,7 @@ namespace CodeTo.Web.Areas.Articles.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [BzDescription(" افزودن مطلب")]
         public async Task<IActionResult> Create(ArticleCreateOrEditViewModel article)
         {
             if (ModelState.IsValid)
@@ -65,6 +68,7 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         }
 
         // GET: Admin/ArticleGroups/Edit/5
+        [BzDescription(" ویرایش مطلب")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +90,7 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [BzDescription(" ویرایش مطلب")]
         public async Task<IActionResult> Edit(int id, ArticleCreateOrEditViewModel Article)
         {
             if (id != Article.Id)
@@ -118,6 +123,8 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         }
 
         // GET: Admin/ArticleGroups/Delete/5
+        [BzDescription(" حذف مطلب")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +144,7 @@ namespace CodeTo.Web.Areas.Articles.Controllers
         // POST: Admin/ArticleGroups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [BzDescription(" حذف مطلب")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _articleService.DeleteAsync(id);

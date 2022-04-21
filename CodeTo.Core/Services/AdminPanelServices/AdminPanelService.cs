@@ -12,6 +12,7 @@ using CodeTo.Core.ViewModel.AdminPanel;
 using CodeTo.DataEF.Context;
 using CodeTo.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace CodeTo.Core.Services.AdminPanelServices
 {
@@ -25,16 +26,19 @@ namespace CodeTo.Core.Services.AdminPanelServices
             _context = context;
             _security = security;
         }
-        public Task<AdminPanelCreateOrEditViewModel> FindAsync(int id)
+        public async Task<AdminPanelCreateOrEditViewModel> FindAsync(int id)
         {
-            throw new NotImplementedException();
+          
+            var model = await _context.Users
+                .FirstOrDefaultAsync(u => u.Id == id);
+            return model.ConvertorAdminPanelCreatOrEditViewModel();
         }
 
         public async Task<int> SecondAddAsync(AdminPanelCreateOrEditViewModel vm)
         {
 
             var email = StringFixer.Fixer(vm.Email);
-            var username = StringFixer.Fixer(vm.Title);
+            var username = StringFixer.Fixer(vm.UserName);
             var pass = _security.HashPassword(vm.Password);
             User adduser = new User();
             adduser.CreateDate = DateTime.Now;
@@ -100,7 +104,7 @@ namespace CodeTo.Core.Services.AdminPanelServices
             try
             {
                 var email = StringFixer.Fixer(vm.Email);
-                var username = StringFixer.Fixer(vm.Title);
+                var username = StringFixer.Fixer(vm.UserName);
                 var pass = _security.HashPassword(vm.Password);
                 User adduser = new User();
                 adduser.CreateDate = DateTime.Now;
@@ -144,6 +148,7 @@ namespace CodeTo.Core.Services.AdminPanelServices
         public async Task<bool> EditAsync(AdminPanelCreateOrEditViewModel vm)
         {
             User user = await _context.Users.FindAsync(vm.Id);
+            user.UserName = vm.UserName;
             if (!string.IsNullOrWhiteSpace(vm.Password))
             {
                 user.Password = _security.HashPassword(vm.Password);
@@ -169,7 +174,7 @@ namespace CodeTo.Core.Services.AdminPanelServices
             user.LastModifyDate = DateTime.Now;
             #region UpdateImage
             //First need to remove current image
-            if (vm.AvatarFile!= null)
+            if (vm.AvatarFile != null)
             {
                 var DeletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/Profile",
                     user.AvatarImageName);
@@ -202,34 +207,25 @@ namespace CodeTo.Core.Services.AdminPanelServices
             return true;
         }
 
-        public async Task<AdminPanelIndexViewModel> GetAllToShowAsync(int pageId = 1, string FilterEmail = "", string FilterUserName = "")
+        public async Task<IPagedList<AdminPanelIndexViewModel>> GetAllToShowAsync(int pageId = 1, string FilterEmail = "", string FilterUserName = "")
         {
-            //User IQueryAble for lazy load
-            IEnumerable<AdminPanelIndexViewModel> result = _context.Users.ConvertorAdminPanelIndexViewModel();
+            if (pageId <= 0) pageId = 1;
+            IEnumerable<AdminPanelIndexViewModel> result;
+            result = _context.Users.ConvertorAdminPanelIndexViewModel();
+
             if (!string.IsNullOrEmpty(FilterEmail))
             {
-                result = result.Where(u => u.Email.Contains(FilterEmail)).ToList();
+                result = result.Where(u => u.Email.Contains(FilterEmail));
             }
 
-            //TODO: error CS0103: The name ' ' does not exist in the current context
             if (!string.IsNullOrEmpty(FilterUserName))
             {
-                IEnumerable<AdminPanelIndexViewModel> v= _context.Users.Select(c => c.ConvertorAdminPanelIndexViewModel())
-                    .Where(u => u.UserName.Contains(FilterUserName)).ToList();
+                result = result.Where(u => u.UserName.Contains(FilterUserName));
             }
 
-            //take shows in each page
-            int take = 20; 
-            int skip = (pageId - 1) * take;
-
-            AdminPanelIndexViewModel list = new AdminPanelIndexViewModel();
-            list.CurrentPage = pageId;
-            list.PageCount = result.Count() / take;
-            list.users = _context.Users.OrderBy(u => u.CreateDate).ConvertorAdminPanelIndexViewModel().Skip(skip).Take(take).ToList();
-            return list;
-
-
-
+            return result
+                .OrderByDescending(u => u.CreateDate)
+                .ToPagedList(pageId, Values.PageSize);
         }
 
         public async Task<List<AdminPanelIndexViewModel>> ShowDetail()
@@ -255,13 +251,13 @@ namespace CodeTo.Core.Services.AdminPanelServices
                 Email = u.Email,
                 CreateDate = u.CreateDate,
                 AvatarImageName = u.AvatarImageName,
-                Title = u.UserName,
+                UserName = u.UserName,
                 PermissionList = u.UserRoles.Select(r => r.RoleId).ToList()
             }).Single();
 
         public async Task<int> getUserId(AdminPanelCreateOrEditViewModel model)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.UserName == model.Title);
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.UserName == model.UserName);
             return user.Id;
         }
 

@@ -20,5 +20,6 @@ namespace CodeTo.Core.Services.PermissionServices
         bool IsSupperAdmin();
         Task<IList<string>> GetCurrentUserPermissionsAsync();
         bool IsRemovable(int roleId);
+        Task<List<PermissionsViewModel>> GetAllPermission();
     }
 }

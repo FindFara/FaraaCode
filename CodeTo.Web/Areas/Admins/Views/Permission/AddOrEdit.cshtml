@@ -1,35 +1,10 @@
-﻿@model CodeTo.Core.ViewModel.Permission.RolePermissionAddOrEditViewModel
+﻿
+@model Tuple<CodeTo.Core.ViewModel.Permission.RolePermissionAddOrEditViewModel,List<CodeTo.Core.ViewModel.Permission.PermissionsViewModel>>
+
 @{
-
-    ViewData["Title"] = (Model.Id == 0 ? "افزودن" : $" ویرایش");
+    ViewData["Title"] = (Model.Item1.RoleId == 0 ? "افزودن" : $" ویرایش");
 }
-
-<meta name="viewport" content="width=device-width" />
 <title>@ViewData["Title"]</title>
-<div class="page-header position-relative">
-    <div class="header-title">
-        <h1>
-            ادمین
-            <small>
-                <i class="fa fa-angle-right"></i>
-                @ViewData["Title"]
-            </small>
-        </h1>
-    </div>
-    <!--Header Buttons-->
-    <div class="header-buttons">
-        <a class="sidebar-toggler" href="#">
-            <i class="fa fa-arrows-h"></i>
-        </a>
-        <a class="refresh" id="refresh-toggler" href="">
-            <i class="glyphicon glyphicon-refresh"></i>
-        </a>
-        <a class="fullscreen" id="fullscreen-toggler" href="#">
-            <i class="glyphicon glyphicon-fullscreen"></i>
-        </a>
-    </div>
-    <!--Header Buttons End-->
-</div>
 <div class="page-body">
     <div class="row">
         <div class="col-lg-6 col-sm-6 col-xs-12">
@@ -38,19 +13,19 @@
                     <span class="widget-caption">افزودن نقش </span>
                 </div>
                 <div class="widget-body">
-                    <form asp-action="@(Model.Id == 0 ? "Add" : "Edit")">
+                    <form asp-action="@(Model.Item1.RoleId == 0 ? "Add" : "Edit")">
 
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                         <div class="form-group">
-                            <label asp-for="Name" class="control-label"></label>
-                            <input asp-for="Name" class="form-control" />
-                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <label asp-for="Item1.RoleName" class="control-label"></label>
+                            <input asp-for="Item1.RoleName" class="form-control" />
+                            <span asp-validation-for="Item1.RoleName" class="text-danger"></span>
                         </div>
 
-                        @if (Model.Id != 0)
+                        @if (Model.Item1.RoleId != 0)
                         {
-                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="Item1.RoleId" />
 
                             <div class="form-group">
                                 <input type="submit" value="Edit" class="btn btn-warning" />
@@ -62,14 +37,11 @@
                                 <input type="submit" value="Add" class="btn btn-success" />
                             </div>
                         }
-
                     </form>
-
                 </div>
             </div>
         </div>
-
-
+    
         <div class="col-lg-6 col-sm-6 col-xs-12">
             <div class="widget flat radius-bordered">
                 <div class="widget-header bg-blue">
@@ -77,14 +49,22 @@
                 </div>
                 <div class="col-lg-12 col-sm-12 col-xs-12 widget-body">
                     <form >
-                        @*TODO:be Dinamic*@
-                            <div class="col-lg-12 col-sm-12 col-xs-12 widget-buttons buttons-bordered">
-                                <label asp-for="PermissionNames">
-                                    <input asp-for="PermissionNames" class="checkbox-slider toggle colored-blue" type="checkbox">
-                                    <span asp-validation-for="PermissionNames" class="text-danger"></span>
-                                </label>
-                            </div>
+                        <div class="">
+                           
+                               @foreach (var per in Model.Item2)
+                               {
+
+
+                                   <div class="task-check">
+                                       <label>
+                                           <input type="checkbox" value="@per.PermissionTitle">
+                                           <span class="text"> @per.PermissionTitle</span>
+                                       </label>
+                                   </div>
+                                
+                               }
                         
+                        </div>
                     </form>
                 </div>
             </div>

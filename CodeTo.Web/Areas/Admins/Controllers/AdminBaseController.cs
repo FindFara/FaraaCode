@@ -9,9 +9,6 @@ namespace CodeTo.Web.Areas.Admins.Controllers
 {
     [Area("Admins")]
     [PermissionChecker]
+    public class AdminBaseController : Controller {}
 
-    public class AdminBaseController : Controller
-    {
-
-    }
 }

@@ -1,0 +1,64 @@
+﻿
+@model CodeTo.Core.ViewModel.AdminPanel.AdminPanelCreateOrEditViewModel
+@{
+
+    ViewData["Title"] = (Model.Id == 0 ? "افزودن" : $" ویرایش");
+}
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewData["Title"]</title>
+        <div class="page-body">
+            <div class="row">
+                <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <div class="widget">
+                        <div class="widget-header bg-danger">
+                            <span class="widget-caption">افزودن نقش </span>
+                        </div>
+                        <div class="widget-body">
+                            <form asp-action="@(Model.Id == 0 ? "Add" : "Edit")">
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <div class="form-group">
+                                    <label asp-for="UserName" class="control-label"></label>
+                                    <input asp-for="UserName" class="form-control" />
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Password" class="control-label"></label>
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="PermissionList" class="control-label"></label>
+                                    <input asp-for="PermissionList" class="form-control" />
+                                    <span asp-validation-for="PermissionList" class="text-danger"></span>
+                                </div>
+
+                                @if (Model.Id != 0)
+                                {
+                                    <input type="hidden" asp-for="Id" />
+
+                                    <div class="form-group">
+                                        <input type="submit" value="Edit" class="btn btn-warning" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <input type="submit" value="Add" class="btn btn-success" />
+                                    </div>
+                                }
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>

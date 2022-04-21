@@ -1,0 +1,87 @@
+﻿@model CodeTo.Core.ViewModel.AdminPanel.AdminPanelCreateOrEditViewModel
+@using CodeTo.Core.Utilities.Extensions
+@{
+    ViewData["Title"] = "جزییات کاربر ";
+    Layout = "~/Areas/Admins/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="page-body" class="col-lg-12 col-sm-12 col-xs-12">
+    <div class="row">
+        <div class="col-lg-3 col-sm-3 col-xs-12">
+            <div class="widget flat radius-bordered">
+                <div class="widget-header bg-blue">
+                    <span class="widget-caption">آواتار کاربر</span>
+                </div>
+                <div class="col-lg-12 col-sm-12 col-xs-12 widget-body">
+                    <form>
+                        <div class="">
+                            <center>
+                                <img src="@Model.AvatarFullName" width="150">
+                            </center>
+                           
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-sm-9 col-xs-12">
+            <div class="widget flat radius-bordered">
+                <div class="widget-header bg-blue">
+                    <span class="widget-caption">جزییات</span>
+                </div>
+                <div class="col-lg-12 col-sm-12 col-xs-12 widget-body">
+                    <div class="">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Id)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Id)
+                        </dd>
+                        <dt class=" col-sm-2">
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.UserName)
+                        </dd>
+                        <dt class=" col-sm-2">
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+                        <dt class=" col-sm-2">
+                            @Html.DisplayNameFor(model => model.CreateDate)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.CreateDate)
+                        </dd>
+                        @if (Model.LastModifyDate != null)
+                        {
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.LastModifyDate)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.LastModifyDate)
+                            </dd>
+                        }
+                        @if (Model.PermissionList != null)
+                        {
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.PermissionList)
+                            </dt>
+                            <dd class="col-sm-10">
+                                @Html.DisplayFor(model => model.PermissionList)
+                            </dd>
+                        }
+                    </div>
+                   
+                    <form>
+                        <a asp-area="Admins" asp-controller="AdminHome" asp-action="Edit" asp-route-id="@Model.Id" type="button" class="btn btn-success">ویرایش</a> |
+                        <a asp-area="Admins" asp-controller="AdminHome" asp-action="Index" type="button" class="btn btn-success">برگشت</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

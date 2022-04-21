@@ -11,7 +11,7 @@ namespace CodeTo.Core.Statics
 {
    public class Values
     {
-       public const int count =15;
+       public const int PageSize = 15;
        public static List<BzClassInfo> Permissions
        {
            get

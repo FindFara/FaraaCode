@@ -39,7 +39,7 @@ namespace CodeTo.Core.Services.PermissionServices
             {
                 var model = new Role()
                 {
-                    RoleTitle = vm.Name
+                    RoleTitle = vm.RoleName
                 };
                 var role = await _context.Roles.AddAsync(model);
                 await _context.SaveChangesAsync();
@@ -82,16 +82,16 @@ namespace CodeTo.Core.Services.PermissionServices
             {
                 var model = new Role()
                 {
-                    RoleTitle = vm.Name
+                    RoleTitle = vm.RoleName
                 };
-                RemoveRolePermissions(vm.Id);
+                RemoveRolePermissions(vm.RoleId);
                 _context.Roles.Update(model);
                 foreach (var permissionName in vm.PermissionNames)
                 {
                     await _context.RolePermissions.AddAsync(
                         new RolePermission()
                         {
-                            RoleId = vm.Id,
+                            RoleId = vm.RoleId,
                             PermissionName = permissionName
                         });
                 }
@@ -162,6 +162,11 @@ namespace CodeTo.Core.Services.PermissionServices
         public bool IsRemovable(int roleId)
         {
             return !_context.UserRoles.Any(c => c.RoleId == roleId);
+        }
+
+        public async Task<List<PermissionsViewModel>> GetAllPermission()
+        {
+            return  _context.RolePermissions.Select(p => p.ToPermissionsViewModel()).ToList();
         }
     }
 }

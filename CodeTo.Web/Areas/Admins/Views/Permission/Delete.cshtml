@@ -1,4 +1,43 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿@model CodeTo.Core.ViewModel.Permission.RolePermissionAddOrEditViewModel
+@{
+    ViewData["Title"] = "حذف دسترسی";
+    Layout = "~/Areas/Admins/Views/Shared/_AdminLayout.cshtml";
 }
+<title>@ViewData["Title"]</title>
 
+<h3>آیا از حذف نقش @Model.RoleName مطمئن هستید ؟</h3>
+<div class="page-body" class="col-lg-12 col-sm-12 col-xs-12">
+    <div class="row">
+        <div class="col-lg-8 col-sm-8 col-xs-12">
+            <div class="widget flat radius-bordered">
+                <div class="widget-header bg-red">
+                    <span class="widget-caption">حذف کاربر</span>
+                </div>
+                <div class="col-lg-12 col-sm-12 col-xs-12 widget-body">
+                    <div class="">
+                        <dt class=" col-sm-2">
+                            @Html.DisplayNameFor(model => model.RoleId)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.RoleId)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.RoleName)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.RoleName)
+                        </dd>
+                    </div>
+                    <div class="col-lg-12 col-sm-12 col-xs-12 widget-body">
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="RoleId" />
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                            <a asp-action="Index" type="button" class="btn btn-success">برگشت</a>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

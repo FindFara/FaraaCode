@@ -20,6 +20,7 @@ namespace CodeTo.Core.ViewModel.AdminPanel
                 AvatarImageName = user.AvatarImageName,
                 CreateDate = user.CreateDate,
                 IsActived = user.IsEmailActive
+                
             };
         }
 
@@ -39,12 +40,13 @@ namespace CodeTo.Core.ViewModel.AdminPanel
         {
             return new AdminPanelCreateOrEditViewModel()
             {
-                Title = user.UserName,
+                UserName = user.UserName,
                 Email = user.Email,
                 Id = user.Id,
                 AvatarImageName = user.AvatarImageName,
                 CreateDate = user.CreateDate,
                 Password = user.Password,
+               
             };
         }
 
