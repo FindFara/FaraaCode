@@ -20,7 +20,7 @@ namespace CodeTo.Domain.Entities.Articles
         public string Writer { get; set; }
 
         [Required]
-        [MaxLength(500)]
+        [MaxLength]
         public string ArticleDescription { get; set; }
         public string ArticleImageName { get; set; }
 

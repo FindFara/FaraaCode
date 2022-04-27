@@ -22,8 +22,9 @@ namespace CodeTo.Core.ViewModel.Articles
                 ArticleTitle = Article.ArticleTitle,
                 ArticleDescription = Article.ArticleDescription,
                 CreateDate = Article.CreateDate,
-                ArticleImageName = Article.ArticleImageName
-                
+                ArticleImageName = Article.ArticleImageName,
+                ArtileGroupTitle = Article.ArticleGroup?.ArticleGroupTitle
+
             };
         }
 

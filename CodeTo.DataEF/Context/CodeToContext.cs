@@ -32,14 +32,14 @@ namespace CodeTo.DataEF.Context
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseGroup> CourseGroups { get; set; }
 
-        #region SeedData
 
-        protected virtual void OnModelCreate(ModelBuilder modelBuilder)
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //TODO:Dont word seeddata 
             modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsDeleted);
             modelBuilder.Entity<Role>().HasQueryFilter(u => !u.IsDeleted);
-            modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsBlocked);
+            modelBuilder.Entity<UserRole>().HasQueryFilter(u => !u.IsDeleted);
+            modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsDeleted);
             modelBuilder.Entity<Article>().HasQueryFilter(u => !u.IsDeleted);
             modelBuilder.Entity<ArticleGroup>().HasQueryFilter(u => !u.IsDeleted);
             modelBuilder.Entity<Course>().HasQueryFilter(u => !u.IsDeleted);
@@ -47,23 +47,23 @@ namespace CodeTo.DataEF.Context
             modelBuilder.Entity<ArticleComment>().HasQueryFilter(u => !u.IsDeleted);
             modelBuilder.Entity<Wallet>().HasQueryFilter(u => !u.IsDeleted);
 
-
-            modelBuilder.Entity<User>().HasData(new User
-            {
-                Id = 1,
-                IsBlocked = false,
-                AvatarImageName = "profile.png",
-                CreateDate = new DateTime(2021, 12, 24, 13, 23, 00),
-                Email = "hosseinKhakpoor@gmail.com",
-                UserName = "Admin",
-                IsEmailActive = true,
-                Password = "ACzGe/muivlpjt6DH0gaVdzHp0y+h4xgJmT84gKoacZ6ImLRt0zpgRfBElJd1ZBF+Q==",//123 or 1234,
-                IsDeleted = false,
-            });
-            base.OnModelCreating(modelBuilder);
+            #region SeedData
+            //modelBuilder.Entity<User>().HasData(new User
+            //{
+            //    Id = 1,
+            //    IsBlocked = false,
+            //    AvatarImageName = "profile.png",
+            //    CreateDate = new DateTime(2021, 12, 24, 13, 23, 00),
+            //    Email = "hosseinKhakpoor@gmail.com",
+            //    UserName = "Admin",
+            //    IsEmailActive = true,
+            //    Password = "ACzGe/muivlpjt6DH0gaVdzHp0y+h4xgJmT84gKoacZ6ImLRt0zpgRfBElJd1ZBF+Q==",//123 or 1234,
+            //    IsDeleted = false,
+            //});
 
             #endregion
 
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

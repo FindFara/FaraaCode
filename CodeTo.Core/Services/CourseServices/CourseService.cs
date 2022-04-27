@@ -58,7 +58,7 @@ namespace CodeTo.Core.Services.CourseServices
                     LastModifyDate = DateTime.Now,
                     Tags = vm.Tags,
                     TeacherId = vm.TeacherId,
-                    
+
 
                 });
 
@@ -111,7 +111,10 @@ namespace CodeTo.Core.Services.CourseServices
             try
             {
                 var product = await _context.Courses.FindAsync(id);
-                product.CourseImageName.DeleteImage(CoursePathTools.CourseImageServerPath);
+                if (product.CourseImageName != null)
+                {
+                    product.CourseImageName.DeleteImage(CoursePathTools.CourseImageServerPath);
+                }
                 _context.Courses.Remove(product);
                 await _context.SaveChangesAsync();
                 return true;

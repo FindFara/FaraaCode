@@ -74,7 +74,6 @@ namespace CodeTo.Core.ViewModel.AdminPanel
         [MaxLength(200)]
         public string Password { get; set; }
 
-        [CanBeNull]
         public List<int> PermissionList { get; set; }
     }
     public class AminUserListForShow

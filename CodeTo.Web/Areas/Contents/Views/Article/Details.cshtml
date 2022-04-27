@@ -1,0 +1,115 @@
+﻿@model CodeTo.Core.ViewModel.Articles.ArticleCreateOrEditViewModel
+@{
+    ViewData["Title"] = $" {@Model.ArticleTitle}";
+    Layout = "~/Areas/Admins/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-body">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-blue">
+                <span class="widget-caption">@ViewData["Title"]</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    <a href="#" data-toggle="dispose">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="orders-container">
+                <div class="orders-header">
+                    <h6>سایر جزییات ...</h6>
+                </div>
+                <ul class="orders-list">
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                <div class="item-booker">
+                                    <i class="fa fa-user"></i>
+                                    @Html.DisplayNameFor(model => model.Id)
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                @Html.DisplayFor(model => model.Id)
+                            </div>
+                        </div>
+                    </li>
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                <div class="item-booker fa fa-user-md">
+                                    @Html.DisplayNameFor(model => model.ArticleTitle)
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                @Html.DisplayFor(model => model.ArticleTitle)
+                            </div>
+                        </div>
+                    </li>
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                <div class="item-booker">
+                                    <i class="fa fa-pencil"> </i>
+                                    @Html.DisplayNameFor(model => model.Writer)
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                @Html.DisplayFor(model => model.Writer)
+                            </div>
+                        </div>
+                    </li>
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="item-booker">
+                                    <i class="fa fa-calendar"> </i>
+                                    @Html.DisplayNameFor(model => model.CreateDate)
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                @Html.DisplayFor(model => model.CreateDate)
+                            </div>
+                        </div>
+                    </li>
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                <div class="item-booker">
+                                    <i class="fa fa-group"> </i>
+                                    @Html.DisplayNameFor(model => model.GroupId)
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                @Html.DisplayFor(model => model.GroupId)
+                            </div>
+                        </div>
+                    </li>
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
+                                <div class="item-booker">
+                                    <i class="fa fa-file-text"> </i>
+                                    @Html.DisplayNameFor(model => model.ArticleDescription)
+                                </div>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 ">
+                                @Html.DisplayFor(model => model.ArticleDescription)
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="col-lg-offset-9">
+                    <br />
+                    <a asp-area="Contents" asp-controller="Article" asp-action="Edit" asp-route-id="@Model.Id" type="button" class="btn btn-success">ویرایش</a> |
+                    <a asp-area="Contents" asp-controller="Article" asp-action="Index" type="button" class="btn btn-darkorange">برگشت</a>
+                </div><br />
+            </div>
+        </div>
+    </div>
+</div>

@@ -54,10 +54,12 @@ namespace CodeTo.Web.Areas.Admins.Controllers
                 return NotFound();
             }
             var user = await _service.FindAsync(id.Value);
+           
             if (user == null)
             {
                 return NotFound();
             }
+
             return View(user);
         }
 

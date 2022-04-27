@@ -33,6 +33,8 @@ namespace CodeTo.Core.ViewModel.Articles
         public long Id { get; set; }
         [Display(Name = "شناسه گروه")]
         public int GroupId { get; set; }
+        [Display(Name = "اسم گروه")]
+        public string ArtileGroupTitle { get; set; }
 
         [Display(Name = "موضوع مقاله")]
         [Required(ErrorMessage = "Enter the {0}")]

@@ -54,15 +54,15 @@ namespace CodeTo.Core.Services.ArticleServices
                     ArticleTitle = vm.ArticleTitle,
                     ArticleDescription = vm.ArticleDescription,
                     CreateDate = DateTime.Now,
-                    LastModifyDate = DateTime.Now,
-                    ArticleImageName = ArticleImageName
+                    ArticleImageName = ArticleImageName,
+                    IsDeleted = false
                 });
 
                 await _context.SaveChangesAsync();
                 return true;
 
             }
-            catch (Exception)
+            catch (Exception rx)
             {
 
                 return false;
@@ -83,7 +83,7 @@ namespace CodeTo.Core.Services.ArticleServices
                     article.ArticleImageName = articleImageName;
                 }
 
-               
+
                 article.Writer = vm.Writer;
                 article.ArticleTitle = vm.ArticleTitle;
                 article.ArticleDescription = vm.ArticleDescription;
@@ -106,13 +106,17 @@ namespace CodeTo.Core.Services.ArticleServices
             try
             {
                 var product = await _context.Articles.FindAsync(id);
-                product.ArticleImageName.DeleteImage(ArticlePathTools.ArticleImageServerPath);
+                if (product.ArticleImageName != null)
+                {
+                    product.ArticleImageName.DeleteImage(ArticlePathTools.ArticleImageServerPath);
+                }
                 _context.Articles.Remove(product);
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
+                _logger.LogError("خطای حذف مطلب" + e.Message);
                 return false;
             }
         }
@@ -126,7 +130,7 @@ namespace CodeTo.Core.Services.ArticleServices
                 .ToListAsync();
         }
 
-        public async 
+        public async
             Task<bool> IsExist(long id)
         {
             return await _context.Articles.AnyAsync(p => p.Id == id);

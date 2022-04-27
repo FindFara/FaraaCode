@@ -1,45 +1,100 @@
-﻿@model CodeTo.Core.ViewModel.Permission.RolePermissionAddOrEditViewModel
+﻿@model Tuple<CodeTo.Core.ViewModel.Permission.RolePermissionAddOrEditViewModel, List<CodeTo.Core.ViewModel.Permission.PermissionsViewModel>>
+
 @{
     ViewData["Title"] = "جزییات دسترسی";
     Layout = "~/Areas/Admins/Views/Shared/_AdminLayout.cshtml";
 }
+<div class="page-body">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-blue">
+                <span class="widget-caption">@ViewData["Title"]</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    <a href="#" data-toggle="dispose">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="orders-container">
+                <div class="orders-header">
+                    <h6>سایر جزییات ...</h6>
+                </div>
+                <ul class="orders-list">
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                <div class="item-booker">
+                                    <i class="fa fa-user"></i>
+                                    @Html.DisplayNameFor(model => model.Item1.RoleId)
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                @Html.DisplayFor(model => model.Item1.RoleId)
+                            </div>
+                        </div>
+                    </li>
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                <div class="item-booker fa fa-user-md">
+                                    @Html.DisplayNameFor(model => model.Item1.RoleName)
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                @Html.DisplayFor(model => model.Item1.RoleName)
+                            </div>
+                        </div>
+                    </li>
 
-<h4>@ViewData["Title"]</h4>
-<div class="col-xs-12 col-md-12">
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                <div class="item-booker fa fa-user-md">
+                                    مجموع دسترسی ها
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                @Html.DisplayFor(model => model.Item2.Count)
+                            </div>
+                        </div>
+                    </li>
+                    <li class="order-item">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="item-booker">
+                                    <i class="fa fa-calendar"> </i>
+                                    @Html.DisplayNameFor(model => model.Item1.PermissionNames)
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                @foreach (var p in Model.Item2)
+                                {
+                                    <dd class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                        @Html.DisplayFor(model => p.PermissionTitle)
+                                    </dd>
+                                }
+                            </div>
+                        </div>
+                    </li>
 
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RoleId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RoleId)
-        </dd>
-        <dt class=" col-sm-2">
-            @Html.DisplayNameFor(model => model.RoleName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RoleName)
-        </dd>
-        <dt class=" col-sm-2">
-            @Html.DisplayNameFor(model => model.Permissions)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Permissions)
-        </dd>
-        <dt class=" col-sm-2">
-            @Html.DisplayNameFor(model => model.PermissionNames)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PermissionNames)
-        </dd>
-        <dt class=" col-sm-2">
-
-    </dl>
+                </ul>
+                <div class="col-lg-offset-9">
+                    <br />
+                    <a asp-area="Admins" asp-controller="Permission" asp-action="Edit" asp-route-id="@Model.Item1.RoleId" type="button" class="btn btn-success">ویرایش</a> |
+                    <a asp-area="Admins" asp-controller="Permission" asp-action="Index" type="button" class="btn btn-success">برگشت</a>
+                </div><br />
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-area="Admins" asp-controller="Permission" asp-action="Edit" asp-route-id="@Model.RoleId" type="button" class="btn btn-success">ویرایش</a> |
-    <a asp-area="Admins" asp-controller="Permission" asp-action="Index" type="button" class="btn btn-success">برگشت</a>
-</div>
+
+
+
 
 

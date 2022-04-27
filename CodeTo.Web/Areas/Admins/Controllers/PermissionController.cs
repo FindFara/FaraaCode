@@ -33,6 +33,7 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         [BzDescription("جزییات دسترسی")]
         public async Task<IActionResult> Details(int? id)
         {
+            var Permissions = await _permissionService.GetPermissionByRoleId(id.Value);
             if (id == null)
             {
                 return NotFound();
@@ -42,7 +43,7 @@ namespace CodeTo.Web.Areas.Admins.Controllers
             {
                 return NotFound();
             }
-            return View(role);
+            return View(Tuple.Create(role, Permissions));
         }
         //TODO:put the therd parametr for the user to seeonly the relevant section
         [BzDescription("افزودن دسترسی")]
@@ -55,7 +56,6 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [BzDescription("افزودن دسترسی")]
         public async Task<IActionResult> Add(RolePermissionAddOrEditViewModel role)
         {
             var Permissions =await _permissionService.GetAllPermission();
@@ -69,7 +69,7 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         }
 
         // GET
-        [BzDescription("ویرایش دسترسی")]
+        
         public async Task<IActionResult> Edit(int? id)
         {
             var Permissions = await _permissionService.GetAllPermission();
@@ -88,9 +88,9 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [BzDescription("ویرایش دسترسی")]
         public async Task<IActionResult> Edit(int id, RolePermissionAddOrEditViewModel role)
         {
+            //TODO:Dont work Edit:RoleId is 0
             if (id != role.RoleId)
             {
                 return NotFound();
@@ -119,7 +119,6 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         }
 
         // GET
-        [BzDescription("حذف دسترسی")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,12 +137,12 @@ namespace CodeTo.Web.Areas.Admins.Controllers
         // POST
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [BzDescription("حذف دسترسی")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _permissionService.RemoveRoleAsync(id);
             return RedirectToAction(nameof(Index));
         }
+        
     }
 }
 

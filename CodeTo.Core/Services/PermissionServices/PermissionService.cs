@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeTo.Core.Services.PermissionServices
 {
-   public class PermissionService:IPermissionService
+    public class PermissionService : IPermissionService
     {
         private readonly CodeToContext _context;
         private readonly ICurrentUserService _currentUserService;
@@ -66,14 +66,8 @@ namespace CodeTo.Core.Services.PermissionServices
 
         public async Task<RolePermissionAddOrEditViewModel> FindRoleAsync(int id)
         {
-            var model = await _context.Roles.Include(c => c.RolePermissions).FirstOrDefaultAsync(c => c.Id == id);
-
-            var vm = model.ToRolePermissionAddEditViewModel();
-            vm.PermissionNames = _context.RolePermissions
-                .Where(c => c.RoleId == id)
-                .Select(c => c.PermissionName)
-                .ToList();
-            return vm;
+            var model = await _context.Roles.FirstOrDefaultAsync(c => c.Id == id);
+            return model.ToRolePermissionAddEditViewModel();
         }
 
         public async Task<bool> UpdateRole(RolePermissionAddOrEditViewModel vm)
@@ -86,15 +80,6 @@ namespace CodeTo.Core.Services.PermissionServices
                 };
                 RemoveRolePermissions(vm.RoleId);
                 _context.Roles.Update(model);
-                foreach (var permissionName in vm.PermissionNames)
-                {
-                    await _context.RolePermissions.AddAsync(
-                        new RolePermission()
-                        {
-                            RoleId = vm.RoleId,
-                            PermissionName = permissionName
-                        });
-                }
 
                 await _context.SaveChangesAsync();
                 return true;
@@ -166,7 +151,84 @@ namespace CodeTo.Core.Services.PermissionServices
 
         public async Task<List<PermissionsViewModel>> GetAllPermission()
         {
-            return  _context.RolePermissions.Select(p => p.ToPermissionsViewModel()).ToList();
+            return _context.RolePermissions.Select(p => p.ToPermissionsViewModel()).ToList();
+        }
+        public IQueryable<RolePermissionAddOrEditViewModel> GetAllRole()
+        {
+            return _context.Roles
+                .Include(c => c.UserRoles)
+                .ThenInclude(c => c.User)
+                .Select(c => c.ToRolePermissionAddEditViewModel());
+        }
+        public List<UserRoleViewModel> GetAllUserRole()
+        {
+            return _context.UserRoles.Select(p => new UserRoleViewModel()
+            {
+                UserId = p.UserId,
+                UserRoleId = p.UR,
+                RoleId = p.RoleId
+
+            }).ToList();
+        }
+
+        public async Task<bool> AddUserRoleAsync(UserRoleViewModel vm)
+        {
+            var model = new UserRole()
+            {
+                UR = vm.UserRoleId,
+                UserId = vm.UserId,
+                RoleId = vm.RoleId
+            };
+            await _context.UserRoles.AddAsync(model);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        public async Task<bool> UpdateUserRole(UserRoleViewModel vm)
+        {
+            try
+            {
+                var model = new UserRole()
+                {
+                    UR = vm.UserRoleId,
+                    UserId = vm.UserId,
+                    RoleId = vm.RoleId
+                };
+                _context.UserRoles.Update(model);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("خطای افزودن نقش جدید" + e.Message);
+                return false;
+            }
+        }
+
+        public bool ExistsUserRole(int id)
+        {
+            return _context.UserRoles.Any(c => c.UR == id);
+        }
+
+        public async Task<UserRoleViewModel> FindUserRoleAsync(int ur)
+        {
+            var model = await _context.UserRoles
+                .FirstOrDefaultAsync(c => c.UR == ur);
+            return model.ToUserRoleViewModel();
+        }
+        public async Task<bool> DeleteUserRoleAsync(int id)
+        {
+            UserRole user = await _context.UserRoles.FindAsync(id);
+            user.IsDeleted = true;
+            _context.UserRoles.Update(user);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<List<PermissionsViewModel>> GetPermissionByRoleId(int roleid)
+        {
+            return await _context.RolePermissions
+                .Where(r => r.RoleId == roleid)
+                .Select(p => p.ToPermissionsViewModel()).ToListAsync();
         }
     }
 }

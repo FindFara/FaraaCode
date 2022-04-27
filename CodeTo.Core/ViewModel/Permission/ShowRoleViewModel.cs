@@ -7,10 +7,22 @@ using System.Threading.Tasks;
 
 namespace CodeTo.Core.ViewModel.Permission
 {
-   public class ShowRoleViewModel
+    public class ShowRoleViewModel
     {
-        public int Id { get; set; }
+        public int RoleId { get; set; }
         [Display(Name = "نام نقش")]
-        public string Name { get; set; }
+        public string RoleName { get; set; }
     }
+    public class UserRoleViewModel
+    {
+        [Display(Name = "شناسه")]
+        public int UserRoleId { get; set; }
+        [Display(Name = "شناسه کاربر")]
+        public int UserId { get; set; }
+        [Display(Name = "شناسه نقش")]
+        public int RoleId { get; set; }
+        [Display(Name = "نام نقش")]
+        public string RoleTitle { get; set; }
+    }
+   
 }

@@ -28,8 +28,7 @@ namespace CodeTo.DataEF.Migrations
 
                     b.Property<string>("ArticleDescription")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ArticleGroupId")
                         .HasColumnType("int");
@@ -317,6 +316,9 @@ namespace CodeTo.DataEF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");

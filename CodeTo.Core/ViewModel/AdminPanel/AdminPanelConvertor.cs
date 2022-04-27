@@ -20,7 +20,7 @@ namespace CodeTo.Core.ViewModel.AdminPanel
                 AvatarImageName = user.AvatarImageName,
                 CreateDate = user.CreateDate,
                 IsActived = user.IsEmailActive
-                
+
             };
         }
 
@@ -30,8 +30,7 @@ namespace CodeTo.Core.ViewModel.AdminPanel
             return users.Select(u => u.ConvertorAdminPanelIndexViewModel());
         }
 
-        public static IEnumerable<AdminPanelIndexViewModel> ConvertorAdminPanelIndexViewModel(
-            this IEnumerable<User> users)
+        public static IEnumerable<AdminPanelIndexViewModel> ConvertorAdminPanelIndexViewModel(this IEnumerable<User> users)
         {
             return users.Select(u => u.ConvertorAdminPanelIndexViewModel());
         }
@@ -45,8 +44,8 @@ namespace CodeTo.Core.ViewModel.AdminPanel
                 Id = user.Id,
                 AvatarImageName = user.AvatarImageName,
                 CreateDate = user.CreateDate,
-                Password = user.Password,
-               
+                Password = user.Password
+
             };
         }
 

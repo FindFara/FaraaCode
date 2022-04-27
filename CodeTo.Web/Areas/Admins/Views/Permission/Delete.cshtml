@@ -5,38 +5,46 @@
 }
 <title>@ViewData["Title"]</title>
 
-<h3>آیا از حذف نقش @Model.RoleName مطمئن هستید ؟</h3>
-<div class="page-body" class="col-lg-12 col-sm-12 col-xs-12">
-    <div class="row">
-        <div class="col-lg-8 col-sm-8 col-xs-12">
-            <div class="widget flat radius-bordered">
-                <div class="widget-header bg-red">
-                    <span class="widget-caption">حذف کاربر</span>
+<div class="page-body">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-red">
+                <span class="widget-caption">@ViewData["Title"]</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    <a href="#" data-toggle="dispose">
+                        <i class="fa fa-times"></i>
+                    </a>
                 </div>
-                <div class="col-lg-12 col-sm-12 col-xs-12 widget-body">
-                    <div class="">
-                        <dt class=" col-sm-2">
-                            @Html.DisplayNameFor(model => model.RoleId)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.RoleId)
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.RoleName)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.RoleName)
-                        </dd>
-                    </div>
-                    <div class="col-lg-12 col-sm-12 col-xs-12 widget-body">
-                        <form asp-action="Delete">
-                            <input type="hidden" asp-for="RoleId" />
-                            <input type="submit" value="Delete" class="btn btn-danger" />
-                            <a asp-action="Index" type="button" class="btn btn-success">برگشت</a>
-                        </form>
-                    </div>
-                </div>
+            </div>
 
+            <div class="col-lg-12 col-sm-12 col-xs-12 widget-body">
+                <h4>آیا از حذف مطلب « @Model.RoleName » مطمئن هستید ؟</h4>
+                <hr class="wide">
+                <dt class=" col-sm-2">
+                    @Html.DisplayNameFor(model => model.RoleId)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.RoleId)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.RoleName)
+                </dt>
+                <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RoleName)
+                </dd>
+                <p><br /></p>
+                <form asp-action="Delete">
+                    <br />
+                    <input type="hidden" asp-for="RoleId" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    <a asp-action="Index" type="button" class="btn btn-success">برگشت</a>
+                </form>
             </div>
         </div>
     </div>

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using CodeTo.Core.Interfaces;
 
 using CodeTo.Core.ViewModel.AdminPanel;
+using CodeTo.Core.ViewModel.Permission;
+using CodeTo.Domain.Entities.Users;
 using X.PagedList;
 
 namespace CodeTo.Core.Services.AdminPanelServices
@@ -24,5 +26,6 @@ namespace CodeTo.Core.Services.AdminPanelServices
         Task<int> SecondAddAsync(AdminPanelCreateOrEditViewModel vm);
         Task<AdminPanelIndexViewModel> GetAllDeletedToShowAsync(int pageId = 1, string FilterEmail = "",
             string FilterUserName = "");
+  
     }
 }

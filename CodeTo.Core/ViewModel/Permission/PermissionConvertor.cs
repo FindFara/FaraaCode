@@ -10,19 +10,22 @@ namespace CodeTo.Core.ViewModel.Permission
 {
     public static class PermissionConvertor
     {
+        #region Role
 
+        #endregion
         #region ShowRole
         public static ShowRoleViewModel ToShowRoleViewModel(this Role r)
         {
             return new ShowRoleViewModel
             {
-                Id = r.Id,
-                Name = r.RoleTitle
+                RoleId = r.Id,
+                RoleName = r.RoleTitle
             };
         }
 
         #endregion
-        #region RolePermission
+
+        #region RolePermissionAddOrEditViewModel
 
         public static RolePermissionAddOrEditViewModel ToRolePermissionAddEditViewModel(this Role r)
         {
@@ -30,12 +33,16 @@ namespace CodeTo.Core.ViewModel.Permission
             {
                 RoleId = r.Id,
                 RoleName = r.RoleTitle,
-             
+              
+
             };
         }
 
 
         #endregion
+
+        #region Permissions
+
         public static PermissionsViewModel ToPermissionsViewModel(this RolePermission p)
         {
             return new PermissionsViewModel
@@ -46,5 +53,21 @@ namespace CodeTo.Core.ViewModel.Permission
                
             };
         }
+
+        #endregion
+
+        #region UserRole
+
+        public static UserRoleViewModel ToUserRoleViewModel(this UserRole p)
+        {
+            return new UserRoleViewModel
+            {
+                UserRoleId = p.UR,
+                UserId = p.UserId,
+                RoleId = p.RoleId,
+            };
+        }
+
+        #endregion
     }
 }

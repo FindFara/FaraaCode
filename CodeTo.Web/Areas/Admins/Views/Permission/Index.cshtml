@@ -19,10 +19,10 @@
             <thead>
                 <tr role="row">
                     <th>
-                        @Html.DisplayNameFor(model => model.Id)
+                        @Html.DisplayNameFor(model => model.RoleId)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Name)
+                        @Html.DisplayNameFor(model => model.RoleName)
                     </th>
                     <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 273px;">
                     </th>
@@ -38,17 +38,17 @@
                     {
                     <tr>
                         <th>
-                            @item.Id
+                            @item.RoleId
                         </th>
                         <th>
-                            @item.Name
+                            @item.RoleName
                         </th>
 
                         <th>
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <a asp-area="Admins" asp-controller="Permission" asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-warning">ویرایش</a>
-                                <a asp-area="Admins" asp-controller="Permission" asp-action="Details" asp-route-id="@item.Id" type="button" class="btn btn-success">جزـیات</a>
-                                <a asp-area="Admins" asp-controller="Permission" asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-danger">حذف</a>
+                                <a asp-area="Admins" asp-controller="Permission" asp-action="Edit" asp-route-id="@item.RoleId" type="button" class="btn btn-warning">ویرایش</a>
+                                <a asp-area="Admins" asp-controller="Permission" asp-action="Details" asp-route-id="@item.RoleId" type="button" class="btn btn-success">جزـیات</a>
+                                <a asp-area="Admins" asp-controller="Permission" asp-action="Delete" asp-route-id="@item.RoleId" type="button" class="btn btn-danger">حذف</a>
                             </div>
                         </th>
                     </tr>

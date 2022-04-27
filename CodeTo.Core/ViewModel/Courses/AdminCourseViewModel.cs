@@ -55,7 +55,7 @@ namespace CodeTo.Core.ViewModel.Courses
 
         public IFormFile CourseImageFile { get; set; }
         public string CourseImageName { get; set; }
-        public string CourseFullName =>
+        public string CourseFullImageName =>
             !string.IsNullOrEmpty(CourseImageName)
                 ? $"{CoursePathTools.CourseImagePath}{CourseImageName}"
                 : CoursePathTools.CourseImageDefautl;

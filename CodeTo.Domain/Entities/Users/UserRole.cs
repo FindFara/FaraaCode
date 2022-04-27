@@ -14,7 +14,7 @@ namespace CodeTo.Domain.Entities.Users
         public int UR { get; set; }
         public int UserId { get; set; }
         public int RoleId { get; set; }
-
+        public bool IsDeleted { get; set; }
 
         #region Relations
 
