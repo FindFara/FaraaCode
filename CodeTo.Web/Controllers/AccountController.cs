@@ -119,7 +119,7 @@ namespace CodeTo.Web.Controllers
         }
         #endregion
 
-        [Route("access-denied")]
+        [Route("AccessDenied")]
         public IActionResult AccessDenied()
         {
             return View();

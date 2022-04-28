@@ -50,7 +50,7 @@ namespace CodeTo.Web.Areas.UserPanel.Controllers
         
            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return Redirect("auth/Login");
+            return RedirectToAction("Login","Account");
         }
         #endregion
         [Route("ChangePassword")]

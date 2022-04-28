@@ -1,0 +1,132 @@
+﻿<header id="topnav" class="defaultscroll sticky ">
+    <div class="container">
+        <!-- Logo container-->
+        <div>
+            <a class="logo" href="index.html">
+                <img src="images/logo-dark.png" height="24" alt="">
+            </a>
+        </div>
+        <div class="buy-button">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-area="UserPanels" asp-controller="UserPanelHome" asp-action="Index"
+                   class="uil-user  btn btn-icon btn-lg btn-primary mt-2"></a>
+
+                <a asp-controller="Account" asp-action="Logout" class="uil-sign-out-alt btn btn-icon btn-lg btn-outline-primary mt-2"></a>
+                if (User.Identity.Name == "Admin")
+                {
+                    <a asp-area="Admins" asp-controller="Dashboard" asp-action="Index"
+                       class="uil-mouse-alt  btn btn-icon btn-lg btn-primary mt-2"></a>
+                }
+            }
+            else
+            {
+                <div class="buy-button">
+                    <a asp-controller="Account" asp-action="Login">
+                        <div class="btn btn-primary login-btn-primary">ورود  </div>
+                        <div class="btn btn-light login-btn-light">ورود </div>
+                    </a>
+                    <a asp-controller="Account" asp-action="Register">
+                        <div class="btn btn-primary login-btn-primary"> ثبت نام </div>
+                        <div class="btn btn-light login-btn-light"> ثبت نام </div>
+                    </a>
+                </div>
+
+            }
+        </div><!--end login button-->
+        <!-- End Logo container-->
+        <div class="menu-extras">
+            <div class="menu-item">
+                <!-- Mobile menu toggle-->
+                <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+                <!-- End mobile menu toggle-->
+            </div>
+        </div>
+
+        <div id="navigation">
+            <!-- Navigation Menu-->
+            <ul class="navigation-menu nav-light">
+                <li><a asp-controller="Home"asp-action="Index" class="sub-menu-item">صفحه اصلی </a></li>
+                <li class="has-submenu parent-parent-menu-item active">
+                    <a href="javascript:void(0)">مقاله ها</a><span class="menu-arrow"></span>
+                    <ul class="submenu megamenu">
+                        <li>
+                            <ul>
+                                <li><a href="index-saas.html" class="sub-menu-item">ساس </a></li>
+                                <li><a href="index-classic-saas.html" class="sub-menu-item">ساس کلاسیک  </a></li>
+                                <li><a href="index-agency.html" class="sub-menu-item">آژانسی </a></li>
+                                <li><a href="index-apps.html" class="sub-menu-item">اپلیکیشن </a></li>
+                                <li><a href="index-classic-app.html" class="sub-menu-item">اپلیکیشن کلاسیک </a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li><a href="index-saas.html" class="sub-menu-item">ساس </a></li>
+                                <li><a href="index-classic-saas.html" class="sub-menu-item">ساس کلاسیک  </a></li>
+                                <li><a href="index-agency.html" class="sub-menu-item">آژانسی </a></li>
+                                <li><a href="index-apps.html" class="sub-menu-item">اپلیکیشن </a></li>
+                                <li><a href="index-classic-app.html" class="sub-menu-item">اپلیکیشن کلاسیک </a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li><a href="index-saas.html" class="sub-menu-item">ساس </a></li>
+                                <li><a href="index-classic-saas.html" class="sub-menu-item">ساس کلاسیک  </a></li>
+                                <li><a href="index-agency.html" class="sub-menu-item">آژانسی </a></li>
+                                <li><a href="index-apps.html" class="sub-menu-item">اپلیکیشن </a></li>
+                                <li><a href="index-classic-app.html" class="sub-menu-item">اپلیکیشن کلاسیک </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="has-submenu parent-parent-menu-item">
+                    <a href="javascript:void(0)">صفحات </a><span class="menu-arrow"></span>
+                    <ul class="submenu">
+                        <li class="has-submenu parent-menu-item">
+                            <a href="javascript:void(0)"> کمپانی  </a><span class="submenu-arrow"></span>
+                            <ul class="submenu">
+                                <li><a href="page-aboutus.html" class="sub-menu-item"> درباره ما </a></li>
+                                <li><a href="page-aboutus-two.html" class="sub-menu-item"> درباره ما 2 </a></li>
+                                <li><a href="page-services.html" class="sub-menu-item">خدمات </a></li>
+                                <li><a href="page-history.html" class="sub-menu-item">تاریخچه </a></li>
+                                <li><a href="page-team.html" class="sub-menu-item"> تیم </a></li>
+                                <li><a href="page-pricing.html" class="sub-menu-item">قیمت گذاری </a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu parent-menu-item">
+                            <a href="javascript:void(0)"> حساب کاربری  </a><span class="submenu-arrow"></span>
+                            <ul class="submenu">
+                                <li><a href="account-profile.html" class="sub-menu-item">پروفایل </a></li>
+                                <li><a href="account-members.html" class="sub-menu-item">اعضا  </a></li>
+                                <li><a href="account-works.html" class="sub-menu-item">کارها</a></li>
+                                <li><a href="account-messages.html" class="sub-menu-item">پیام ها </a></li>
+                                <li><a href="account-payments.html" class="sub-menu-item">پرداخت ها  </a></li>
+                                <li><a href="account-setting.html" class="sub-menu-item">تنظیمات </a></li>
+                                <li><a href="page-invoice.html" class="sub-menu-item">صورتحساب </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="has-submenu parent-menu-item">
+                    <a href="javascript:void(0)">اسناد </a><span class="menu-arrow"></span>
+                    <ul class="submenu">
+                        <li><a href="documentation.html" class="sub-menu-item">مستند </a></li>
+                        <li><a href="changelog.html" class="sub-menu-item">تغییرات </a></li>
+                        <li><a href="components.html" class="sub-menu-item">اجزاء </a></li>
+                        <li><a href="widget.html" class="sub-menu-item">ابزارک </a></li>
+                    </ul>
+                </li>
+            </ul><!--end navigation menu-->
+            <div class="buy-menu-btn d-none">
+                <a href="https://www.rtl-theme.com/?p=133270" target="_blank" class="btn btn-primary">خرید از راست چین </a>
+            </div><!--end login button-->
+        </div><!--end navigation-->
+    </div><!--end container-->
+</header>

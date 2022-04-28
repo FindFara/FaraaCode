@@ -671,6 +671,8 @@
 
 /*End Fonts*/
 
+
+/*Version: 3.2.2*/
 @media (min-width: 1400px) {
  .container {
   max-width:1140px !important
@@ -1396,13 +1398,13 @@ small {
  -webkit-box-shadow:0 3px 5px 0 rgba(132,146,166,0.3);
  box-shadow:0 3px 5px 0 rgba(132,146,166,0.3)
 }
-/*.btn-light {
+.btn-light {
  background-color:#f8f9fc !important;
  border:1px solid #f8f9fc !important;
  color:#fff !important;
  -webkit-box-shadow:0 3px 5px 0 rgba(248,249,252,0.3);
  box-shadow:0 3px 5px 0 rgba(248,249,252,0.3)
-}*/
+}
 .btn-light:hover,
 .btn-light:focus,
 .btn-light:active,
@@ -1544,7 +1546,7 @@ small {
  box-shadow:0 3px 5px 0 rgba(32,41,66,0.3)
 }
 .btn {
- padding:6px 11px;
+ padding:8px 20px;
  outline:none;
  text-decoration:none;
  font-size:16px;
@@ -1564,7 +1566,7 @@ small {
 }
 .btn.btn-lg {
  padding:14px 30px;
- font-size:20px
+ font-size:16px
 }
 .btn.searchbtn {
  padding:6px 20px
@@ -1621,13 +1623,13 @@ small {
 .btn.btn-icon.btn-lg {
  height:48px;
  width:48px;
- line-height:51px
+ line-height:46px
 }
-    .btn.btn-icon.btn-lg .icons {
-        height: 20px;
-        width: 20px;
-        font-size: 20px
-    }
+.btn.btn-icon.btn-lg .icons {
+ height:20px;
+ width:20px;
+ font-size:20px
+}
 .btn.btn-icon.btn-sm {
  height:30px;
  width:30px;
@@ -2460,7 +2462,7 @@ padding: 60px 0
  position:relative
 }
 .bg-overlay {
- background-color:rgba(60,72,88,0.3);
+ background-color:rgba(60,72,88,0.7);
  position:absolute;
  top:0;
  left:0;
@@ -2678,7 +2680,7 @@ padding: 60px 0
  }
 }
 #topnav {
- position:absolute ;
+ position:fixed;
  left:0;
  right:0;
  top:0;
@@ -2702,11 +2704,11 @@ padding: 60px 0
  outline:none
 }
 #topnav .has-submenu.active a {
- color:#f8f9fc
+ color:#fff
 }
-    #topnav .has-submenu.active .submenu li.active > a {
-        color: #2f55d4 !important
-    }
+#topnav .has-submenu.active .submenu li.active>a {
+ color:#2f55d4 !important
+}
 #topnav .has-submenu.active.active .menu-arrow {
  border-color:#2f55d4
 }
@@ -2856,7 +2858,7 @@ padding: 60px 0
  float:left
 }
 #topnav.scroll {
- background-color:#e43f52;
+ background-color:#fff;
  border:none;
  -webkit-box-shadow:0 0 3px rgba(60,72,88,0.15);
  box-shadow:0 0 3px rgba(60,72,88,0.15)
@@ -3053,7 +3055,7 @@ padding: 60px 0
   margin-left:10px
  }
  #topnav .navigation-menu.nav-light>li>a {
-  color:rgba(255,255,255,0.9)
+  color:rgba(255,255,255,0.5)
  }
  #topnav .navigation-menu.nav-light>li.active>a {
   color:#fff !important
@@ -3061,9 +3063,9 @@ padding: 60px 0
  #topnav .navigation-menu.nav-light>li:hover>.menu-arrow {
   border-color:#fff !important
  }
-    #topnav .navigation-menu.nav-light > li:hover > a {
-        color: #a09e9e !important
-    }
+ #topnav .navigation-menu.nav-light>li:hover>a {
+  color:#fff !important
+ }
  #topnav .navigation-menu.nav-light .has-submenu .menu-arrow {
   border-color:rgba(255,255,255,0.5)
  }
@@ -3187,7 +3189,7 @@ padding: 60px 0
  #topnav .navigation-menu>li>a:hover,
  #topnav .navigation-menu>li .submenu li a:hover,
  #topnav .navigation-menu>li.has-submenu.open>a {
-  color:#fff
+  color:#2f55d4
  }
  #topnav .menu-extras .menu-item {
   border-color:#8492a6
@@ -3209,7 +3211,7 @@ padding: 60px 0
   top:12px
  }
  #topnav .has-submenu.active a {
-  color:#fff
+  color:#2f55d4
  }
  #navigation {
   position:absolute;
@@ -5041,7 +5043,7 @@ padding: 60px 0
  }
 }
 .bg-profile {
- padding:50px 0;
+ padding:100px 0;
  background-size:cover;
  -ms-flex-item-align:center;
  -ms-grid-row-align:center;

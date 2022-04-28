@@ -46,7 +46,7 @@ namespace CodeTo.Web.Attributes
                         if (permissions.Select(c => c.ToLower()).Contains(permission.ToLower()))
                             context.HttpContext.Items.Add("permissions", permissions);
                         else
-                            context.Result = new RedirectResult("/auth/access-denied");
+                            context.Result = new RedirectResult("/auth/AccessDenied");
                     }
 
                 }
