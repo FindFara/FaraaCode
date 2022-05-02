@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bz.ClassFinder.Models;
 using CodeTo.Domain.Entities.Permissions;
 using CodeTo.Domain.Entities.Users;
 
@@ -10,9 +11,6 @@ namespace CodeTo.Core.ViewModel.Permission
 {
     public static class PermissionConvertor
     {
-        #region Role
-
-        #endregion
         #region ShowRole
         public static ShowRoleViewModel ToShowRoleViewModel(this Role r)
         {
@@ -33,8 +31,7 @@ namespace CodeTo.Core.ViewModel.Permission
             {
                 RoleId = r.Id,
                 RoleName = r.RoleTitle,
-              
-
+                Permissions = {new BzClassInfo()}
             };
         }
 

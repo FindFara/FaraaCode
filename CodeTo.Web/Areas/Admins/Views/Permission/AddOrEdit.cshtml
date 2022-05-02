@@ -1,4 +1,5 @@
-﻿@model Tuple<CodeTo.Core.ViewModel.Permission.RolePermissionAddOrEditViewModel, List<CodeTo.Core.ViewModel.Permission.PermissionsViewModel>>
+﻿@using Microsoft.AspNetCore.Routing
+@model Tuple<CodeTo.Core.ViewModel.Permission.RolePermissionAddOrEditViewModel, List<CodeTo.Core.ViewModel.Permission.PermissionsViewModel>>
 @{
     ViewData["Title"] = (Model.Item1.RoleId == 0 ? "افزودن" : " ویرایش");
 }
@@ -26,6 +27,11 @@
                     <input asp-for="Item1.RoleName" class="form-control" />
                     <span asp-validation-for="Item1.RoleName" class="text-danger"></span>
                 </div>
+                <div class="form-group col-lg-12">
+                    <label asp-for="Item1.Permissions" class="control-label"></label>
+                    <input asp-for="Item1.Permissions" class="form-control" />
+                    <span asp-validation-for="Item1.Permissions" class="text-danger"></span>
+                </div>
                 @foreach (var per in Model.Item2)
                 {
                     <div class="task-check col-lg-2 col-sm- col-xs-4">
@@ -35,6 +41,7 @@
                         </label>
                     </div>
                 }
+
                 @if (Model.Item1.RoleId != 0)
                 {
                     <input type="hidden" asp-for="Item1.RoleId" />
@@ -49,6 +56,7 @@
                         <input type="submit" value="Add" class="btn btn-success" />
                     </div>
                 }
+                @Context.User.Claims.ToList()
             </form>
         </div>
     </div>
