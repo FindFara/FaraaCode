@@ -18,11 +18,11 @@ namespace CodeTo.Web
     public class Startup
     {
         public IConfiguration _configuration;
-
         public Startup(IConfiguration configuration)
         {
             _configuration = configuration;
         }
+       
         public void ConfigureServices(IServiceCollection services)
         {
             #region Authentication

@@ -14,7 +14,10 @@ namespace CodeTo.Web.Controllers
             return View();
         }
 
-        [Authorize]
-        public IActionResult Test() => View();
+        public IActionResult About()
+        {
+            return View();
+        }
+        
     }
 }
