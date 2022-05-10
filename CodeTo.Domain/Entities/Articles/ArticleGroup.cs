@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +18,15 @@ namespace CodeTo.Domain.Entities.Articles
        #region Auditable
        public DateTime CreateDate { get; set; }
        public DateTime? LastModifyDate { get; set; }
-       #endregion
 
-       #region Relations
-       public ICollection<Article> Article { get; set; }
+        #endregion
+        public int? ParentID { get; set; }
+
+
+        #region Relations
+        [ForeignKey("ParentID")]
+        public List<ArticleGroup> ArticleGroups { get; set; }
+        public ICollection<Article> Article { get; set; }
        #endregion
    }
    

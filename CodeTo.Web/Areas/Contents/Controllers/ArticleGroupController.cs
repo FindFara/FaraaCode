@@ -69,7 +69,7 @@ namespace CodeTo.Web.Areas.Contents.Controllers
         }
 
         // GET: Admin/ArticleGroups/Edit/5
-        [HttpGet("Articles/ArticleGroup/Edit")]
+        [HttpGet("Contents/ArticleGroup/Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -146,9 +146,6 @@ namespace CodeTo.Web.Areas.Contents.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //private bool ArticleGroupExists(int id)
-        //{
-        //    return _context.ArticleGroups.Any(e => e.Id == id);
-        //}
+       
     }
 }

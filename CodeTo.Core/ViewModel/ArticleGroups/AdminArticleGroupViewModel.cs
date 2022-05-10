@@ -16,6 +16,9 @@ namespace CodeTo.Core.ViewModel.ArticleGroups
         [Required(ErrorMessage = "Enter the {0}")]
         public string Title { get; set; }
 
+        [Display(Name = "شناسه گروه اصلی")]
+        public int? ParentId { get; set; }
+
         [Display(Name = "تاریخ ایجاد")]
         public DateTime CreateDate { get; set; }
        
@@ -25,11 +28,18 @@ namespace CodeTo.Core.ViewModel.ArticleGroups
     public class ArticleGroupIndexViewModel:IIndexVeiwModel<int>
     {
         public int Id { get; set; }
+
         [Display(Name = "اسم گروه")]
         public string Title { get; set; }
+
         [Display(Name = "تاریخ ایجاد")]
         public DateTime CreateDate { get; set; }
+
         [Display(Name = "آخرین بروزرسانی")]
         public DateTime? LastModifyDate { get; set; }
+
+        [Display(Name = "شناسه گروه ")]
+        public int? ParentId { get; set; }
     }
+
 }

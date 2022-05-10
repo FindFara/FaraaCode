@@ -30,8 +30,8 @@ namespace CodeTo.Domain.Entities.Articles
         public DateTime? LastModifyDate { get; set; }
 
         #endregion
-        #region Relations
 
+        #region Relations
         public ArticleGroup ArticleGroup { get; set; }
         public ICollection<ArticleComment> ArticleComment { get; set; }
         #endregion

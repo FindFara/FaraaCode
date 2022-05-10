@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeTo.Core.ViewModel.ArticleGroups;
+using CodeTo.Core.ViewModel.Articles;
+using CodeTo.Core.ViewModel.CourseGroups;
 using CodeTo.DataEF.Context;
 using CodeTo.Domain.Entities.Articles;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeTo.Core.Services.ArticleServices
 {
-   public class ArticleGroupService :IArticleGroupService
+    public class ArticleGroupService : IArticleGroupService
     {
         private readonly CodeToContext _context;
 
@@ -27,7 +29,9 @@ namespace CodeTo.Core.Services.ArticleServices
                 {
                     Id = vm.Id,
                     CreateDate = DateTime.Now,
-                    ArticleGroupTitle = vm.Title
+                    ArticleGroupTitle = vm.Title,
+                    ParentID=vm.ParentId
+                    
                 });
                 await _context.SaveChangesAsync();
                 return true;
@@ -61,6 +65,7 @@ namespace CodeTo.Core.Services.ArticleServices
             {
                 var ArticleGroup = await _context.ArticleGroups.FindAsync(vm.Id);
                 ArticleGroup.ArticleGroupTitle = vm.Title;
+                ArticleGroup.ParentID = vm.ParentId;
                 ArticleGroup.LastModifyDate = DateTime.Now;
                 _context.ArticleGroups.Update(ArticleGroup);
                 await _context.SaveChangesAsync();
@@ -92,5 +97,6 @@ namespace CodeTo.Core.Services.ArticleServices
             //var vm = result.ToIndexViewModel().ToList();
             //return vm;
         }
+
     }
 }

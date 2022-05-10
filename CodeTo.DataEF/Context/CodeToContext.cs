@@ -27,6 +27,7 @@ namespace CodeTo.DataEF.Context
         public DbSet<WalletType> WalletTypes { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<Article> Articles { get; set; }
+   
         public DbSet<ArticleGroup> ArticleGroups { get; set; }
         public DbSet<ArticleComment> ArticleComments { get; set; }
         public DbSet<Course> Courses { get; set; }

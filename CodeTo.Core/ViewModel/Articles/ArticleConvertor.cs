@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeTo.Core.ViewModel.ArticleGroups;
 using CodeTo.Domain.Entities.Articles;
 
 namespace CodeTo.Core.ViewModel.Articles
@@ -23,7 +24,7 @@ namespace CodeTo.Core.ViewModel.Articles
                 ArticleDescription = Article.ArticleDescription,
                 CreateDate = Article.CreateDate,
                 ArticleImageName = Article.ArticleImageName,
-                ArtileGroupTitle = Article.ArticleGroup?.ArticleGroupTitle
+                ArtileGroupTitle = Article.ArticleGroup?.ArticleGroupTitle,
 
             };
         }
@@ -59,5 +60,7 @@ namespace CodeTo.Core.ViewModel.Articles
         }
 
         #endregion
+     
+
     }
 }

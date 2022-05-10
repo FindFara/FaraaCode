@@ -4,6 +4,7 @@ using CodeTo.DataEF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeTo.DataEF.Migrations
 {
     [DbContext(typeof(CodeToContext))]
-    partial class CodeToContextModelSnapshot : ModelSnapshot
+    [Migration("20220509141046_Categoriadd")]
+    partial class Categoriadd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +31,9 @@ namespace CodeTo.DataEF.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<int?>("ArticleCategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ArticleDescription")
                         .IsRequired()
@@ -61,9 +66,41 @@ namespace CodeTo.DataEF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArticleGroupId");
+                    b.HasIndex("ArticleCategoryId");
 
                     b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.ArticleCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ArticleCategoryTitle")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("ArticleGroupId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleGroupId");
+
+                    b.ToTable("ArticlesCategory");
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Articles.ArticleComment", b =>
@@ -128,12 +165,7 @@ namespace CodeTo.DataEF.Migrations
                     b.Property<DateTime?>("LastModifyDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ParentID")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ParentID");
 
                     b.ToTable("ArticleGroups");
                 });
@@ -405,11 +437,18 @@ namespace CodeTo.DataEF.Migrations
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Articles.Article", b =>
                 {
-                    b.HasOne("CodeTo.Domain.Entities.Articles.ArticleGroup", "ArticleGroup")
+                    b.HasOne("CodeTo.Domain.Entities.Articles.ArticleCategory", "ArticleCategory")
                         .WithMany("Article")
-                        .HasForeignKey("ArticleGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ArticleCategoryId");
+
+                    b.Navigation("ArticleCategory");
+                });
+
+            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.ArticleCategory", b =>
+                {
+                    b.HasOne("CodeTo.Domain.Entities.Articles.ArticleGroup", "ArticleGroup")
+                        .WithMany("ArticleCategory")
+                        .HasForeignKey("ArticleGroupId");
 
                     b.Navigation("ArticleGroup");
                 });
@@ -429,13 +468,6 @@ namespace CodeTo.DataEF.Migrations
                     b.Navigation("Article");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.ArticleGroup", b =>
-                {
-                    b.HasOne("CodeTo.Domain.Entities.Articles.ArticleGroup", null)
-                        .WithMany("ArticleGroups")
-                        .HasForeignKey("ParentID");
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Courses.Course", b =>
@@ -515,11 +547,14 @@ namespace CodeTo.DataEF.Migrations
                     b.Navigation("ArticleComment");
                 });
 
-            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.ArticleGroup", b =>
+            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.ArticleCategory", b =>
                 {
                     b.Navigation("Article");
+                });
 
-                    b.Navigation("ArticleGroups");
+            modelBuilder.Entity("CodeTo.Domain.Entities.Articles.ArticleGroup", b =>
+                {
+                    b.Navigation("ArticleCategory");
                 });
 
             modelBuilder.Entity("CodeTo.Domain.Entities.Courses.CourseGroup", b =>

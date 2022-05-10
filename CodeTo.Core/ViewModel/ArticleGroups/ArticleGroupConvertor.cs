@@ -15,8 +15,9 @@ namespace CodeTo.Core.ViewModel.ArticleGroups
             {
                 CreateDate = group.CreateDate,
                 Id = group.Id,
-                Title = group.ArticleGroupTitle
-               
+                Title = group.ArticleGroupTitle,
+                ParentId = group?.ParentID
+
             };
         }
         public static IQueryable<ArticleGroupCreateOrEditViewModel> ToCreateOrEditViewModel(this IQueryable<ArticleGroup> groups)
@@ -31,7 +32,9 @@ namespace CodeTo.Core.ViewModel.ArticleGroups
                 Id = group.Id,
                 Title = group.ArticleGroupTitle,
                 CreateDate = group.CreateDate,
-                LastModifyDate = group.LastModifyDate
+                LastModifyDate = group.LastModifyDate,
+                ParentId = group?.ParentID
+                
             };
         }
         public static IEnumerable<ArticleGroupIndexViewModel> ToIndexViewModel(this IEnumerable<ArticleGroup> groups)

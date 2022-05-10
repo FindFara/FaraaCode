@@ -56,6 +56,6 @@ namespace CodeTo.Core.ViewModel.Articles
                 ? $"{ArticlePathTools.ArticleImagePath}{ArticleImageName}"
                 : ArticlePathTools.ArticleImageDefautl;
     }
+   
 }
-
 

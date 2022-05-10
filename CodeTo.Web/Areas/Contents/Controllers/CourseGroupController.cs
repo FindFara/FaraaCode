@@ -69,12 +69,13 @@ namespace CodeTo.Web.Areas.Contents.Controllers
         }
 
         // GET: Admin/CourseGroups/Edit/5
-        [HttpGet("Courses/CourseGroup/Edit")]
+        [HttpGet("Contents/CourseGroup/Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
+
             }
 
             var CourseGroup = await _service.FindAsync(id.Value);

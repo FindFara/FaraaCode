@@ -34,4 +34,5 @@ namespace CodeTo.Core.ViewModel.CourseGroups
         public DateTime? LastModifyDate { get; set; }
       
     }
+
 }
