@@ -1,0 +1,89 @@
+﻿@model IPagedList< CodeTo.Core.ViewModel.Articles.ClientArticleViewModel>
+@using CodeTo.Core.Utilities.Extensions
+<partial name="/Views/Blog/_HeroBlog.cshtml">
+    <!-- Blog Start -->
+    <section class="section">
+        <div class="container" style="max-width: 1250px;">
+            <div class="row justify-content-between">
+                <div class="col-lg-4 col-md-5">
+                    <div class="widget">
+                        <form role="search" asp-area="Blog" asp-action="Index" method="get">
+                            <div class="input-group mb-3 border rounded">
+                                <input type="text"  name="FilterTitle" class="form-control border-0" placeholder="جستجوی کلمه کلیدی...">
+                                <button type="submit" class="input-group-text bg-white border-0" id="searchsubmit"><i class="uil uil-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-5">
+                    <select class="form-select form-control" aria-label="Default select example" id="Sortbylist-job">
+                        <option selected>مرتب سازی بر اساس آخرین</option>
+                        <option>مرتب سازی بر اساس محبوبیت</option>
+                        <option>مرتب سازی بر اساس رتبه بندی</option>
+                        <option>مرتب سازی بر اساس قیمت: کم به زیاد</option>
+                        <option>مرتب سازی بر اساس قیمت: زیاد به کم</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-6 pt-4">
+                <div class="row">
+                    @foreach (var ar in Model)
+                    {
+                        <div class="col-lg-3 col-md-12 mb-4 pb-2">
+                            <div class="card blog rounded border-0 shadow">
+                                <div class="position-relative">
+                                    <img src="@ar.ArticleFullName" class="card-img-top rounded-top" alt="...">
+                                    <div class="overlay rounded-top bg-dark"></div>
+                                </div>
+                                <div class="card-body content">
+                                    <h6><a href="javascript:void(0)" class="card-title title text-dark" style="font-size: 15px">@ar.ArticleTitle</a></h6>
+                                    <div class="post-meta d-flex justify-content-between mt-3">
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="list-inline-item me-2 mb-0"><a href="javascript:void(0)" class="text-muted like"><i class="uil uil-heart me-1"></i>33</a></li>
+                                            <li class="list-inline-item"><a href="javascript:void(0)" class="text-muted comments"><i class="uil uil-comment me-1"></i>08</a></li>
+                                        </ul>
+                                        <a asp-controller="Blog" asp-action="DetailArticle"accesskey asp-route-id="@ar.Id" class="text-muted readmore">ادامه مطلب  <i class="uil uil-angle-left-b align-middle"></i></a>
+                                    </div>
+                                </div>
+                                <div class="author">
+                                    <small class="text-light user d-block"><i class="uil uil-user"></i>@ar.Writer</small>
+                                    <small class="text-light date"><i class="uil uil-calendar-alt"></i>@ar.CreateDate.ToShamsi()</small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- PAGINATION START -->
+                    <div class="col-12">
+                        <ul class="pagination justify-content-center mb-0">
+                            @if (Model.HasPreviousPage)
+                            {
+                                <li class="page-item">
+                                <a class="page-link" asp-action="Index" asp-route-pageId="@(Model.PageCount - 1)" aria-label="Previous">قبل </a>
+                            </li>
+                            }
+                            @for (int i = 1; i <= Model.PageCount; i++)
+                            {
+                                var isCurrent = Model.PageNumber == i;
+                                <li class="@(isCurrent?"current":"")">
+                                    @if (isCurrent)
+                                    {
+                                        <span class="page-link">@i</span>
+                                    }
+                                    else
+                                    {
+                                        <a class="page-link" asp-action="Index" asp-route-pageId="@(i)">@i</a>
+                                    }
+                                </li>
+                            }
+                            <li class="page-item">
+                                <a class="page-link" asp-action="Index" asp-route-pageId="@(Model.PageCount + 1)" aria-label="Next">بعد </a>
+                            </li>
+                        </ul>
+                    <!-- PAGINATION END -->
+                </div><!--end row-->
+            </div>
+            <!-- BLog End -->
+        </div>
+    </section>
+    <!-- Blog End -->

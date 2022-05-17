@@ -12,7 +12,8 @@ namespace CodeTo.Core.Statics
    public class Values
     {
        public const int PageSize = 15;
-       public static List<BzClassInfo> Permissions
+        public const int BlogPageSize = 12;
+        public static List<BzClassInfo> Permissions
        {
            get
            {

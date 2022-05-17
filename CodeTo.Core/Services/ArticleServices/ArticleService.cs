@@ -42,7 +42,7 @@ namespace CodeTo.Core.Services.ArticleServices
                 {
                     ArticleImageName = GeneratorGuid.GeneratorUniqCode() + vm.ArticleImageFile.FileName;
                     var thumbSize = new ThumbSize(100, 100);
-                    vm.ArticleImageFile.AddImageToServer(ArticleImageName, UserPathTools.UserImageServerPath, thumbSize,
+                    vm.ArticleImageFile.AddImageToServer(ArticleImageName, ArticlePathTools.ArticleImageServerPath, thumbSize,
                         vm.ArticleImageName);
                 }
 
@@ -130,8 +130,7 @@ namespace CodeTo.Core.Services.ArticleServices
                 .ToListAsync();
         }
 
-        public async
-            Task<bool> IsExist(long id)
+        public async Task<bool> IsExist(long id)
         {
             return await _context.Articles.AnyAsync(p => p.Id == id);
         }

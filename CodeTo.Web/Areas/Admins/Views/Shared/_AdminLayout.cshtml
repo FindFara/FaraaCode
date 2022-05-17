@@ -1,14 +1,8 @@
 ﻿<!DOCTYPE html>
-<!--
-BeyondAdmin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.6
-Version: 1.6.0
-Purchase: https://wrapbootstrap.com/theme/beyondadmin-adminapp-angularjs-mvc-WB06R48S4
--->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!-- Head -->
-<head>
-    <meta charset="utf-8" />
+<head> 
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
     <title>@ViewData["Title"]</title>
     <partial name="_AdminMeta" />
     <partial name="_AdminStyle" />
@@ -309,8 +303,8 @@ Purchase: https://wrapbootstrap.com/theme/beyondadmin-adminapp-angularjs-mvc-WB0
     </div>
 
     <partial name="_AdminScript" />
-    @RenderSection("AdminScripts", false)
+    @RenderSection("Scripts", false)
 
 </body>
-<!--  /Body -->
+<!--/Body -->
 </html>

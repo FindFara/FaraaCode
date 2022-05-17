@@ -60,7 +60,31 @@ namespace CodeTo.Core.ViewModel.Articles
         }
 
         #endregion
-     
+        #region Client Index
+
+        public static ClientArticleViewModel ToClientArticleViewModel(this Article Article)
+        {
+            if (Article == null) return null;
+            return new ClientArticleViewModel
+            {
+                Id = Article.Id,
+                GroupId = Article.ArticleGroupId,
+                Writer = Article.Writer,
+                ArticleTitle = Article.ArticleTitle,
+                ArticleDescription = Article.ArticleDescription,
+                CreateDate = Article.CreateDate,
+                ArticleImageName = Article.ArticleImageName,
+                ArtileGroupTitle = Article.ArticleGroup?.ArticleGroupTitle,
+
+            };
+        }
+
+        public static IQueryable<ClientArticleViewModel> ToClientArticleViewModel(this IQueryable<Article> Articles)
+        {
+            return Articles.Select(c => c.ToClientArticleViewModel());
+        }
+
+        #endregion
 
     }
 }

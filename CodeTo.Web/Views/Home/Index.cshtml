@@ -4,7 +4,7 @@
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="3000">
                 <div class="bg-home d-flex align-items-center" style="height: 70vh; background-image:url('/images/bg/bg1.jpg')">
-                    <div class="bg-overlay"></div>
+                    <div class="bg-overlay"> </div>
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-12 text-center">
@@ -13,13 +13,11 @@
                                     <h4 class="title para-desc para-dark mx-auto text-light">خودآموزی ، کسب تجربه ، مشاهده توسعه دهندگان </h4>
                                     <h4 class="title para-desc para-dark mx-auto text-light">وبلاگ ، دوره های جامع و رایگان </h4>
                                     <br />
-                                    <div class="mt-4">
-                                        <div class="subcribe-form">
-                                            <form>
-                                                <input type="text" id="course" name="name" class="rounded" placeholder=" چی میخوای یاد بگیری ؟ ">
-                                                <button type="submit" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search fea icon-sm"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
-                                            </form>
-                                        </div>
+                                    <div class="subcribe-form">
+                                        <form>
+                                            <input type="text" id="course" name="name" class="rounded" placeholder=" چی میخوای یاد بگیری ؟ ">
+                                            <button type="submit" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search fea icon-sm"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -28,6 +26,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>
 <!-- Hero End -->
 
@@ -146,15 +145,23 @@
         </div>
     </div>
     <br />
-    <div class="page-next ">
-        <nav aria-label="breadcrumb" class="d-inline-block">
-            <ul class="breadcrumb bg-white rounded shadow mb-0">
-                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">خانه </a></li>
-                <li class="breadcrumb-item active" aria-current="page">مقالات  </li>
-            </ul>
-        </nav>
+    <div class="row align-items-center mb-4 pb-2">
+        <div class="page-next col-md-8">
+            <nav aria-label="breadcrumb" class="d-inline-block">
+                <ul class="breadcrumb bg-white rounded shadow mb-0">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">خانه </a></li>
+                    <li class="breadcrumb-item active" aria-current="page">برترین دوره ها</li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-md-4 mt-4 mt-sm-0">
+            <div class="text-center text-md-end">
+                <a href="javascript:void(0)" class="btn btn-soft-primary">نمایش بیشتر <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left fea icon-sm"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></a>
+            </div>
+        </div>
     </div>
-    <br />
+
     <div class="row">
         <div class="col-lg-3 col-md-6 mt-6">
             <div class="card blog rounded border-0 shadow">
@@ -247,16 +254,23 @@
             </div>
         </div><!--end col-->
     </div>
-    <br />
-    <div class="page-next ">
-        <nav aria-label="breadcrumb" class="d-inline-block">
-            <ul class="breadcrumb bg-white rounded shadow mb-0">
-                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">خانه </a></li>
-                <li class="breadcrumb-item active" aria-current="page">برترین دوره ها</li>
-            </ul>
-        </nav>
-    </div>
 
+    <br />
+    <div class="row align-items-center mb-4 pb-2">
+        <div class="page-next col-md-8">
+            <nav aria-label="breadcrumb" class="d-inline-block">
+                <ul class="breadcrumb bg-white rounded shadow mb-0">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">خانه </a></li>
+                    <li class="breadcrumb-item active" aria-current="page">برترین دوره ها</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-4 mt-4 mt-sm-0">
+            <div class="text-center text-md-end">
+                <a href="javascript:void(0)" class="btn btn-soft-primary">نمایش بیشتر <i data-feather="arrow-left" class="fea icon-sm"></i></a>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-3 col-md-6 mt-4 pt-2">
             <div class="card courses-desc overflow-hidden rounded shadow border-0">

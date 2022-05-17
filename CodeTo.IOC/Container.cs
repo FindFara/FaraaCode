@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using CodeTo.Core.Services.ArticleServices;
 using CodeTo.Core.Services.CourseServices;
 using CodeTo.Core.Services.PermissionServices;
-
+using CodeTo.Core.Services.ArticleServices.ClientArticleServices;
 
 namespace CodeTo.IOC
 {
@@ -40,7 +40,7 @@ namespace CodeTo.IOC
             services.AddTransient<ICourseService, CourseService>();
             services.AddTransient<IArticleGroupService,ArticleGroupService>();
             services.AddTransient<ICourseGroupService,CourseGroupService>();
-
+            services.AddTransient<IClientArticleService, ClientArticleService>();
 
             return services;
         }

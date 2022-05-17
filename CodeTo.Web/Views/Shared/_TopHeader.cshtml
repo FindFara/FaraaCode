@@ -7,18 +7,43 @@
                 <img src="images/logo-dark.png" height="24" alt="">
             </a>
         </div>
-        <div class="buy-button">
+        <div>
             @if (User.Identity.IsAuthenticated)
             {
-                <a asp-area="UserPanels" asp-controller="UserPanelHome" asp-action="Index"
-               class="uil-user  btn btn-icon btn-lg btn-primary mt-2"></a>
-
-                <a asp-controller="Account" asp-action="Logout" class="uil-sign-out-alt btn btn-icon btn-lg btn-outline-primary mt-2"></a>
-                if (User.Identity.Name == "Admin")
-                {
-                    <a asp-area="Admins" asp-controller="Dashboard" asp-action="Index"
-               class="uil-book  btn btn-icon btn-lg btn-primary mt-2"></a>
-                }
+                <ul class="buy-button list-inline mb-0">
+                    <li class="list-inline-item mb-0">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-link text-decoration-none dropdown-toggle p-0 pe-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="uil uil-search h5 text-muted" ></i>
+                            </button>
+                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 py-0" style="width: 300px;">
+                                <form>
+                                    <input type="text" id="text" name="name" class="form-control border bg-white" placeholder="جستجو...">
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-inline-item mb-0 pe-1">
+                        <a href="javascript:void(0)" data class="btn btn-icon btn-primary"data-bs-toggle="modal" data-bs-target="#wishlist"><i class="uil uil-heart align-middle icons"></i></a>
+                    </li>
+                    <li class="list-inline-item mb-0">
+                        <div class="dropdown dropdown-primary">
+                            <button type="button" class="btn btn-icon btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="uil uil-user align-middle icons"></i>
+                            </button>
+                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 py-3" style="width: 200px; margin: 0px; position: absolute; inset: 0px auto auto 0px; transform: translate(0px, 38px);">
+                                <a class="dropdown-item text-dark" asp-area="UserPanels" asp-controller="UserPanelHome" asp-action="Index"><i class="uil uil-user align-middle me-1"></i> حساب کاربری</a>
+                                <a class="dropdown-item text-dark" href="#"><i class="uil uil-clipboard-notes align-middle me-1"></i>کیف پول </a>
+                                @if (User.Identity.Name == "Admin")
+                                {
+                                    <a class="dropdown-item text-dark" a asp-area="Admins" asp-controller="Dashboard" asp-action="Index"><i class="uil uil-award align-middle me-1"></i>پنل ادمین</a>
+                                }
+                                <div class="dropdown-divider my-3 border-top"></div>
+                                <a class="dropdown-item text-dark" asp-controller="Account" asp-action="Logout"><i class="uil uil-sign-out-alt align-middle me-1"></i> خروج </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             }
             else
             {
@@ -32,7 +57,6 @@
                         <div class="btn btn-light login-btn-light"> ثبت نام </div>
                     </a>
                 </div>
-
             }
         </div><!--end login button-->
         <!-- End Logo container-->
@@ -56,6 +80,7 @@
                 <li><a asp-area="" asp-controller="Home" asp-action="Index" class="sub-menu-item">صفحه اصلی </a></li>
                 @await Component.InvokeAsync("ShowArticleGroups")
                 @await Component.InvokeAsync("ShowCourseGroups")
+                <li><a asp-area="" asp-controller="Blog" asp-action="Index" class="sub-menu-item">وبلاگ</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="About" class="sub-menu-item"> درباره ما</a></li>
             </ul><!--end navigation menu-->
             <!--end login button-->
