@@ -71,7 +71,7 @@ namespace CodeTo.Core.Services.AccountServices
             try
             {
                 var hassPassword = _securityService.HashPassword(vm.Password);
-                var user = await _context.Users.AddAsync(new Domain.Entities.Users.User
+                var user = await _context.Users.AddAsync(new User
                 {
                     EmailActiveCode = GeneratorGuid.GeneratorUniqCode(),
                     UserName = vm.UserName,
@@ -87,6 +87,7 @@ namespace CodeTo.Core.Services.AccountServices
             catch (Exception ex)
             {
                 var m = ex.Message;
+               
                 return false;
             }
         }

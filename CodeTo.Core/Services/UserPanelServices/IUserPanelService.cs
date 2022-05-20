@@ -19,18 +19,18 @@ namespace CodeTo.Core.Services.UserPanelServices
         Task<bool> EditProfile(string username, EditProfileViewModel profile);
         Task<bool> compareOldPassword(string username, string oldpassword);
         Task<bool> ChangePassword(string username, string newpassword);
-
+       
 
         #region Wallet
-        
+
         int GetUserIdByUserName(string username);
-        int UserBalanceAsync(string username);
+        Task<int> UserBalanceAsync(string username);
         
         Task<List<WalletHistoryViewModel>> ShowHistory(string username);
-        int ChargeUserWallet(int amount, string username, string Description, bool ISpay = false);
+        Task<int> ChargeUserWallet(int amount, string username, string Description, bool ISpay = false);
         long AddWallet(Wallet wallet);
-        public Wallet GetWalletByWalletId(long walletid);
-        public void UpdateWallet(Wallet wallet);
+         Wallet GetWalletByWalletId(long walletid);
+         void UpdateWallet(Wallet wallet);
 
         #endregion
     }

@@ -1,4 +1,5 @@
 ﻿using CodeTo.Domain.Base;
+using CodeTo.Domain.Entities.Articles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -54,7 +55,7 @@ namespace CodeTo.Domain.Entities.Users
         public double Wallets { get; set; }
         public long WalletsId { get; set; }
         public List<UserRole> UserRoles { get; set; }
-    
+        public List<ArticleComment> ArticleComments { get; set; }
         #endregion
 
     }

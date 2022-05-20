@@ -4,6 +4,7 @@ using CodeTo.DataEF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeTo.DataEF.Migrations
 {
     [DbContext(typeof(CodeToContext))]
-    partial class CodeToContextModelSnapshot : ModelSnapshot
+    [Migration("20220519094223_comment-article")]
+    partial class commentarticle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +74,10 @@ namespace CodeTo.DataEF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<long?>("ArticleId")
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("ArticleId1")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateDate")
@@ -94,7 +99,7 @@ namespace CodeTo.DataEF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArticleId");
+                    b.HasIndex("ArticleId1");
 
                     b.HasIndex("UserId");
 
@@ -370,7 +375,7 @@ namespace CodeTo.DataEF.Migrations
                 {
                     b.HasOne("CodeTo.Domain.Entities.Articles.Article", "Article")
                         .WithMany("ArticleComment")
-                        .HasForeignKey("ArticleId");
+                        .HasForeignKey("ArticleId1");
 
                     b.HasOne("CodeTo.Domain.Entities.Users.User", "User")
                         .WithMany("ArticleComments")

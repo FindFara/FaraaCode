@@ -1,6 +1,5 @@
 ﻿using CodeTo.Core.Services.ArticleServices;
 using CodeTo.Core.Services.CourseServices;
-using CodeTo.Core.ViewModel.ArticleGroups;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

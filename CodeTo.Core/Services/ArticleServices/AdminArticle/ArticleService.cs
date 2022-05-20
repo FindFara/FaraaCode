@@ -11,7 +11,7 @@ using CodeTo.DataEF.Context;
 using CodeTo.Domain.Entities.Articles;
 using Microsoft.EntityFrameworkCore;
 
-namespace CodeTo.Core.Services.ArticleServices
+namespace CodeTo.Core.Services.ArticleServices.AdminArticle
 {
     public class ArticleService : IArticleService
     {
@@ -124,7 +124,6 @@ namespace CodeTo.Core.Services.ArticleServices
         public async Task<List<ArticleIndexViewModel>> GetAllAsync()
         {
             return await _context.Articles
-                .Include(c => c.ArticleGroup)
                 .OrderByDescending(c => c.Id)
                 .ToIndexViewModel()
                 .ToListAsync();

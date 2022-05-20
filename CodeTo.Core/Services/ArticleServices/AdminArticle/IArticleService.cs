@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeTo.Core.Interfaces;
 
-namespace CodeTo.Core.Services.ArticleServices
+namespace CodeTo.Core.Services.ArticleServices.AdminArticle
 {
     public interface IArticleService : IGenericService<long, ArticleIndexViewModel, ArticleCreateOrEditViewModel>
     {

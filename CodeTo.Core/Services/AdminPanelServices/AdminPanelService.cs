@@ -117,7 +117,7 @@ namespace CodeTo.Core.Services.AdminPanelServices
                 adduser.IsEmailActive = true;
                 adduser.LastModifyDate = DateTime.Now;
 
-                #region MyRegion
+                #region image
 
                 if (vm.AvatarFile != null)
                 {

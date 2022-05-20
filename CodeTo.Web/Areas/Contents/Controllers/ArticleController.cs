@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bz.ClassFinder.Attributes;
-using CodeTo.Core.Services.ArticleServices;
 using CodeTo.Core.ViewModel.Articles;
 using CodeTo.Web.Areas.Contents.Controllers;
 using Microsoft.EntityFrameworkCore;
+using CodeTo.Core.Services.ArticleServices.AdminArticle;
 
 namespace CodeTo.Web.Areas.Contents.Controllers
 {

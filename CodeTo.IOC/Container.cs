@@ -13,10 +13,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeTo.Core.Services.ArticleServices;
 using CodeTo.Core.Services.CourseServices;
 using CodeTo.Core.Services.PermissionServices;
 using CodeTo.Core.Services.ArticleServices.ClientArticleServices;
+using CodeTo.Core.Services.ArticleServices.AdminArticle;
+using CodeTo.Core.Services.CommentService.ArticleComment;
 
 namespace CodeTo.IOC
 {
@@ -38,9 +39,9 @@ namespace CodeTo.IOC
             services.AddTransient<IPermissionService, PermissionService>();
             services.AddTransient<IArticleService, ArticleService>();
             services.AddTransient<ICourseService, CourseService>();
-            services.AddTransient<IArticleGroupService,ArticleGroupService>();
             services.AddTransient<ICourseGroupService,CourseGroupService>();
             services.AddTransient<IClientArticleService, ClientArticleService>();
+            services.AddTransient<IArticleCommentService, ArticleCommentService>();
 
             return services;
         }

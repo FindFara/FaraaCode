@@ -78,9 +78,8 @@
             <!-- Navigation Menu-->
             <ul class="navigation-menu nav-light">
                 <li><a asp-area="" asp-controller="Home" asp-action="Index" class="sub-menu-item">صفحه اصلی </a></li>
-                @await Component.InvokeAsync("ShowArticleGroups")
                 @await Component.InvokeAsync("ShowCourseGroups")
-                <li><a asp-area="" asp-controller="Blog" asp-action="Index" class="sub-menu-item">وبلاگ</a></li>
+                <li><a asp-area="" asp-controller="Blog" asp-action="Index" class="sub-menu-item">بلاگ</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="About" class="sub-menu-item"> درباره ما</a></li>
             </ul><!--end navigation menu-->
             <!--end login button-->

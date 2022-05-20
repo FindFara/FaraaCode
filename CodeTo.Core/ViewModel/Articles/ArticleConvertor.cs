@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeTo.Core.ViewModel.ArticleGroups;
 using CodeTo.Domain.Entities.Articles;
 
 namespace CodeTo.Core.ViewModel.Articles
@@ -23,8 +22,7 @@ namespace CodeTo.Core.ViewModel.Articles
                 ArticleTitle = Article.ArticleTitle,
                 ArticleDescription = Article.ArticleDescription,
                 CreateDate = Article.CreateDate,
-                ArticleImageName = Article.ArticleImageName,
-                ArtileGroupTitle = Article.ArticleGroup?.ArticleGroupTitle,
+                ArticleImageName = Article.ArticleImageName
 
             };
         }
@@ -46,8 +44,7 @@ namespace CodeTo.Core.ViewModel.Articles
                 Writer = Article.Writer,
                 ArticleTile = Article.ArticleTitle,
                 CreateDate = Article.CreateDate,
-                LastModifyDate = Article.LastModifyDate,
-                ArtileGroupTitle = Article.ArticleGroup?.ArticleGroupTitle,
+                LastModifyDate = Article.LastModifyDate
             };
         }
         public static IEnumerable<ArticleIndexViewModel> ToIndexViewModel(this IEnumerable<Article> Articles)
@@ -73,8 +70,7 @@ namespace CodeTo.Core.ViewModel.Articles
                 ArticleTitle = Article.ArticleTitle,
                 ArticleDescription = Article.ArticleDescription,
                 CreateDate = Article.CreateDate,
-                ArticleImageName = Article.ArticleImageName,
-                ArtileGroupTitle = Article.ArticleGroup?.ArticleGroupTitle,
+                ArticleImageName = Article.ArticleImageName
 
             };
         }
@@ -85,6 +81,28 @@ namespace CodeTo.Core.ViewModel.Articles
         }
 
         #endregion
+        #region Article Comment
 
+        public static ArticleCommentViewModel ToArticleCommentViewModel(this ArticleComment ac)
+        {
+            if (ac == null) return null;
+            return new ArticleCommentViewModel
+            {
+                id = ac.Id,
+                UserId = ac.UserId,
+                ArticleId = ac.ArticleId,
+                Message = ac.Message,
+                ReaedAdmin = ac.ReaedAdmin,
+                CreateDate = ac.CreateDate
+
+            };
+        }
+
+        public static IQueryable<ArticleCommentViewModel> ToArticleCommentViewModel(this IQueryable<ArticleComment> ac)
+        {
+            return ac.Select(c => c.ToArticleCommentViewModel());
+        }
+
+        #endregion
     }
 }

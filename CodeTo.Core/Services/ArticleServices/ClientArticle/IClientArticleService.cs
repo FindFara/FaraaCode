@@ -12,5 +12,6 @@ namespace CodeTo.Core.Services.ArticleServices.ClientArticleServices
     {
         public Task<IPagedList<ClientArticleViewModel>> GetAllToShowAsync(int pageId = 1, string FilterTitle= "");
         public Task<ClientArticleViewModel> GetDetailArticle(long id);
+        Task<IPagedList<ClientArticleViewModel>> GetByGroupIdAsync(int groupid,int page = 1);
     }
 }

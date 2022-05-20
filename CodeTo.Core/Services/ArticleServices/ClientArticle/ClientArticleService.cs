@@ -36,10 +36,19 @@ namespace CodeTo.Core.Services.ArticleServices.ClientArticleServices
                 .ToPagedList(pageId, Values.BlogPageSize);
         }
 
+        public async Task<IPagedList<ClientArticleViewModel>> GetByGroupIdAsync(int groupid, int pageid = 1)
+        {
+            if (pageid <= 0) pageid = 1;
+            return await _context.Articles.Where(a => a.ArticleGroupId == groupid)
+                .Select(c => c.ToClientArticleViewModel())
+                .ToPagedListAsync(pageid, Values.BlogPageSize);
+
+        }
+
         public async Task<ClientArticleViewModel> GetDetailArticle(long id)
         {
             var model = await _context.Articles.FirstOrDefaultAsync(a => a.Id == id);
-              return model.ToClientArticleViewModel();
+            return model.ToClientArticleViewModel();
         }
     }
 }

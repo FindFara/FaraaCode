@@ -40,10 +40,11 @@ namespace CodeTo.Core.Services.UserPanelServices
 
             UserPanelInformationViewModel uv = new UserPanelInformationViewModel();
             {
+                uv.Id=user.Id;
                 uv.UserName = user.UserName;
                 uv.Email = user.Email;
                 uv.CreateDate = user.CreateDate;
-                uv.Wallet =UserBalanceAsync(username); 
+                uv.Wallet = await UserBalanceAsync(username); 
             }
             return uv;
         }
@@ -130,12 +131,12 @@ namespace CodeTo.Core.Services.UserPanelServices
 
 
 
-        public int GetUserIdByUserName(string username)
+        public  int GetUserIdByUserName(string username)
         {
-            return _context.Users.SingleOrDefault(u => u.UserName == username).Id;
+            return  _context.Users.FirstOrDefaultAsync(u => u.UserName == username).Id;
         }
 
-        public int UserBalanceAsync(string username)
+        public async Task<int> UserBalanceAsync(string username)
         {
             var Userid = GetUserIdByUserName(username);
             var deposit = _context.Wallets.Where(w => w.UserId == Userid && w.WalletTypeId == 1 && w.Ispay)
@@ -162,7 +163,7 @@ namespace CodeTo.Core.Services.UserPanelServices
                 }).ToList();
         }
 
-        public int ChargeUserWallet(int amount, string username, string Description, bool ISpay = false)
+        public async Task<int> ChargeUserWallet(int amount, string username, string Description, bool ISpay = false)
         {
             Wallet wallet = new Wallet()
             {

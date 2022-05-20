@@ -32,8 +32,7 @@ namespace CodeTo.Domain.Entities.Articles
         #endregion
 
         #region Relations
-        public ArticleGroup ArticleGroup { get; set; }
-        public ICollection<ArticleComment> ArticleComment { get; set; }
+        public List<ArticleComment> ArticleComment { get; set; }
         #endregion
 
     }

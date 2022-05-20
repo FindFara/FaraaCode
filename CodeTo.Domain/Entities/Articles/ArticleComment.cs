@@ -9,19 +9,17 @@ using CodeTo.Domain.Entities.Users;
 
 namespace CodeTo.Domain.Entities.Articles
 {
-    public class ArticleComment : BaseEntity<long>, DateEntity
+    public class ArticleComment : BaseEntity<long>
     {
         public int ArticleId { get; set; }
         public int UserId { get; set; }
+        public bool ReaedAdmin { get; set; }
 
         [Required] [MaxLength(500)] 
         public string Message { get; set; }
 
         #region Date
-
         public DateTime CreateDate { get; set; }
-        public DateTime? LastModifyDate { get; set; }
-
         #endregion
         #region Relations
 

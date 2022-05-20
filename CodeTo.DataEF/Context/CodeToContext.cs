@@ -27,8 +27,6 @@ namespace CodeTo.DataEF.Context
         public DbSet<WalletType> WalletTypes { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<Article> Articles { get; set; }
-   
-        public DbSet<ArticleGroup> ArticleGroups { get; set; }
         public DbSet<ArticleComment> ArticleComments { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseGroup> CourseGroups { get; set; }
@@ -42,7 +40,6 @@ namespace CodeTo.DataEF.Context
             modelBuilder.Entity<UserRole>().HasQueryFilter(u => !u.IsDeleted);
             modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsDeleted);
             modelBuilder.Entity<Article>().HasQueryFilter(u => !u.IsDeleted);
-            modelBuilder.Entity<ArticleGroup>().HasQueryFilter(u => !u.IsDeleted);
             modelBuilder.Entity<Course>().HasQueryFilter(u => !u.IsDeleted);
             modelBuilder.Entity<CourseGroup>().HasQueryFilter(u => !u.IsDeleted);
             modelBuilder.Entity<ArticleComment>().HasQueryFilter(u => !u.IsDeleted);
