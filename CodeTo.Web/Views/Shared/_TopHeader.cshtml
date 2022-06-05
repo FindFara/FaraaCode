@@ -17,8 +17,8 @@
                                 <i class="uil uil-search h5 text-muted" ></i>
                             </button>
                             <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 py-0" style="width: 300px;">
-                                <form>
-                                    <input type="text" id="text" name="name" class="form-control border bg-white" placeholder="جستجو...">
+                                <form asp-controller="Blog" asp-action="Index" method="get">
+                                    <input type="text" id="text" name="FilterTitle" class="form-control border bg-white" placeholder="جستجو...">
                                 </form>
                             </div>
                         </div>
@@ -33,7 +33,6 @@
                             </button>
                             <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 py-3" style="width: 200px; margin: 0px; position: absolute; inset: 0px auto auto 0px; transform: translate(0px, 38px);">
                                 <a class="dropdown-item text-dark" asp-area="UserPanels" asp-controller="UserPanelHome" asp-action="Index"><i class="uil uil-user align-middle me-1"></i> حساب کاربری</a>
-                                <a class="dropdown-item text-dark" href="#"><i class="uil uil-clipboard-notes align-middle me-1"></i>کیف پول </a>
                                 @if (User.Identity.Name == "Admin")
                                 {
                                     <a class="dropdown-item text-dark" a asp-area="Admins" asp-controller="Dashboard" asp-action="Index"><i class="uil uil-award align-middle me-1"></i>پنل ادمین</a>
@@ -78,7 +77,6 @@
             <!-- Navigation Menu-->
             <ul class="navigation-menu nav-light">
                 <li><a asp-area="" asp-controller="Home" asp-action="Index" class="sub-menu-item">صفحه اصلی </a></li>
-                @await Component.InvokeAsync("ShowCourseGroups")
                 <li><a asp-area="" asp-controller="Blog" asp-action="Index" class="sub-menu-item">بلاگ</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="About" class="sub-menu-item"> درباره ما</a></li>
             </ul><!--end navigation menu-->

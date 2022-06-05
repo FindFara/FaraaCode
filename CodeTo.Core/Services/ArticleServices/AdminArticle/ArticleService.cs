@@ -49,10 +49,11 @@ namespace CodeTo.Core.Services.ArticleServices.AdminArticle
                 _context.Articles.Add(new Article
                 {
                     Id = vm.Id,
-                    ArticleGroupId = vm.GroupId,
+                   
                     Writer = vm.Writer,
                     ArticleTitle = vm.ArticleTitle,
                     ArticleDescription = vm.ArticleDescription,
+                    ShortDescription=vm.ShortDescription,
                     CreateDate = DateTime.Now,
                     ArticleImageName = ArticleImageName,
                     IsDeleted = false
@@ -87,7 +88,8 @@ namespace CodeTo.Core.Services.ArticleServices.AdminArticle
                 article.Writer = vm.Writer;
                 article.ArticleTitle = vm.ArticleTitle;
                 article.ArticleDescription = vm.ArticleDescription;
-                article.ArticleGroupId = vm.GroupId;
+                article.ShortDescription = vm.ShortDescription;
+               
                 article.LastModifyDate = DateTime.Now;
 
                 _context.Articles.Update(article);

@@ -10,7 +10,7 @@ namespace CodeTo.Domain.Entities.Articles
 {
     public class Article : BaseEntity<long>, DateEntity
     {
-        public int ArticleGroupId { get; set; }
+       
         [Required]
         [MaxLength(150)]
         public string ArticleTitle { get; set; }
@@ -22,6 +22,9 @@ namespace CodeTo.Domain.Entities.Articles
         [Required]
         [MaxLength]
         public string ArticleDescription { get; set; }
+        [Required]
+        [MaxLength(1000)]
+        public string ShortDescription { get; set; }
         public string ArticleImageName { get; set; }
 
         #region Date

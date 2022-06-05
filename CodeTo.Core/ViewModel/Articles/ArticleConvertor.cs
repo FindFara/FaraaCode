@@ -17,12 +17,13 @@ namespace CodeTo.Core.ViewModel.Articles
             return new ArticleCreateOrEditViewModel
             {
                 Id = Article.Id,
-                GroupId = Article.ArticleGroupId,
                 Writer = Article.Writer,
                 ArticleTitle = Article.ArticleTitle,
                 ArticleDescription = Article.ArticleDescription,
                 CreateDate = Article.CreateDate,
-                ArticleImageName = Article.ArticleImageName
+                ArticleImageName = Article.ArticleImageName,
+                ShortDescription=Article.ShortDescription
+                
 
             };
         }
@@ -65,9 +66,9 @@ namespace CodeTo.Core.ViewModel.Articles
             return new ClientArticleViewModel
             {
                 Id = Article.Id,
-                GroupId = Article.ArticleGroupId,
                 Writer = Article.Writer,
                 ArticleTitle = Article.ArticleTitle,
+                ShortDescription=Article.ShortDescription,
                 ArticleDescription = Article.ArticleDescription,
                 CreateDate = Article.CreateDate,
                 ArticleImageName = Article.ArticleImageName

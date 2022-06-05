@@ -145,7 +145,7 @@ namespace CodeTo.Core.Services.UserPanelServices
             var withdraw = _context.Wallets.Where(w => w.UserId == Userid && w.WalletTypeId == 2 && w.Ispay)
                 .Select(w => w.Amount)
                 .ToList();
-            return ((int)(deposit.Sum() - withdraw.Sum()));
+            return (int)(deposit.Sum() - withdraw.Sum());
 
         }
 

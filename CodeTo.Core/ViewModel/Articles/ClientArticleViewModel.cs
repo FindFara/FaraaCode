@@ -24,7 +24,8 @@ namespace CodeTo.Core.ViewModel.Articles
         [Display(Name = "نویسنده")]
         [Required(ErrorMessage = "لطفا{0}را کنید")]
         public string Writer { get; set; }
-
+        [Display(Name = " توضیحات کوتاه ")]
+        public string ShortDescription { get; set; }
         [Display(Name = "توضیحات")]
         public string ArticleDescription { get; set; }
 

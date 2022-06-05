@@ -25,7 +25,6 @@ namespace CodeTo.Web.Controllers
         public async Task<IActionResult> Index(int groupid, int pageId = 1, string FilterTitle = "")
         {
             var AllArticle = await _service.GetAllToShowAsync(pageId, FilterTitle);
-            var ByGroup = await _service.GetByGroupIdAsync(groupid, pageId);
             return View(AllArticle);
             //return View(Tuple.Create(AllArticle,ByGroup));
         }

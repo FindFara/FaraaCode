@@ -7,11 +7,21 @@
             <div class="row">
                 <!-- BLog Start -->
                 <div class="col-lg-9 col-md-6">
-                    <div class="card blog blog-detail border-0 shadow rounded">
+
+                    <div class="card blog blog-detail border-0 shadow rounded ">
+                        <div class="card-body content">
+                            <h5 #>@Model.ArticleTitle</h5>
+                            <p class="text-muted mt-3" style="color: #645757 !important">@Model.ShortDescription</p>
+
+                        </div>
+                        <ul class="list-unstyled d-flex justify-content-between mt-2 me-4">
+                            <li class="list-inline-item user me-2"><a href="javascript:void(0)" class="text-primary"><i class="uil uil-user text-dark"></i>@Model.Writer</a></li>
+                            <li class="list-inline-item date text-muted"><i class="uil uil-calendar-alt text-primary"></i>@Model.CreateDate.ToShamsi()</li>
+                        </ul>
                         <img src="@Model.ArticleFullName" class="img-fluid rounded-top" alt="">
-                        <div class="card-.body content">
-                            <h6><i class="mdi mdi-tag text-primary me-1"></i><a href="javscript:void(0)" class="text-primary">@Model.ArticleTitle</a>, <a href="javscript:void(0)" class="text-primary"> @Model.ArtileGroupTitle </a></h6>
-                            <p class="text-muted mt-3">@Model.ArticleDescription</p>
+                        <div class="card-body content">
+                            <h6><i class="mdi mdi-tag text-primary me-2"></i><a href="javscript:void(0)" class="text-primary">@Model.ArticleTitle</a>, <a href="javscript:void(0)" class="text-primary"> @Model.Writer </a></h6>
+                            <p class="text-muted mt-3 " style="color: #000000 !important">@Model.ArticleDescription</p>
                             <div class="post-meta mt-3">
                                 <ul class="list-unstyled mb-0">
                                     <li class="list-inline-item me-2 mb-0"><a href="javascript:void(0)" class="text-muted like"><i class="uil uil-heart me-1"></i>33</a></li>
@@ -19,6 +29,7 @@
                                 </ul>
                             </div>
                         </div>
+
                     </div>
                     @*@await Component.InvokeAsync("ShowArticle", new { ArticleId = @Model.ArticleId })
                         <!-- Show Coment-->
@@ -137,73 +148,73 @@
                         {
                         <div class="alert alert-danger " role="alert">  جهت درج نظر ابتدا باید وارد شوید  <a asp-controller="Account" asp-action="Login" class="alert-link"> وارد شدن  </a></div>
                         }
-                        *@
-                        </div>
-                    <!-- Send Coment-->
-                    <!-- BLog End -->
-                    <!-- START SIDEBAR -->
-                    <div class="col-lg-3 col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                        <div class="card border-0 sidebar rounded shadow">
-                            <div class="card-body">
-                                <!-- SEARCH -->
-                                <div class="widget">
-                                    <form role="search" method="get">
-                                        <div class="input-group mb-3 border rounded">
-                                            <input type="text" id="s" name="s" class="form-control border-0" placeholder="جستجوی کلمه کلیدی...">
-                                            <button type="submit" class="input-group-text bg-transparent border-0" id="searchsubmit"><i class="uil uil-search"></i></button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- SEARCH -->
-                                <!-- Categories -->
-                                <div class="widget mb-4 pb-2">
-                                    <h5 class="widget-title">دسته بندیها </h5>
-                                    <ul class="list-unstyled mt-4 mb-0 blog-categories">
-                                        <li><a href="jvascript:void(0)">مالی </a> <span class="float-end">13</span></li>
-                                        <li><a href="jvascript:void(0)">شرکتی </a> <span class="float-end">90 </span></li>
-                                        <li><a href="jvascript:void(0)">وبلاگ </a> <span class="float-end">18</span></li>
-                                        <li><a href="jvascript:void(0)">کسب و کار</a> <span class="float-end">20</span></li>
-                                        <li><a href="jvascript:void(0)">سرمایه گذاری </a> <span class="float-end">22</span></li>
-                                    </ul>
-                                </div>
-                                <!-- Categories -->
-                                <!-- TAG CLOUDS -->
-                                <div class="widget mb-4 pb-2">
-                                    <h5 class="widget-title">برچسب های ابری</h5>
-                                    <div class="tagcloud mt-4">
-                                        <a href="jvascript:void(0)" class="rounded">کسب و کار </a>
-                                        <a href="jvascript:void(0)" class="rounded">مالی </a>
-                                        <a href="jvascript:void(0)" class="rounded">بازاریابی</a>
-                                        <a href="jvascript:void(0)" class="rounded">مدل </a>
-                                        <a href="jvascript:void(0)" class="rounded"> عروس </a>
-                                        <a href="jvascript:void(0)" class="rounded">سبک زندگی </a>
-                                        <a href="jvascript:void(0)" class="rounded">مسافرت </a>
-                                        <a href="jvascript:void(0)" class="rounded">زیبایی </a>
-                                        <a href="jvascript:void(0)" class="rounded">ویدئو </a>
-                                        <a href="jvascript:void(0)" class="rounded">صدا </a>
+                    *@
+                </div>
+                <!-- Send Coment-->
+                <!-- BLog End -->
+                <!-- START SIDEBAR -->
+                <div class="col-lg-3 col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                    <div class="card border-0 sidebar rounded shadow">
+                        <div class="card-body">
+                            <!-- SEARCH -->
+                            <div class="widget">
+                                <form role="search" method="get">
+                                    <div class="input-group mb-3 border rounded">
+                                        <input type="text" id="s" name="s" class="form-control border-0" placeholder="جستجوی کلمه کلیدی...">
+                                        <button type="submit" class="input-group-text bg-transparent border-0" id="searchsubmit"><i class="uil uil-search"></i></button>
                                     </div>
-                                </div>
-                                <!-- TAG CLOUDS -->
-                                <!-- SOCIAL -->
-                                <div class="widget">
-                                    <h5 class="widget-title">دنبال کردن ما</h5>
-                                    <ul class="list-unstyled social-icon mb-0 mt-4">
-                                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="facebook" class="fea icon-sm fea-social"></i></a></li>
-                                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
-                                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="twitter" class="fea icon-sm fea-social"></i></a></li>
-                                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="linkedin" class="fea icon-sm fea-social"></i></a></li>
-                                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="github" class="fea icon-sm fea-social"></i></a></li>
-                                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="youtube" class="fea icon-sm fea-social"></i></a></li>
-                                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="gitlab" class="fea icon-sm fea-social"></i></a></li>
-                                    </ul>
-                                </div>
-                                <!-- SOCIAL -->
+                                </form>
                             </div>
+                            <!-- SEARCH -->
+                            <!-- Categories -->
+                            <div class="widget mb-4 pb-2">
+                                <h5 class="widget-title">دسته بندیها </h5>
+                                <ul class="list-unstyled mt-4 mb-0 blog-categories">
+                                    <li><a href="jvascript:void(0)">مالی </a> <span class="float-end">13</span></li>
+                                    <li><a href="jvascript:void(0)">شرکتی </a> <span class="float-end">90 </span></li>
+                                    <li><a href="jvascript:void(0)">وبلاگ </a> <span class="float-end">18</span></li>
+                                    <li><a href="jvascript:void(0)">کسب و کار</a> <span class="float-end">20</span></li>
+                                    <li><a href="jvascript:void(0)">سرمایه گذاری </a> <span class="float-end">22</span></li>
+                                </ul>
+                            </div>
+                            <!-- Categories -->
+                            <!-- TAG CLOUDS -->
+                            <div class="widget mb-4 pb-2">
+                                <h5 class="widget-title">برچسب های ابری</h5>
+                                <div class="tagcloud mt-4">
+                                    <a href="jvascript:void(0)" class="rounded">کسب و کار </a>
+                                    <a href="jvascript:void(0)" class="rounded">مالی </a>
+                                    <a href="jvascript:void(0)" class="rounded">بازاریابی</a>
+                                    <a href="jvascript:void(0)" class="rounded">مدل </a>
+                                    <a href="jvascript:void(0)" class="rounded"> عروس </a>
+                                    <a href="jvascript:void(0)" class="rounded">سبک زندگی </a>
+                                    <a href="jvascript:void(0)" class="rounded">مسافرت </a>
+                                    <a href="jvascript:void(0)" class="rounded">زیبایی </a>
+                                    <a href="jvascript:void(0)" class="rounded">ویدئو </a>
+                                    <a href="jvascript:void(0)" class="rounded">صدا </a>
+                                </div>
+                            </div>
+                            <!-- TAG CLOUDS -->
+                            <!-- SOCIAL -->
+                            <div class="widget">
+                                <h5 class="widget-title">دنبال کردن ما</h5>
+                                <ul class="list-unstyled social-icon mb-0 mt-4">
+                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="facebook" class="fea icon-sm fea-social"></i></a></li>
+                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
+                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="twitter" class="fea icon-sm fea-social"></i></a></li>
+                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="linkedin" class="fea icon-sm fea-social"></i></a></li>
+                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="github" class="fea icon-sm fea-social"></i></a></li>
+                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="youtube" class="fea icon-sm fea-social"></i></a></li>
+                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="gitlab" class="fea icon-sm fea-social"></i></a></li>
+                                </ul>
+                            </div>
+                            <!-- SOCIAL -->
                         </div>
                     </div>
-                    <!-- END SIDEBAR -->
                 </div>
+                <!-- END SIDEBAR -->
             </div>
+        </div>
     </section>
     <!-- Blog End -->
     @section scripts{

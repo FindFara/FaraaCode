@@ -4,6 +4,7 @@ using CodeTo.DataEF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeTo.DataEF.Migrations
 {
     [DbContext(typeof(CodeToContext))]
-    partial class CodeToContextModelSnapshot : ModelSnapshot
+    [Migration("20220521093617_add-shortdescription")]
+    partial class addshortdescription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,6 +35,9 @@ namespace CodeTo.DataEF.Migrations
                     b.Property<string>("ArticleDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ArticleGroupId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ArticleImageName")
                         .HasColumnType("nvarchar(max)");
