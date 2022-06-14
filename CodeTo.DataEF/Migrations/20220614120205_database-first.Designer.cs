@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeTo.DataEF.Migrations
 {
     [DbContext(typeof(CodeToContext))]
-    [Migration("20220519095501_comment-articlo")]
-    partial class commentarticlo
+    [Migration("20220614120205_database-first")]
+    partial class databasefirst
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -35,9 +35,6 @@ namespace CodeTo.DataEF.Migrations
                     b.Property<string>("ArticleDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ArticleGroupId")
-                        .HasColumnType("int");
 
                     b.Property<string>("ArticleImageName")
                         .HasColumnType("nvarchar(max)");
@@ -55,6 +52,11 @@ namespace CodeTo.DataEF.Migrations
 
                     b.Property<DateTime?>("LastModifyDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("ShortDescription")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Writer")
                         .IsRequired()
@@ -74,7 +76,10 @@ namespace CodeTo.DataEF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<long?>("ArticleId")
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("ArticleId1")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateDate")
@@ -96,7 +101,7 @@ namespace CodeTo.DataEF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArticleId");
+                    b.HasIndex("ArticleId1");
 
                     b.HasIndex("UserId");
 
@@ -372,7 +377,7 @@ namespace CodeTo.DataEF.Migrations
                 {
                     b.HasOne("CodeTo.Domain.Entities.Articles.Article", "Article")
                         .WithMany("ArticleComment")
-                        .HasForeignKey("ArticleId");
+                        .HasForeignKey("ArticleId1");
 
                     b.HasOne("CodeTo.Domain.Entities.Users.User", "User")
                         .WithMany("ArticleComments")
