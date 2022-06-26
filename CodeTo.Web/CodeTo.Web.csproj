@@ -23,4 +23,9 @@
 	
 	  <ProjectReference Include="..\CodeTo.IOC\CodeTo.IOC.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\upload\article\" />
+	  <Folder Include="wwwroot\upload\user\" />
+	</ItemGroup>
 </Project>

@@ -2479,7 +2479,7 @@ button:not(:disabled) {
 }
 
 .subcribe-form .btn {
-    padding: 11px 20px;
+    padding: 10px 20px;
 }
 
 .subcribe-form input {
@@ -4244,7 +4244,7 @@ p {
     .bg-marketing,
     .swiper-slider-hero .swiper-container .swiper-slide {
         padding: 150px 0;
-        height: auto
+        height: 50vh;
     }
 }
 
@@ -6112,7 +6112,7 @@ p {
 }
 
 .footer {
-    background: #202942;
+    background: rgb(36 66 147);
     padding: 60px 0;
     position: relative;
     color: #adb5bd

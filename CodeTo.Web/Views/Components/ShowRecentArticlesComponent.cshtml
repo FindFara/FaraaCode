@@ -1,29 +1,29 @@
 ﻿@model List<CodeTo.Core.ViewModel.Articles.ClientArticleViewModel>
 @using CodeTo.Core.Utilities.Extensions
 <div class="row  mb-4 pb-2">
-    <div class="page-next col-md-8">
+    <div class="page-next col-8">
         <nav aria-label="breadcrumb" class="d-inline-block">
             <ul class="breadcrumb bg-white rounded shadow mb-0">
-                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">خانه </a></li>
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">خانه</a></li>
                 <li class="breadcrumb-item active" aria-current="page"> جدیدترین مقالات</li>
             </ul>
         </nav>
     </div>
 
-    <div class="col-md-4 mt-4 mt-sm-0">
+    <div class="col-4 mt-sm-0">
         <div class="text-center text-md-end">
-            <a asp-controller="Blog" asp-action="Index" class="btn btn-soft-primary">نمایش بیشتر <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left fea icon-sm"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></a>
+            <a asp-controller="Blog" asp-action="Index" class="btn btn-soft-primary">بیشتر<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left fea icon-sm"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></a>
         </div>
     </div>
 </div>
 <div class="row mb-4">
     @foreach (var ar in Model)
     {
-        <div class="col-lg-3 col-md-12 mb-4 pb-2">
+        <div class="col-lg-3 col-md-10 col-sm-10 mb-4 pb-2">
             <div class="card blog rounded border-0 shadow">
                 <div class="position-relative">
                     <a asp-controller="Blog" asp-action="DetailArticle" asp-route-id="@ar.Id">
-                        <img src="@ar.ArticleFullName" class="card-img-top rounded-top" alt="...">
+                        <img src="@ar.ArticleFullName" width="350" height="200" class="card-img-top rounded-top" alt="...">
                         <div class="overlay rounded-top bg-dark"></div>
                     </a>
                 </div>

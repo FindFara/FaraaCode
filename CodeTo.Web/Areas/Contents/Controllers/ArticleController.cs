@@ -43,16 +43,12 @@ namespace CodeTo.Web.Areas.Contents.Controllers
             return View(article);
         }
 
-        // GET: Admin/ArticleGroups/Create
+       
         [BzDescription(" افزودن مطلب")]
         public IActionResult Create()
         {
             return View("CreateOrEdit", new ArticleCreateOrEditViewModel());
         }
-
-        // POST: Admin/ArticleGroups/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -68,7 +64,7 @@ namespace CodeTo.Web.Areas.Contents.Controllers
             return View(article);
         }
 
-        // GET: Admin/ArticleGroups/Edit/5
+        
         [BzDescription(" ویرایش مطلب")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -86,9 +82,6 @@ namespace CodeTo.Web.Areas.Contents.Controllers
             return View("CreateOrEdit", article);
         }
 
-        // POST: Admin/ArticleGroups/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [BzDescription(" ویرایش مطلب")]
