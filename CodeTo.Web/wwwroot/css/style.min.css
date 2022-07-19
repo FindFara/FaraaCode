@@ -3273,7 +3273,7 @@ p {
         }
 
     #topnav .menu-extras {
-        float: left
+        float: right
     }
 
     #topnav.scroll {
@@ -4243,8 +4243,8 @@ p {
     .bg-half-260,
     .bg-marketing,
     .swiper-slider-hero .swiper-container .swiper-slide {
-        padding: 150px 0;
-        height: 50vh;
+        padding: 200px 0;
+        height: auto;
     }
 }
 
@@ -5903,7 +5903,7 @@ p {
 }
 
 .bg-profile {
-    padding: 100px 0;
+    padding: 50px 0;
     background-size: cover;
     -ms-flex-item-align: center;
     -ms-grid-row-align: center;
@@ -6112,8 +6112,8 @@ p {
 }
 
 .footer {
-    background: rgb(36 66 147);
-    padding: 60px 0;
+    background: #2443ac;
+    padding: 40px 20px;
     position: relative;
     color: #adb5bd
 }

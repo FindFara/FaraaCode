@@ -18,7 +18,7 @@ namespace CodeTo.Core.Services.AccountServices
 
     public class AccountService : IAccountService
     {
-        private readonly CodeToContext _context;
+        private readonly CodeToContext _context ;
         private readonly ISecurityService _securityService;
      
 

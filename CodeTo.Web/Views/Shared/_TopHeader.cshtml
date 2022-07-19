@@ -4,7 +4,7 @@
         <!-- Logo container-->
         <div>
             <a class="logo" asp-area="" asp-controller="Home" asp-action="Index">
-                <img src="/images/bg/FaraaCodeLogo.png" height="24" alt="">
+                <img src="/img/bg/FaraaCodeLogo.png" height="24" alt="">
             </a>
         </div>
         <div>
@@ -23,8 +23,8 @@
                             </div>
                         </div>
                     </li>
-                    <li class="list-inline-item mb-0 pe-1">
-                        <a href="javascript:void(0)" data class="btn btn-icon btn-primary"data-bs-toggle="modal" data-bs-target="#wishlist"><i class="uil uil-heart align-middle icons"></i></a>
+                    <li class="list-inline-item">
+                        <a href="javascript:void(0)" class="btn btn-icon btn-primary"><i class="uil uil-heart"></i></a>
                     </li>
                     <li class="list-inline-item mb-0">
                         <div class="dropdown dropdown-primary">
@@ -48,13 +48,14 @@
             {
                 <div class="buy-button">
                     <a asp-controller="Account" asp-action="Login">
-                        <div class="btn btn-primary login-btn-primary">ورود  </div>
-                        <div class="btn btn-light login-btn-light">ورود </div>
+                        <div class="btn btn-primary">ورود  </div>
+                        
                     </a>
                     <a asp-controller="Account" asp-action="Register">
-                        <div class="btn btn-primary login-btn-primary"> ثبت نام </div>
-                        <div class="btn btn-light login-btn-light"> ثبت نام </div>
+                        <div class="btn btn-primary"> ثبت نام </div>
+                        
                     </a>
+                    
                 </div>
             }
         </div><!--end login button-->

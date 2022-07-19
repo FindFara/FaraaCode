@@ -24,8 +24,7 @@ namespace CodeTo.Core.Services.UserPanelServices
         #region Wallet
 
         int GetUserIdByUserName(string username);
-        Task<int> UserBalanceAsync(string username);
-        
+        //Task<int> UserBalanceAsync(string username);
         Task<List<WalletHistoryViewModel>> ShowHistory(string username);
         Task<int> ChargeUserWallet(int amount, string username, string Description, bool ISpay = false);
         long AddWallet(Wallet wallet);

@@ -1,15 +1,26 @@
-﻿<partial name="_UStyle" />
-<partial name="_UProfile" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<section class="section mt-60">
-    <div class="container mt-lg-3">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
-                <partial name="_USidebar" />
-            </div>
-            @RenderBody()
-        </div>
-    </div>
-</section>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <partial name="_UStyle" />
+    <partial name="_TopHeader" />
+    <partial name="_UProfile" />
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <section class="section mt-60">
+
+        <div class="container mt-lg-3">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
+                    <partial name="_USidebar" />
+                </div>
+                @RenderBody()
+            </div>
+        </div>
+    </section>
+</body>
+<partial name="_Footer" />
 <partial name="_UScript" />
+
+</html>

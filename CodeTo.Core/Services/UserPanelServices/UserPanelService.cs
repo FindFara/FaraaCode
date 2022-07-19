@@ -44,7 +44,7 @@ namespace CodeTo.Core.Services.UserPanelServices
                 uv.UserName = user.UserName;
                 uv.Email = user.Email;
                 uv.CreateDate = user.CreateDate;
-                uv.Wallet = await UserBalanceAsync(username); 
+                //uv.Wallet = await UserBalanceAsync(username); 
             }
             return uv;
         }
@@ -136,18 +136,18 @@ namespace CodeTo.Core.Services.UserPanelServices
             return  _context.Users.FirstOrDefaultAsync(u => u.UserName == username).Id;
         }
 
-        public async Task<int> UserBalanceAsync(string username)
-        {
-            var Userid = GetUserIdByUserName(username);
-            var deposit = _context.Wallets.Where(w => w.UserId == Userid && w.WalletTypeId == 1 && w.Ispay)
-                .Select(w => w.Amount)
-                .ToList();
-            var withdraw = _context.Wallets.Where(w => w.UserId == Userid && w.WalletTypeId == 2 && w.Ispay)
-                .Select(w => w.Amount)
-                .ToList();
-            return (int)(deposit.Sum() - withdraw.Sum());
+        //public async Task<int> UserBalanceAsync(string username)
+        //{
+        //    var Userid = GetUserIdByUserName(username);
+        //    var deposit = _context.Wallets.Where(w => w.UserId == Userid && w.WalletTypeId == 1 && w.Ispay)
+        //        .Select(w => w.Amount)
+        //        .ToList();
+        //    var withdraw = _context.Wallets.Where(w => w.UserId == Userid && w.WalletTypeId == 2 && w.Ispay)
+        //        .Select(w => w.Amount)
+        //        .ToList();
+        //    return (int)(deposit.Sum() - withdraw.Sum());
 
-        }
+        //}
 
         public async Task<List<WalletHistoryViewModel>> ShowHistory(string username)
         {
