@@ -59,9 +59,9 @@ namespace CodeTo.Web.Controllers
                 {
                     IsPersistent = register.RememberMe
                 };
-                await HttpContext.SignInAsync(principal,properties);
+                await HttpContext.SignInAsync(principal, properties);
 
-                    return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
 
             }
             return View(register);
@@ -79,22 +79,20 @@ namespace CodeTo.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(AccountRegisterViewModel register)
         {
-            
+            if (ModelState.IsValid)
+            {
+                if (await _accountService.IsDuplicatedEmail(register.Email))
+                    ModelState.AddModelError(nameof(register.Email), "ایمیل ورودی معتبر نمیباشد ");
 
-            if (await _accountService.IsDuplicatedEmail(register.Email))
-                ModelState.AddModelError(nameof(register.Email), "ایمیل ورودی معتبر نمیباشد ");
+                if (await _accountService.IsDuplicatedUsername(register.UserName))
+                    ModelState.AddModelError(nameof(register.UserName), "نام کاربری  ورودی معتبر نمیباشد ");
 
-            if (await _accountService.IsDuplicatedUsername(register.UserName))
-                ModelState.AddModelError(nameof(register.UserName), "نام کاربری  ورودی معتبر نمیباشد ");
-
-
-            if (!ModelState.IsValid)
+                var user = await _accountService.RegisterAsync(register);
+            }
+            else
             {
                 return View(register);
             }
-
-             var user = await _accountService.RegisterAsync(register);
-           
 
             //TODO: Activation Send Email
             //TODO: Redirect to succssesfullView
