@@ -21,6 +21,8 @@ namespace CodeTo.Core.ViewModel.Articles
 
         [Display(Name = "نویسنده")]
         public string Writer { get; set; }
+        [Display(Name = "تعداد بازدید")]
+        public int VisitCount { get; set; }
 
         [Display(Name = "تاریخ ایجاد")]
         public DateTime CreateDate { get; set; }

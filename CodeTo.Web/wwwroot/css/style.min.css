@@ -1080,7 +1080,8 @@ small {
 }
 
 .card .card-body {
-    padding: 1.5rem
+    padding: 1.5rem ;
+    padding-top: 10px
 }
 
 .component-wrapper .title {
@@ -2490,6 +2491,7 @@ button:not(:disabled) {
     outline: none !important;
     padding-left: 160px;
     padding-right: 30px;
+    box-shadow: 0 3px 8px 0 rgba(47, 85, 212, 0.3);
     background-color: rgba(255,255,255,0.8)
 }
 
@@ -3072,8 +3074,8 @@ p {
     z-index: 999;
     background-color: transparent;
     border: 0;
-    -webkit-transition: all .5s ease;
-    transition: all .5s ease
+/*    -webkit-transition: all .5s ease;
+    transition: all .5s ease*/
 }
 
     #topnav .logo {
@@ -3536,7 +3538,7 @@ p {
         }
 
         #topnav .navigation-menu.nav-light .has-submenu.active .menu-arrow {
-            border-color: #fff !important
+            border-color: rgba(60,72,88,0.15) !important
         }
 
         #topnav .navigation-menu.nav-right {
@@ -3852,7 +3854,7 @@ p {
 }
 
 .bg-half-260 {
-    padding: 260px 0;
+    padding: 95px 0;
     background-size: cover;
     -ms-flex-item-align: center;
     -ms-grid-row-align: center;
@@ -4243,7 +4245,7 @@ p {
     .bg-half-260,
     .bg-marketing,
     .swiper-slider-hero .swiper-container .swiper-slide {
-        padding: 200px 0;
+        padding: 80px 0;
         height: auto;
     }
 }
@@ -5026,7 +5028,7 @@ p {
     }
 
         .blog .content .post-meta .like:hover {
-            color: #e43f52 !important
+            color: #f8f9fc !important
         }
 
         .blog .content .post-meta .comments:hover {

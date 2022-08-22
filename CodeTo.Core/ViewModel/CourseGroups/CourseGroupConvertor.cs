@@ -8,7 +8,7 @@ using CodeTo.Domain.Entities.Courses;
 
 namespace CodeTo.Core.ViewModel.CourseGroups
 {
-   public static class CourseGroupViewModel
+   public static class CourseGroupConvertor
     {
         #region ToCreateOrEdit
 
@@ -39,7 +39,6 @@ namespace CodeTo.Core.ViewModel.CourseGroups
                 Title = group.GroupTitle,
                 CreateDate = group.CreateDate,
                 LastModifyDate = group.LastModifyDate,
-               
             };
         }
         public static IEnumerable<CourseGroupIndexViewModel> ToIndexViewModel(this IEnumerable<CourseGroup> groups)
@@ -49,6 +48,23 @@ namespace CodeTo.Core.ViewModel.CourseGroups
         public static IQueryable<CourseGroupIndexViewModel> ToIndexViewModel(this IQueryable<CourseGroup> groups)
         {
             return groups.Select(c => c.ToIndexViewModel());
+        }
+
+        #endregion
+        #region ToClientCourseGroup
+
+        public static ClientCourseGroupViewModel ToClientCourseGroupViewModel(this CourseGroup group)
+        {
+            return new ClientCourseGroupViewModel
+            {
+                Id = group.Id,
+                Title = group.GroupTitle,
+               ParentId = group.ParentId,
+            };
+        }
+        public static IQueryable<ClientCourseGroupViewModel> ToClientCourseGroupViewModel(this IQueryable<CourseGroup> groups)
+        {
+            return groups.Select(c => c.ToClientCourseGroupViewModel());
         }
 
         #endregion

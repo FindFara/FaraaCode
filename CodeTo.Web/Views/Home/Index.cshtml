@@ -1,145 +1,89 @@
 ﻿<!-- Hero Start -->
-<section class="home-slider position-relative mb-4 pb-2">
-    <div id="carouselExampleInterval" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="3000">
-                <div class="bg-home d-flex align-items-center" style="height: 60vh; background-image:url('/img/bg/bg1.jpg')">
-                    <div class="bg-overlay"> </div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-12 text-center">
-                                <div class="title-heading text-white mt-4">
-                                    <h4 class="title para-desc para-dark mx-auto text-light"> ترکیب کامل با</h4>
-                                    <h4 class="title para-desc para-dark mx-auto text-light">خودآموزی ، کسب تجربه ، مشاهده توسعه دهندگان </h4>
-                                    <h4 class="title para-desc para-dark mx-auto text-light">وبلاگ ، دوره های جامع و رایگان </h4>
-                                    <br />
-                                    <div class="subcribe-form">
-                                        <form asp-controller="Blog" asp-action="Index" method="get">
-                                            <input type="text"  name="FilterTitle" class="rounded" placeholder=" چی میخوای یاد بگیری ؟ ">
-                                            <button type="submit" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search fea icon-sm"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
-                                        </form>
-                                    </div>
 
-                                </div>
-                            </div>
+<section class="bg-half-260 d-table w-100" id="home" style="background: url('img/bg/home-bg.png')">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6">
+                <div class="title-heading mt-4">
+                    <h1 class="heading mb-3"> <span class="text-primary"> ترکیب کامل  </span>  با آزمون و<br>  آموزش در  فراکد </h1>
+                    <p class="para-desc text-muted">خودتو در برنامه نویسی به چالش بکش !!</p>
+                   
+
+                    <div class="mt-4 pt-2">
+                        <a href="javascript:void(0)" class="btn btn-pills btn-primary"> ورود به آزمون </a>
+                         <a href="#!" data-type="youtube" data-id="yba7hPeTSjk" class="btn btn-icon btn-pills btn-primary m-1 lightbox"><i class="uil uil-user align-middle"></i></a><span class="fw-bold text-uppercase small align-middle ms-1">وارد شوید  </span> 
+                    </div>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-6 col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                <img src="img/bg/seo.gif" class="img-fluid" alt="">
+                <div class="subcribe-form mt-3 pt-2">
+                    <form asp-controller="Blog" asp-action="Index" method="get">
+                        <input type="text" name="FilterTitle" class="rounded" placeholder=" چی میخوای یاد بگیری ؟ ">
+                        <button type="submit" class="btn btn-primary"><i data-feather="search" class="fea icon-sm"></i></button>
+                    </form>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+</section><!--end section-->
+
+<section class="py-4 mb-4 " >
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-md-6 col-6 mt-6 pt-2 ">
+                <a asp-controller="Blog" asp-action="Index">
+                    <div class="d-flex key-feature align-items-center p-3 rounded shadow  ">
+                        <img src="/img/job/Codepen.svg" class="avatar avatar-ex-sm" alt="">
+                        <div class="flex-1 ms-3">
+                            <h4 class="title mb-2 text-dark"> آزمون برنامه نویسی</h4>
+                            <p class="text-muted mb-0">Programing test</p>
                         </div>
                     </div>
-                </div>
-            </div>
+                </a>
+            </div><!--end col-->
+
+            <div class="col-lg-3 col-md-6 col-6 mt-6 pt-2 ">
+                <a asp-controller="Blog" asp-action="Index">
+                    <div class="d-flex key-feature align-items-center p-3 rounded shadow  ">
+                        <img src="/img/job/Discord.svg" class="avatar avatar-ex-sm" alt="">
+                        <div class="flex-1 ms-3">
+                            <h4 class="title mb-2 text-dark">بلاگ فراکد</h4>
+                            <p class="text-muted mb-0">FaraaCode blog</p>
+                        </div>
+                    </div>
+                </a>
+            </div><!--end col-->
+
+            <div class="col-lg-3 col-md-6 col-6 mt-6 pt-2 ">
+                <a asp-controller="Blog" asp-action="Index">
+                    <div class="d-flex key-feature align-items-center p-3 rounded shadow ">
+                        <img src="/img/job/Eslint.svg" class="avatar avatar-ex-sm" alt="">
+                        <div class="flex-1 ms-3">
+                            <h4 class="title mb-2 text-dark">دوره های آموزشی </h4>
+                            <p class="text-muted mb-0">Education Courses</p>
+                        </div>
+                    </div>
+                </a>
+            </div><!--end col-->
+
+            <div class="col-lg-3 col-md-6 col-6 mt-6 pt-2 ">
+                <a asp-controller="Blog" asp-action="Index">
+                    <div class="d-flex key-feature align-items-center p-3 rounded shadow ">
+                        <img src="/img/job/Gitlab.svg" class="avatar avatar-ex-sm" alt="">
+                        <div class="flex-1 ms-3">
+                            <h4 class="title mb-2 text-dark">سرگرمی </h4>
+                            <p class="text-muted mb-0">Entertainment</p>
+                        </div>
+                    </div>
+                </a>
+            </div><!--end col-->
         </div>
-    </div>
+    </div><!--end col-->
 </section>
-<!-- Hero End -->
+<div class="container mb-4 pb-2 ">
 
-<div class="container mb-4 pb-2" style="max-width: 1250px;" >
-    <div class="page-next col-8">
-        <nav aria-label="breadcrumb" class="d-inline-block">
-            <ul class="breadcrumb bg-white rounded shadow mb-0">
-                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">خانه </a></li>
-                <li class="breadcrumb-item active" aria-current="page">وبلاگ </li>
-            </ul>
-        </nav>
-        <br />
-    </div>
-    <div class="row mb-4 pb-2">
-        <div class="col-lg-3 col-md- col-6 mt-6 pt-2">
-            <a href="page-job-detail.html">
-                <div class="d-flex key-feature align-items-center p-3 rounded shadow">
-                    <img src="/img/job/Circleci.svg" class="avatar avatar-ex-sm" alt="">
-                    <div class="flex-1 ms-3">
-                        <h4 class="title mb-2 text-dark">بازارکار</h4>
-                        <p class="text-muted mb-0">Job</p>
-                    </div>
-                </div>
-            </a>
-
-        </div><!--end col-->
-
-        <div class="col-lg-3 col-md-6 col-6 mt-6 pt-2">
-            <a asp-controller="Blog" asp-action="Index">
-                <div class="d-flex key-feature align-items-center p-3 rounded shadow">
-                    <img src="/img/job/Codepen.svg" class="avatar avatar-ex-sm" alt="">
-                    <div class="flex-1 ms-3">
-                        <h4 class="title mb-2 text-dark">فرانت اند </h4>
-                        <p class="text-muted mb-0">FrontEnd</p>
-                    </div>
-                </div>
-            </a>
-        </div><!--end col-->
-
-        <div class="col-lg-3 col-md-6 col-6 mt-6 pt-2">
-            <a asp-controller="Blog" asp-action="Index">
-                <div class="d-flex key-feature align-items-center p-3 rounded shadow">
-                    <img src="/img/job/Discord.svg" class="avatar avatar-ex-sm" alt="">
-                    <div class="flex-1 ms-3">
-                        <h4 class="title mb-2 text-dark">بک اند</h4>
-                        <p class="text-muted mb-0">BackEnd</p>
-                    </div>
-                </div>
-            </a>
-        </div><!--end col-->
-
-        <div class="col-lg-3 col-md-6 col-6 mt-6 pt-2">
-            <a asp-controller="Blog" asp-action="Index">
-                <div class="d-flex key-feature align-items-center p-3 rounded shadow">
-                    <img src="/img/job/Eslint.svg" class="avatar avatar-ex-sm" alt="">
-                    <div class="flex-1 ms-3">
-                        <h4 class="title mb-2 text-dark">UI طراح </h4>
-                        <p class="text-muted mb-0">UI Designer</p>
-                    </div>
-                </div>
-            </a>
-        </div><!--end col-->
-
-        <div class="col-lg-3 col-md-6 col-6 mt-6 pt-2">
-            <a asp-controller="Blog" asp-action="Index">
-                <div class="d-flex key-feature align-items-center p-3 rounded shadow">
-                    <img src="/img/job/Gitlab.svg" class="avatar avatar-ex-sm" alt="">
-                    <div class="flex-1 ms-3">
-                        <h4 class="title mb-2 text-dark">سرگرمی </h4>
-                        <p class="text-muted mb-0">Entertainment</p>
-                    </div>
-                </div>
-            </a>
-        </div><!--end col-->
-
-        <div class="col-lg-3 col-md-6 col-6 mt-6 pt-2">
-            <a asp-controller="Blog" asp-action="Index">
-                <div class="d-flex key-feature align-items-center p-3 rounded shadow">
-                    <img src="/img/job/Gradle.svg" class="avatar avatar-ex-sm" alt="">
-                    <div class="flex-1 ms-3">
-                        <h4 class="title mb-2 text-dark"> بازی </h4>
-                        <p class="text-muted mb-0">Game</p>
-                    </div>
-                </div>
-            </a>
-        </div><!--end col-->
-
-        <div class="col-lg-3 col-md-6 col-6 mt-6 pt-2">
-            <a asp-controller="Blog" asp-action="Index">
-                <div class="d-flex key-feature align-items-center p-3 rounded shadow">
-                    <img src="/img/job/Webhooks.svg" class="avatar avatar-ex-sm" alt="">
-                    <div class="flex-1 ms-3">
-                        <h4 class="title mb-2 text-dark">کسب و کار </h4>
-                        <p class="text-muted mb-0">Business</p>
-                    </div>
-                </div>
-            </a>
-        </div><!--end col-->
-
-        <div class="col-lg-3 col-md-6 col-6 mt-6 pt-2">
-            <a asp-controller="Blog" asp-action="Index">
-                <div class="d-flex key-feature align-items-center p-3 rounded shadow">
-                    <img src="/img/job/Twilio.svg" class="avatar avatar-ex-sm" alt="">
-                    <div class="flex-1 ms-3">
-                        <h4 class="title mb-2 text-dark">تکنولوژی </h4>
-                        <p class="text-muted mb-0">Technology</p>
-                    </div>
-                </div>
-            </a>
-        </div><!--end col-->
-    
-    </div>
 
     @await Component.InvokeAsync("ShowRecentArticlesComponent")
 

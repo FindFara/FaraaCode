@@ -13,19 +13,27 @@ namespace CodeTo.Core.ViewModel.Articles
     {
         [Display(Name = "شناسه ")]
         public long Id { get; set; }
+
         [Display(Name = "شناسه گروه")]
         public int GroupId { get; set; }
+
         [Display(Name = "اسم گروه")]
         public string ArtileGroupTitle { get; set; }
 
         [Display(Name = "موضوع مقاله")]
         [Required(ErrorMessage = "Enter the {0}")]
         public string ArticleTitle { get; set; }
+
         [Display(Name = "نویسنده")]
         [Required(ErrorMessage = "لطفا{0}را کنید")]
         public string Writer { get; set; }
+
+        [Display(Name = "تعداد بازدید")]
+        public int VisitCount { get; set; }
+
         [Display(Name = " توضیحات کوتاه ")]
         public string ShortDescription { get; set; }
+
         [Display(Name = "توضیحات")]
         public string ArticleDescription { get; set; }
 

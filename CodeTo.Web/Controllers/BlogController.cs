@@ -15,7 +15,7 @@ namespace CodeTo.Web.Controllers
     {
         private readonly IClientArticleService _service;
         private readonly IArticleCommentService _articleComment;
-        private readonly IUserPanelService _userPanel; 
+        private readonly IUserPanelService _userPanel;
         public BlogController(IArticleCommentService articleComment, IClientArticleService service)
         {
             _articleComment = articleComment;
@@ -31,10 +31,10 @@ namespace CodeTo.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> DetailArticle(long id)
         {
-            return View( await _service.GetDetailArticle(id));
+            return View(await _service.GetDetailArticle(id));
 
         }
-       
+
         // POST
         [HttpPost]
         public async Task<IActionResult> CreateComment(ArticleCommentViewModel comment, int articleid)
@@ -42,7 +42,7 @@ namespace CodeTo.Web.Controllers
             //TODO : send comment not work
             if (ModelState.IsValid)
             {
-               await _articleComment.AddCommentAsync(comment,User.Identity.Name);
+                await _articleComment.AddCommentAsync(comment, User.Identity.Name);
 
                 return View("DetailArticle");
             }

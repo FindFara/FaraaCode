@@ -14,6 +14,7 @@ namespace CodeTo.Web.Components
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
+        
         {
             return await Task.FromResult((IViewComponentResult)View("~/Views/Components/ShowRecentArticlesComponent.cshtml", await _articleService.GetRecentArticle()));
         }

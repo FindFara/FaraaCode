@@ -57,18 +57,14 @@ namespace CodeTo.Core.Services.CourseServices
                     GroupId = vm.GroupId,
                     LastModifyDate = DateTime.Now,
                     Tags = vm.Tags,
-                    TeacherId = vm.TeacherId,
-
-
+                    TeacherId = vm.TeacherId
                 });
 
                 await _context.SaveChangesAsync();
                 return true;
-
             }
             catch (Exception)
             {
-
                 return false;
             }
         }
@@ -118,6 +114,7 @@ namespace CodeTo.Core.Services.CourseServices
                 _context.Courses.Remove(product);
                 await _context.SaveChangesAsync();
                 return true;
+
             }
             catch (Exception ex)
             {

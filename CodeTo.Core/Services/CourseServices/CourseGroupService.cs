@@ -26,6 +26,7 @@ namespace CodeTo.Core.Services.CourseServices
                 _context.CourseGroups.Add(new CourseGroup
                 {
                     Id = vm.Id,
+                    ParentId= vm.ParentId,
                     CreateDate = DateTime.Now,
                     GroupTitle = vm.Title
                 });
@@ -61,6 +62,7 @@ namespace CodeTo.Core.Services.CourseServices
             {
                 var CourseGroup = await _context.CourseGroups.FindAsync(vm.Id);
                 CourseGroup.GroupTitle = vm.Title;
+                CourseGroup.ParentId = vm.ParentId;
                 CourseGroup.LastModifyDate = DateTime.Now;
                 _context.CourseGroups.Update(CourseGroup);
                 await _context.SaveChangesAsync();
@@ -92,5 +94,24 @@ namespace CodeTo.Core.Services.CourseServices
             //var vm = result.ToIndexViewModel().ToList();
             //return vm;
         }
+
+        public async Task<bool> IsSubGroup(int groupid)
+        {
+            return _context.CourseGroups.Any(g => g.ParentId == groupid);
+        }
+
+        public async Task<List<ClientCourseGroupViewModel>> GetAllGroup()
+        {
+            return await _context.CourseGroups.ToClientCourseGroupViewModel().ToListAsync();
+        }
+
+        public async Task<List<ClientCourseGroupViewModel>> GetSubGroup(int groupid)
+        {
+            return await _context.CourseGroups
+               .Where(g => g.ParentId == groupid)
+               .ToClientCourseGroupViewModel()
+               .ToListAsync();
+        }
+
     }
 }

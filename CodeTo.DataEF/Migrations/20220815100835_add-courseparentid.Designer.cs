@@ -4,6 +4,7 @@ using CodeTo.DataEF.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeTo.DataEF.Migrations
 {
     [DbContext(typeof(CodeToContext))]
-    partial class CodeToContextModelSnapshot : ModelSnapshot
+    [Migration("20220815100835_add-courseparentid")]
+    partial class addcourseparentid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,9 +57,6 @@ namespace CodeTo.DataEF.Migrations
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
-
-                    b.Property<int?>("VisitCount")
-                        .HasColumnType("int");
 
                     b.Property<string>("Writer")
                         .IsRequired()

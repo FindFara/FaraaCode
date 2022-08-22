@@ -26,6 +26,7 @@ namespace CodeTo.Domain.Entities.Articles
         [MaxLength(1000)]
         public string ShortDescription { get; set; }
         public string ArticleImageName { get; set; }
+        public int VisitCount { get; set; } =1;
 
         #region Date
 

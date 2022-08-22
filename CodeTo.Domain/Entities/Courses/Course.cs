@@ -55,8 +55,6 @@ namespace CodeTo.Domain.Entities.Courses
         [ForeignKey("GroupId")]
         public CourseGroup CourseGroup { get; set; }
 
-      
-
         #endregion
 
     }

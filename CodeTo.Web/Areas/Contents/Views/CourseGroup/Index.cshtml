@@ -22,7 +22,6 @@
     </div>
     <div id="editabledatatable_wrapper" class="dataTables_wrapper form-inline no-footer">
         <div class="DTTT btn-group">
-
         </div>
 
         <table class="table table-striped table-hover table-bordered dataTable no-footer" id="editabledatatable" role="grid" aria-describedby="editabledatatable_info">
@@ -33,6 +32,9 @@
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ParentId)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.CreateDate)
@@ -54,19 +56,22 @@
                     {
                     <tr>
                         <th>
-                            @item.Id
+                                @item.Id
                         </th>
                         <th>
-                            @item.Title
+                                @item.Title
                         </th>
                         <th>
-                            @item.CreateDate.ToShamsi()
+                                @item.ParentId
                         </th>
                         <th>
-                            @if (item.LastModifyDate.HasValue)
-                            {
-                                @item.LastModifyDate.Value.ToShamsi()
-                            }
+                                @item.CreateDate.ToShamsi()
+                        </th>
+                        <th>
+                                @if (item.LastModifyDate.HasValue)
+                                {
+                                    @item.LastModifyDate.Value.ToShamsi()
+                                }
                         </th>
 
                         <th>
@@ -77,10 +82,10 @@
                             </div>
                         </th>
                     </tr>
-                }
-                    </tr>
+                    }
+                </tr>
 
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
+</div>

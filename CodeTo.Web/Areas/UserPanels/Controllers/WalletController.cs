@@ -34,7 +34,7 @@ namespace CodeTo.Web.Areas.UserPanels.Controllers
 
         [Route("Wallet")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] // mibi null this
         public async Task<IActionResult> Index(WalletViewModel wallet)
         {
             if (!ModelState.IsValid)
@@ -48,13 +48,13 @@ namespace CodeTo.Web.Areas.UserPanels.Controllers
 
             #region OnlinePaymnet
 
-                //Payment paymnet = new ZarinpalSandbox.Payment(Convert.ToInt32(wallet.Amount));
-                //Task<PaymentRequestResponse> res = paymnet.PaymentRequest("شارژ حساب ", "https://localhost:44328/OnlinePayment" + walletid);
-                //if (res.Result.Status == 100)
-                //{
-                //    return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
-                //}
-            
+            //Payment paymnet = new ZarinpalSandbox.Payment(Convert.ToInt32(wallet.Amount));
+            //Task<PaymentRequestResponse> res = paymnet.PaymentRequest("شارژ حساب ", "https://localhost:44328/OnlinePayment" + walletid);
+            //if (res.Result.Status == 100)
+            //{
+            //    return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
+            //}
+
 
             #endregion
 

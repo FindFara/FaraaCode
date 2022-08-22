@@ -10,5 +10,8 @@ namespace CodeTo.Core.Services.CourseServices
 {
     public interface ICourseGroupService : IGenericService<int, CourseGroupIndexViewModel, CourseGroupCreateOrEditViewModel>
     {
+        public Task<bool> IsSubGroup(int groupid);
+        public Task<List<ClientCourseGroupViewModel>> GetAllGroup();
+        public Task<List<ClientCourseGroupViewModel>> GetSubGroup(int groupid);
     }
 }

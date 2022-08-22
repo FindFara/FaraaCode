@@ -1,6 +1,7 @@
 ﻿using CodeTo.Core.Statics;
 using CodeTo.Core.ViewModel.Articles;
 using CodeTo.DataEF.Context;
+using CodeTo.Domain.Entities.Articles;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -47,16 +48,21 @@ namespace CodeTo.Core.Services.ArticleServices.ClientArticleServices
 
         public async Task<ClientArticleViewModel> GetDetailArticle(long id)
         {
-            var model = await _context.Articles.FirstOrDefaultAsync(a => a.Id == id);
-            return model.ToClientArticleViewModel();
+            var article = await _context.Articles.FindAsync(id);
+            article.VisitCount += 1;
+            _context.Articles.Update(article);
+            await _context.SaveChangesAsync();
+            return article.ToClientArticleViewModel();
         }
 
         public Task<List<ClientArticleViewModel>> GetRecentArticle()
         {
-            return _context.Articles.OrderByDescending(a => a.CreateDate)
-                .Select(s=>s.ToClientArticleViewModel())
-                .Take(8)
-                .ToListAsync(); 
+
+            var model = _context.Articles.OrderByDescending(a => a.CreateDate)
+              .Select(s => s.ToClientArticleViewModel())
+              .Take(8)
+              .ToListAsync();
+            return model;
         }
     }
 }

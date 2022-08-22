@@ -1,0 +1,25 @@
+﻿@model IEnumerable<CodeTo.Core.ViewModel.CourseGroups.ClientCourseGroupViewModel>
+
+<li class="has-submenu parent-parent-menu-item">
+    <a href="javascript:void(0)">دوره ها</a><span class="menu-arrow"></span>
+    <ul class="submenu">
+       
+            @foreach (var group in Model.Where(g => g.ParentId == null))
+            { <li class="has-submenu parent-menu-item">
+                <a href="javascript:void(0)"> @group.Title </a>
+                <span class="submenu-arrow"></span>
+                
+                    @if (Model.Any(g => g.ParentId == group.Id))
+                    {<ul class="submenu">
+                        @foreach (var subgroup in Model.Where(g => g.ParentId == group.Id))
+                        {
+                            <li><a href="page-aboutus.html" class="sub-menu-item"> @subgroup.Title </a></li>
+                        } 
+                        </ul>
+            
+                    }
+              
+        </li>
+        }
+    </ul>
+</li>

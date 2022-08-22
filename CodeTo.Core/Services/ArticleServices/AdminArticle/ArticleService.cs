@@ -89,7 +89,6 @@ namespace CodeTo.Core.Services.ArticleServices.AdminArticle
                 article.ArticleTitle = vm.ArticleTitle;
                 article.ArticleDescription = vm.ArticleDescription;
                 article.ShortDescription = vm.ShortDescription;
-               
                 article.LastModifyDate = DateTime.Now;
 
                 _context.Articles.Update(article);

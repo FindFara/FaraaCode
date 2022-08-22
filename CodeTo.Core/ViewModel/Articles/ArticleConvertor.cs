@@ -11,18 +11,18 @@ namespace CodeTo.Core.ViewModel.Articles
     {
         #region ToCreateOrEdit
 
-        public static ArticleCreateOrEditViewModel ToCreateOrEditViewModel(this Article Article)
+        public static ArticleCreateOrEditViewModel ToCreateOrEditViewModel(this Article article )
         {
-            if (Article == null) return null;
+            if (article == null) return null;
             return new ArticleCreateOrEditViewModel
             {
-                Id = Article.Id,
-                Writer = Article.Writer,
-                ArticleTitle = Article.ArticleTitle,
-                ArticleDescription = Article.ArticleDescription,
-                CreateDate = Article.CreateDate,
-                ArticleImageName = Article.ArticleImageName,
-                ShortDescription=Article.ShortDescription
+                Id = article.Id,
+                Writer = article.Writer,
+                ArticleTitle = article.ArticleTitle,
+                ArticleDescription = article.ArticleDescription,
+                CreateDate = article.CreateDate,
+                ArticleImageName = article.ArticleImageName,
+                ShortDescription= article.ShortDescription
                 
 
             };
@@ -36,16 +36,17 @@ namespace CodeTo.Core.ViewModel.Articles
         #endregion
         #region ToIndex
 
-        public static ArticleIndexViewModel ToIndexViewModel(this Article Article)
+        public static ArticleIndexViewModel ToIndexViewModel(this Article article)
         {
-            if (Article == null) return null;
+            if (article == null) return null;
             return new ArticleIndexViewModel
             {
-                Id = Article.Id,
-                Writer = Article.Writer,
-                ArticleTile = Article.ArticleTitle,
-                CreateDate = Article.CreateDate,
-                LastModifyDate = Article.LastModifyDate
+                Id = article.Id,
+                Writer = article.Writer,
+                ArticleTile = article.ArticleTitle,
+                CreateDate = article.CreateDate,
+                LastModifyDate = article.LastModifyDate,
+                VisitCount = article.VisitCount
             };
         }
         public static IEnumerable<ArticleIndexViewModel> ToIndexViewModel(this IEnumerable<Article> Articles)
@@ -60,18 +61,20 @@ namespace CodeTo.Core.ViewModel.Articles
         #endregion
         #region Client Index
 
-        public static ClientArticleViewModel ToClientArticleViewModel(this Article Article)
+        public static ClientArticleViewModel ToClientArticleViewModel(this Article article)
         {
-            if (Article == null) return null;
+            if (article == null) return null;
             return new ClientArticleViewModel
             {
-                Id = Article.Id,
-                Writer = Article.Writer,
-                ArticleTitle = Article.ArticleTitle,
-                ShortDescription=Article.ShortDescription,
-                ArticleDescription = Article.ArticleDescription,
-                CreateDate = Article.CreateDate,
-                ArticleImageName = Article.ArticleImageName
+                Id = article.Id,
+                Writer = article.Writer,
+                ArticleTitle = article.ArticleTitle,
+                ShortDescription= article.ShortDescription,
+                ArticleDescription = article.ArticleDescription,
+                CreateDate = article.CreateDate,
+                ArticleImageName = article.ArticleImageName,
+                VisitCount= article.VisitCount
+
 
             };
         }
@@ -84,17 +87,17 @@ namespace CodeTo.Core.ViewModel.Articles
         #endregion
         #region Article Comment
 
-        public static ArticleCommentViewModel ToArticleCommentViewModel(this ArticleComment ac)
+        public static ArticleCommentViewModel ToArticleCommentViewModel(this ArticleComment article)
         {
-            if (ac == null) return null;
+            if (article == null) return null;
             return new ArticleCommentViewModel
             {
-                id = ac.Id,
-                UserId = ac.UserId,
-                ArticleId = ac.ArticleId,
-                Message = ac.Message,
-                ReaedAdmin = ac.ReaedAdmin,
-                CreateDate = ac.CreateDate
+                id = article.Id,
+                UserId = article.UserId,
+                ArticleId = article.ArticleId,
+                Message = article.Message,
+                ReaedAdmin = article.ReaedAdmin,
+                CreateDate = article.CreateDate
 
             };
         }
